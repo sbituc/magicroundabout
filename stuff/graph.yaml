@@ -1,0 +1,369 @@
+# graph definition
+# .0 = source nodes, .9 = sink nodes
+
+graph :
+    node :
+        id : 10
+        neighbors : [
+                    node :
+                        id : 11
+                    ]
+    node :
+        id : 11
+        neighbors : [
+                    node : 
+                        id : 12
+                    node : 
+                        id : 27
+                    node : 
+                        id : 28
+                    ]
+    node :
+        id : 12
+        neighbors : [
+                    node : 
+                        id : 13
+                    node : 
+                        id : 27
+                    node : 
+                        id : 28
+                    ]
+    node :
+        id : 13
+        neighbors : [
+                    node :
+                        id : 14
+                    ]
+    node :
+        id : 14
+        neighbors : [
+                    node : 
+                        id : 16
+                    node : 
+                        id : 54
+                    node : 
+                        id : 55
+                    ]
+    node :
+        id : 15
+        neighbors : [
+                    node : 
+                        id : 54
+                    node : 
+                        id : 55
+                    ]
+    node :
+        id : 16
+        neighbors : [
+                    node :
+                        id : 17
+                    ]
+    node :
+        id : 17
+        neighbors : [
+                    node : 
+                        id : 12
+                    node : 
+                        id : 18
+                    ]
+    node :
+        id : 18
+        neighbors : [
+                    node :
+                        id : 19
+                    ]
+    node :
+        id : 19
+        neighbors : []
+    node :
+        id : 20
+        neighbors : [
+                    node :
+                        id : 21
+                    ]
+    node :
+        id : 21
+        neighbors : [
+                    node : 
+                        id : 22
+                    node : 
+                        id : 37
+                    node : 
+                        id : 38
+                    ]
+    node :
+        id : 22
+        neighbors : [
+                    node : 
+                        id : 23
+                    node : 
+                        id : 37
+                    node : 
+                        id : 38
+                    ]
+    node :
+        id : 23
+        neighbors : [
+                    node :
+                        id : 24
+                    ]
+    node :
+        id : 24
+        neighbors : [
+                    node : 
+                        id : 26
+                    node : 
+                        id : 14
+                    node : 
+                        id : 15
+                    ]
+    node :
+        id : 25
+        neighbors : [
+                    node : 
+                        id : 14
+                    node : 
+                        id : 15
+                    ]
+    node :
+        id : 26
+        neighbors : [
+                    node :
+                        id : 27
+                    ]
+    node :
+        id : 27
+        neighbors : [
+                    node : 
+                        id : 22
+                    node : 
+                        id : 28
+                    ]
+    node :
+        id : 28
+        neighbors : [
+                    node :
+                        id : 29
+                    ]
+    node :
+        id : 29
+        neighbors : []
+    node :
+        id : 30
+        neighbors : [
+                    node :
+                        id : 31
+                    ]
+    node :
+        id : 31
+        neighbors : [
+                    node : 
+                        id : 32
+                    node : 
+                        id : 47
+                    node : 
+                        id : 48
+                    ]
+    node :
+        id : 32
+        neighbors : [
+                    node : 
+                        id : 33
+                    node : 
+                        id : 47
+                    node : 
+                        id : 48
+                    ]
+    node :
+        id : 33
+        neighbors : [
+                    node :
+                        id : 34
+                    ]
+    node :
+        id : 34
+        neighbors : [
+                    node : 
+                        id : 36
+                    node : 
+                        id : 24
+                    node : 
+                        id : 25
+                    ]
+    node :
+        id : 35
+        neighbors : [
+                    node : 
+                        id : 24
+                    node : 
+                        id : 25
+                    ]
+    node :
+        id : 36
+        neighbors : [
+                    node :
+                        id : 37
+                    ]
+    node :
+        id : 37
+        neighbors : [
+                    node : 
+                        id : 32
+                    node : 
+                        id : 38
+                    ]
+    node :
+        id : 38
+        neighbors : [
+                    node :
+                        id : 39
+                    ]
+    node :
+        id : 39
+        neighbors : []
+    node :
+        id : 40
+        neighbors : [
+                    node :
+                        id : 41
+                    ]
+    node :
+        id : 41
+        neighbors : [
+                    node : 
+                        id : 42
+                    node : 
+                        id : 57
+                    node : 
+                        id : 58
+                    ]
+    node :
+        id : 42
+        neighbors : [
+                    node : 
+                        id : 43
+                    node : 
+                        id : 57
+                    node : 
+                        id : 58
+                    ]
+    node :
+        id : 43
+        neighbors : [
+                    node :
+                        id : 44
+                    ]
+    node :
+        id : 44
+        neighbors : [
+                    node : 
+                        id : 46
+                    node : 
+                        id : 34
+                    node : 
+                        id : 35
+                    ]
+    node :
+        id : 45
+        neighbors : [
+                    node : 
+                        id : 34
+                    node : 
+                        id : 35
+                    ]
+    node :
+        id : 46
+        neighbors : [
+                    node :
+                        id : 47
+                    ]
+    node :
+        id : 47
+        neighbors : [
+                    node : 
+                        id : 42
+                    node : 
+                        id : 48
+                    ]
+    node :
+        id : 48
+        neighbors : [
+                    node :
+                        id : 49
+                    ]
+    node :
+        id : 49
+        neighbors : []
+    node :
+        id : 50
+        neighbors : [
+                    node :
+                        id : 51
+                    ]
+    node :
+        id : 51
+        neighbors : [
+                    node : 
+                        id : 52
+                    node : 
+                        id : 17
+                    node : 
+                        id : 18
+                    ]
+    node :
+        id : 52
+        neighbors : [
+                    node : 
+                        id : 53
+                    node : 
+                        id : 17
+                    node : 
+                        id : 18
+                    ]
+    node :
+        id : 53
+        neighbors : [
+                    node :
+                        id : 54
+                    ]
+    node :
+        id : 54
+        neighbors : [
+                    node : 
+                        id : 56
+                    node : 
+                        id : 44
+                    node : 
+                        id : 45
+                    ]
+    node :
+        id : 55
+        neighbors : [
+                    node : 
+                        id : 44
+                    node : 
+                        id : 45
+                    ]
+    node :
+        id : 56
+        neighbors : [
+                    node :
+                        id : 57
+                    ]
+    node :
+        id : 57
+        neighbors : [
+                    node : 
+                        id : 52
+                    node : 
+                        id : 58
+                    ]
+    node :
+        id : 58
+        neighbors : [
+                    node :
+                        id : 59
+                    ]
+    node :
+        id : 59
+        neighbors : []
