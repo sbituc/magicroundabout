@@ -1,21 +1,25 @@
 
-public class CEdge implements IEdge 
+class CEdge implements IEdge 
 {
     
-    int startNode;
-    int endNode;
+    int startNodeId;
+    int endNodeId;
     double weight;
-    
     
     
     public final int start()
     {
-        return startNode;
+        return startNodeId;
     }
     
     public final int end()
     {
-        return endNode;
+        return endNodeId;
+    }
+    
+    public double weight()
+    {
+        return weight;
     }
     
 }
