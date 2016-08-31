@@ -15,17 +15,17 @@ public interface INode<T>
     T id();
 
     /**
-     * x-position of the node
+     * x-position of the node (longitude)
      *
      * @return position
      */
-    int xposition();
+    double xposition();
 
     /**
-     * y-position of the node
+     * y-position of the node (latitude)
      *
      * @return position
      */
-    int yposition();
+    double yposition();
 
 }
