@@ -67,7 +67,8 @@ public final class CMain {
         System.out.println();
 
         // show neighbours
-        System.out.println( l_graph.neighbours( Integer.parseInt( l_cli.getOptionValue( "start", "10" ) ) ) );
+        System.out.println("TEST");
+        System.out.println( l_graph.neighbours( Integer.parseInt( l_cli.getOptionValue( "start", "13" ) ) ) );
         System.out.println();
 
         // calculate a route
@@ -75,7 +76,7 @@ public final class CMain {
             l_graph
                 .route(
                     Integer.parseInt( l_cli.getOptionValue( "start", "10" ) ),
-                    Integer.parseInt( l_cli.getOptionValue( "end", "59" ) )
+                    Integer.parseInt( l_cli.getOptionValue( "end", "49" ) )
                 )
         );
 
