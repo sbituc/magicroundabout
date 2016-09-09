@@ -12,13 +12,13 @@ public final class CNode<T> implements INode<T> {
      */
     private final T m_id;
     /**
-     * x-position within the grid structure
+     * x-position within the spheroid earth (longitude)
      */
-    private final int m_xposition;
+    private final double m_xposition;
     /**
-     * y-position within the grid structure
+     * y-position within the spheroid earth (latitude)
      */
-    private final int m_yposition;
+    private final double m_yposition;
 
     /**
      * ctor
@@ -38,7 +38,7 @@ public final class CNode<T> implements INode<T> {
      * @param m_xposition x-position
      * @param m_yposition y-position
      */
-    public CNode( final T p_id, final int m_xposition, final int m_yposition )
+    public CNode( final T p_id, final double m_xposition, final double m_yposition )
     {
         if (p_id == null)
             throw new IllegalArgumentException( "node ID need not to be null" );
@@ -55,13 +55,13 @@ public final class CNode<T> implements INode<T> {
     }
 
     @Override
-    public final int xposition()
+    public final double xposition()
     {
         return m_xposition;
     }
 
     @Override
-    public final int yposition()
+    public final double yposition()
     {
         return m_yposition;
     }
@@ -82,7 +82,7 @@ public final class CNode<T> implements INode<T> {
 
     /**
      * overload equals for checking of equal nodes, nodes
-     * are equal iif the use the equal identifier
+     * are equal if the use the equal identifier
      *
      * @param p_object any object
      * @return boolean if objects are equal

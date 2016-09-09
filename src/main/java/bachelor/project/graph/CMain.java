@@ -67,15 +67,15 @@ public final class CMain {
         System.out.println();
 
         // show neighbours
-        System.out.println( l_graph.neighbours( Integer.parseInt( l_cli.getOptionValue( "start", "1" ) ) ) );
+        System.out.println( l_graph.neighbours( Integer.parseInt( l_cli.getOptionValue( "start", "10" ) ) ) );
         System.out.println();
 
         // calculate a route
         System.out.println(
             l_graph
                 .route(
-                    Integer.parseInt( l_cli.getOptionValue( "start", "1" ) ),
-                    Integer.parseInt( l_cli.getOptionValue( "end", "5" ) )
+                    Integer.parseInt( l_cli.getOptionValue( "start", "10" ) ),
+                    Integer.parseInt( l_cli.getOptionValue( "end", "59" ) )
                 )
         );
 
