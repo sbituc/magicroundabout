@@ -2,7 +2,7 @@ package bachelor;
 
 import java.util.Random;
 
-public class App 
+public class RandomRoute 
 {
     public static void main( String[] args )
     {
@@ -16,7 +16,7 @@ public class App
 	        
 	        /*
 	         * chance of start point being the same as the end point was roughly at 20%
-	         * reassigning a new end point in case of equality dropped the rate to around 4% 
+	         * reassigning a new end point in case of equality drops the rate to around 4% 
 	         */
 	        if (randomStart == randomEnd) {
 				randomEnd = new Random().nextInt(roadNamesList.length);
