@@ -5,7 +5,7 @@
  * 
  * source: http://www.ibm.com/developerworks/java/library/j-coordconvert/index.html
  */
-package bachelor;
+package com.ibm.util;
 
 import java.util.Hashtable;
 import java.util.Map;

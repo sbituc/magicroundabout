@@ -7,7 +7,7 @@ import org.jxmapviewer.viewer.DefaultTileFactory;
 import org.jxmapviewer.viewer.GeoPosition;
 import org.jxmapviewer.viewer.TileFactoryInfo;
 
-public class mapSimulation {
+public class MapSimulation {
 	public static void main(String[] args)
 	{
 		JXMapViewer mapViewer = new JXMapViewer();
