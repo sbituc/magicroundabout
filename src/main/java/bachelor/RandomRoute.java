@@ -9,17 +9,20 @@ public class RandomRoute
         String[] roadNamesList = {"County Road", "Drove Road", "Fleming Way", "Queen's Drive", "Shrivenham Road"};
         
         int j = 0;
-        for (int i = 0; i < 60000; i++) {
+        
+        Random random = new Random();
+        
+        for (int i = 0; i < 100000; i++) {
         	
-	        int randomStart = new Random().nextInt(roadNamesList.length);
-	        int randomEnd = new Random().nextInt(roadNamesList.length);
+	        int randomStart = random.nextInt(roadNamesList.length);
+	        int randomEnd = random.nextInt(roadNamesList.length);
 	        
 	        /*
 	         * chance of start point being the same as the end point was roughly at 20%
 	         * reassigning a new end point in case of equality drops the rate to around 4% 
 	         */
 	        if (randomStart == randomEnd) {
-				randomEnd = new Random().nextInt(roadNamesList.length);
+				randomEnd = random.nextInt(roadNamesList.length);
 				if (randomStart == randomEnd) {
 					j++;
 				}

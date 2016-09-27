@@ -3,7 +3,7 @@ import javax.swing.JFrame;
 
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.OSMTileFactoryInfo;
-import org.jxmapviewer.VirtualEarthTileFactoryInfo;
+//import org.jxmapviewer.VirtualEarthTileFactoryInfo;
 import org.jxmapviewer.viewer.DefaultTileFactory;
 import org.jxmapviewer.viewer.GeoPosition;
 import org.jxmapviewer.viewer.TileFactoryInfo;
@@ -15,7 +15,7 @@ public class MapSimulation {
 
 		// Create a TileFactoryInfo for OpenStreetMap
 		TileFactoryInfo osmInfo = new OSMTileFactoryInfo();
-		TileFactoryInfo veInfo = new VirtualEarthTileFactoryInfo(VirtualEarthTileFactoryInfo.MAP);
+//		TileFactoryInfo veInfo = new VirtualEarthTileFactoryInfo(VirtualEarthTileFactoryInfo.MAP);
 		DefaultTileFactory tileFactory = new DefaultTileFactory(osmInfo);
 		mapViewer.setTileFactory(tileFactory);
 		
