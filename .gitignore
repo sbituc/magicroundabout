@@ -1,1 +1,8 @@
-/target/
+*.*
+!.gitignore
+!*.md
+!pom.xml
+!*.java
+!*.yml
+
+target/**
