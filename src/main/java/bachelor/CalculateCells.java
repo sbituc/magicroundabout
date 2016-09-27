@@ -46,7 +46,8 @@ public class CalculateCells {
 		System.out.println(lineSlope);
 		double yIntercept = y10 - lineSlope * x10;
 		System.out.println(yIntercept);
-		
+
+		/*
 		double lineSlope2 = (y12 - y11)/(x12 - x11);
 		System.out.println(lineSlope2);
 		double yIntercept2 = y11 - lineSlope2 * x11;
@@ -56,6 +57,9 @@ public class CalculateCells {
 		System.out.println(lineSlope3);
 		double yIntercept3 = y12 - lineSlope2 * x12;
 		System.out.println(yIntercept3);
+		*/
+		
+		
 		
     }
 
