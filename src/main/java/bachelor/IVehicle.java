@@ -1,5 +1,9 @@
 package bachelor;
 
-public interface IVehicle extends Runnable {
+import java.util.concurrent.Callable;
+
+public interface IVehicle extends Callable<IVehicle> {
+	
+	
 
 }
