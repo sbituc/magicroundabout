@@ -10,9 +10,9 @@ public class RandomRoute
         
         int j = 0;
         
-        Random random = new Random();
+        Random random = new Random(System.currentTimeMillis());
         
-        for (int i = 0; i < 100000; i++) {
+        for (int i = 0; i < 60000; i++) {
         	
 	        int randomStart = random.nextInt(roadNamesList.length);
 	        int randomEnd = random.nextInt(roadNamesList.length);
