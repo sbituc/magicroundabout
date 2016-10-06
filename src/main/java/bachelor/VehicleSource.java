@@ -4,13 +4,16 @@ import bachelor.project.graph.network.INode;
 
 public class VehicleSource implements IVehicleFactory {
 
+	// TODO Fix problem when compiling with maven ---> error: cannot find symbol
+	/*
 	private final INode<T> m_startNode;
-	
+
 	public VehicleSource(final INode<T> p_startNode){
 		m_startNode = p_startNode;
 
 	}
-	
+	*/
+
 	public IVehicleFactory call() throws Exception {
 
 		// TODO Auto-generated method stub
