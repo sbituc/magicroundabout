@@ -1,4 +1,4 @@
-package bachelor;
+package bachelor.project.car;
 
 import java.util.ArrayList;
 import java.util.List;
