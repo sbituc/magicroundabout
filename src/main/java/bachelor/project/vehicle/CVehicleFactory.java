@@ -14,5 +14,9 @@ public abstract class CVehicleFactory implements IVehicleFactory {
         return vehicles;
     }
 
+    public IVehicleFactory call() throws Exception {
+        return null;
+    }
+
     protected abstract void generateVehicles();
 }

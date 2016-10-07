@@ -15,7 +15,7 @@ import java.text.MessageFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
-final class CYAML
+public final class CYAML
 {
     /**
      * set with nodes
@@ -35,7 +35,7 @@ final class CYAML
      * @throws URISyntaxException thrown on icorrect path format
      */
     @SuppressWarnings( "unchecked" )
-    CYAML(final String p_input) throws IOException, URISyntaxException
+    public CYAML(final String p_input) throws IOException, URISyntaxException
     {
         // get all data from the YAML file
         final Map<String, Object> l_data = (Map<String, Object>) new Yaml().load( CYAML.getResourceURL( new File( p_input ) ).openStream() );
@@ -108,7 +108,7 @@ final class CYAML
      *
      * @return node set
      */
-    final Set<INode<Integer>> nodes()
+    public final Set<INode<Integer>> nodes()
     {
         return m_nodes;
     }
@@ -118,7 +118,7 @@ final class CYAML
      *
      * @return edge set
      */
-    final Set<IEdge<Integer>> edges()
+    public final Set<IEdge<Integer>> edges()
     {
         return m_edges;
     }

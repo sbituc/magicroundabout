@@ -2,7 +2,7 @@ package bachelor.project.graph.network;
 
 /**
  * interface of graph nodes to create different types of nodes
- * @tparam T any type of the identifier
+ * @param T any type of the identifier
  */
 public interface INode<T>
 {
