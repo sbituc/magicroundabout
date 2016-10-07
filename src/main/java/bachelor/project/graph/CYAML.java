@@ -48,12 +48,12 @@ final class CYAML
         // of the nodes within the set (no node addition or deletion is possible)
 
         m_nodes = Collections.unmodifiableSet(
-            // get the "nodes" element from the map but if it is not exists return an empty list to avoid null-pointer-exception
+            // get the "nodes" element from the ui but if it is not exists return an empty list to avoid null-pointer-exception
             ( (List<?>) l_data.getOrDefault( "nodes", Collections.EMPTY_LIST ) )
                 .stream()
-                // cast each element in the list to a map (YAML file contains maps within the node list)
+                // cast each element in the list to a ui (YAML file contains maps within the node list)
                 .map( i -> (Map<String,Object>) i )
-                // build node object from the map item
+                // build node object from the ui item
                 .map( i -> new CNode<>( (Integer) i.get( "id" ), (Integer) i.get( "x" ), (Integer) i.get( "y" ) ) )
                 // and convert all data into a set
                 .collect(Collectors.toSet() )
@@ -61,10 +61,10 @@ final class CYAML
 
         // for the edges we iterate over the node list again and extract the edge identifier values
         m_edges = Collections.unmodifiableSet(
-            // get the "nodes" element from the map but if it is not exists return an empty list to avoid null-pointer-exception
+            // get the "nodes" element from the ui but if it is not exists return an empty list to avoid null-pointer-exception
             ( (List<?>) l_data.getOrDefault( "nodes", Collections.EMPTY_LIST ) )
                 .stream()
-                // cast each element in the list to a map (YAML file contains maps within the node list)
+                // cast each element in the list to a ui (YAML file contains maps within the node list)
                 .map( i -> (Map<String,Object>) i )
                 // get the "to" node identifiers from the node structure
                 .flatMap( i -> {

@@ -27,7 +27,7 @@ public class CGraph<T> implements IGraph<T>
      */
     private final DijkstraShortestPath<INode<T>,IEdge<T>> m_dijekstra;
     /**
-     * map with identifier and node objects
+     * ui with identifier and node objects
      */
     private final Map<T, INode<T>> m_nodemap;
 
@@ -65,7 +65,7 @@ public class CGraph<T> implements IGraph<T>
         p_nodes.forEach( m_graph::addVertex );
 
         // put edges to the graph and get the corresponding nodes first,
-        // so build a  map with node identifier and node object
+        // so build a  ui with node identifier and node object
         // to get the node objects
         m_nodemap = Collections.unmodifiableMap(
                 p_nodes.stream()
@@ -73,7 +73,7 @@ public class CGraph<T> implements IGraph<T>
         );
 
         p_edges.stream()
-                // check if the nodes "from" and "to" exists on the node map
+                // check if the nodes "from" and "to" exists on the node ui
                 .filter( i -> m_nodemap.containsKey( i.from() ) && m_nodemap.containsKey( i.to() ) )
                 // create edge and put it to the graph
                 .forEach( i -> m_graph.addEdge( i, m_nodemap.get( i.from() ), m_nodemap.get( i.to() ) ) );
@@ -89,7 +89,7 @@ public class CGraph<T> implements IGraph<T>
     public final List<IEdge<T>> route( final T p_start, final T p_end )
     {
         // build two temporary nodes, because nodes are equal on their hashcode method
-        // so it is faster to build two new nodes than searching within the node map
+        // so it is faster to build two new nodes than searching within the node ui
         return m_dijekstra.getPath( new CNode<>( p_start ), new CNode<>( p_end ) );
     }
 
@@ -103,7 +103,7 @@ public class CGraph<T> implements IGraph<T>
     public final IEdge<T> edge( final T p_start, final T p_end )
     {
         // build two temporary nodes, because nodes are equal on their hashcode method
-        // so it is faster to build two new nodes than searching within the node map
+        // so it is faster to build two new nodes than searching within the node ui
         return m_graph.findEdge( new CNode<>( p_start ), new CNode<>( p_end ) );
     }
 

@@ -1,4 +1,4 @@
-package bachelor.project.map;
+package bachelor.project.ui;
 import javax.swing.JFrame;
 
 import org.jxmapviewer.JXMapViewer;

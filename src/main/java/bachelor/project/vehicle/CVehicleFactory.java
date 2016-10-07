@@ -1,4 +1,4 @@
-package bachelor.project.car;
+package bachelor.project.vehicle;
 
 import java.util.ArrayList;
 import java.util.List;
