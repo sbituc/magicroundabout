@@ -2,7 +2,6 @@ package bachelor.project.graph;
 
 
 import java.awt.geom.Point2D;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,8 +109,8 @@ public class CalculateCellCenterCoordinates {
 
         // LON = x-axis
         // LAT = y-axis
-        Point2D p1 = new Point2D.Double(lon11, lat11);
-        Point2D p2 = new Point2D.Double(lon12, lat12);
+        Point2D p1 = new Point2D.Double(lon12, lat12);
+        Point2D p2 = new Point2D.Double(lon13, lat13);
 
         System.out.println(CellCenterCoordinates(p1.getX(), p1.getY(), p2.getX(), p2.getY()));
     }

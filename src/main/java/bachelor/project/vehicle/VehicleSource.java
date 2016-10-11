@@ -1,6 +1,7 @@
 package bachelor.project.vehicle;
 
 import bachelor.project.graph.network.IEdge;
+import bachelor.project.graph.network.IGraph;
 import bachelor.project.graph.network.INode;
 
 import java.util.List;
@@ -35,14 +36,16 @@ public class VehicleSource extends CVehicleFactory {
      * Wann soll sie Auto erzeugen? Zufall
      * Wieviele Autos
      */
-    private final INode m_startNode;
+    private final int m_startNodeId;
     private final int m_maxAttemptsOfGeneration;
     private final int m_probabilityOfGeneration;
+    private final IGraph m_graph;
 
-    public VehicleSource(final INode p_startNode, int p_maxAttemptsOfGeneration, int p_probabilityOfGeneration) {
-        m_startNode = p_startNode;
+    public VehicleSource(final int p_startNodeId, int p_maxAttemptsOfGeneration, int p_probabilityOfGeneration, IGraph p_graph) {
+        m_startNodeId = p_startNodeId;
         m_maxAttemptsOfGeneration = p_maxAttemptsOfGeneration;
         m_probabilityOfGeneration = p_probabilityOfGeneration;
+        m_graph = p_graph;
     }
 
     /*

@@ -44,4 +44,12 @@ public interface IGraph<T>
      */
     Collection<INode<T>> neighbours( final T p_id );
 
+    /**
+     * returns the end nodes of the graph
+     * end nodes = nodes without neighbours
+     *
+     * @param p_graph
+     * @return collection of end nodes
+     */
+    Collection<INode<T>> getEndNodes();
 }
