@@ -74,6 +74,11 @@ public final class CMain {
         System.out.println( l_graph.neighbours( Integer.parseInt( l_cli.getOptionValue( "start", "13" ) ) ) );
         System.out.println();
 
+        // show end nodes
+        System.out.println("Endknoten");
+        System.out.println( l_graph.getEndNodes() );
+        System.out.println();
+
         // calculate a route
         System.out.println(
             l_graph

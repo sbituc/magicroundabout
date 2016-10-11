@@ -3,9 +3,12 @@ package bachelor.project.vehicle;
 import bachelor.project.graph.network.IEdge;
 import bachelor.project.graph.network.IGraph;
 import bachelor.project.graph.network.INode;
+import bachelor.project.ui.Map;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 
 // TODO  for main program, 5 instances of VehicleSource needed with one starting node each
@@ -57,6 +60,8 @@ public class VehicleSource extends CVehicleFactory {
         int randomInt;
         Random randomGeneration = new Random(System.currentTimeMillis());
 
+        Collection endNodes = m_graph.getEndNodes();
+
         for (int i = 0; i < m_maxAttemptsOfGeneration; i++) {
             randomInt = randomGeneration.nextInt(100);
             if (randomInt < m_probabilityOfGeneration) {
@@ -65,15 +70,16 @@ public class VehicleSource extends CVehicleFactory {
                 /*
                  * going with route, color for the moment
                  */
-                List randomRoute = generateRandomRoute(randomGeneration);
+                List randomRoute = generateRandomRoute(m_startNodeId, randomGeneration);
 //                vehicles.add(new Car());
+//                vehicles.add(new CVehicle());
             }
         }
 
 
     }
 
-    protected List<IEdge> generateRandomRoute(Random p_random) {
+    protected List<IEdge> generateRandomRoute(int p_startNodeId, Random p_random) {
 //        int roadStart = m_startNode;
 //        int roadEnd = p_random.nextInt(5) + 1; // chooses int between 0 and 4 (including), labels are 1 to 5
 

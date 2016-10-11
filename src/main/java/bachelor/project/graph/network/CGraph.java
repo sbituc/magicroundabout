@@ -116,9 +116,10 @@ public class CGraph<T> implements IGraph<T>
 
     @Override
     public Collection<INode<T>> getEndNodes() {
+
         return m_nodemap.entrySet().stream().parallel()
                 .filter(i -> this.neighbours( i.getKey() ).isEmpty() )
-                .map( i-> i.getValue() )
+                .map( i -> i.getValue() )
                 .collect(Collectors.toSet());
     }
 

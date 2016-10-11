@@ -6,6 +6,7 @@ import bachelor.project.graph.network.IEdge;
 import bachelor.project.graph.network.INode;
 import org.yaml.snakeyaml.Yaml;
 
+import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -54,7 +55,7 @@ public final class CYAML
                 // cast each element in the list to a ui (YAML file contains maps within the node list)
                 .map( i -> (Map<String,Object>) i )
                 // build node object from the ui item
-                .map( i -> new CNode<>( (Integer) i.get( "id" ), (Integer) i.get( "x" ), (Integer) i.get( "y" ) ) )
+                .map( i -> new CNode<>( (Integer) i.get( "id" ), (Double) i.get( "lon" ), (Double) i.get( "lat" ) ) )
                 // and convert all data into a set
                 .collect(Collectors.toSet() )
         );

@@ -61,7 +61,7 @@ public class Main {
  *  VehicleSource source_X = new VehicleSource(X0, int maxAttempts, int probability);
  *
  */
-        VehicleSource source_1 = new VehicleSource(10, 100000, 45);
+//        VehicleSource source_1 = new VehicleSource(10, 100000, 45);
 //        VehicleSource source_1 = new VehicleSource(Integer.parseInt( l_cli.getOptionValue( "start", "10" ) ), 100000, 45);
     }
 }
