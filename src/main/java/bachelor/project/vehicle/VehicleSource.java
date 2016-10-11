@@ -63,7 +63,7 @@ public class VehicleSource extends CVehicleFactory {
                  * going with route, color for the moment
                  */
                 List randomRoute = generateRandomRoute(randomGeneration);
-                vehicles.add(new Car());
+//                vehicles.add(new Car());
             }
         }
 
