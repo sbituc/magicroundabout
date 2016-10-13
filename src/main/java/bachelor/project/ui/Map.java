@@ -1,8 +1,5 @@
 package bachelor.project.ui;
 
-/**
- * Created by Hooby on 10.10.2016.
- */
 import javax.swing.JFrame;
 import org.jdesktop.swingx.JXMapKit;
 import org.jdesktop.swingx.JXMapKit.DefaultProviders;

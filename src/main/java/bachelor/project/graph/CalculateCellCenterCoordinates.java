@@ -1,6 +1,13 @@
 package bachelor.project.graph;
 
 
+import bachelor.project.graph.network.CGraph;
+import bachelor.project.graph.network.IGraph;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Options;
+
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,8 +79,39 @@ public class CalculateCellCenterCoordinates {
         return null;
     }
 
-    public static void main(String[] args) {
+//    public static void main(String[] args) {
+    public static void main(final String[] p_args) throws Exception {
+        // --- define CLI options --------------------------------------------------------------------------------------
 
+        final Options l_clioptions = new Options();
+        l_clioptions.addOption("help", false, "shows this information");
+        l_clioptions.addOption("yaml", true, "YAML graph file");
+        l_clioptions.addOption("start", true, "start ID");
+        l_clioptions.addOption("end", true, "end ID");
+
+        final CommandLine l_cli;
+        try {
+            l_cli = new DefaultParser().parse(l_clioptions, p_args);
+        } catch (final Exception l_exception) {
+            System.err.println("command-line arguments parsing error");
+            System.exit(-1);
+            return;
+        }
+
+        // --- show help -----------------------------------------------------------------------------------------------
+        if (l_cli.hasOption("help")) {
+            new HelpFormatter().printHelp(new java.io.File(CMain.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getName(), l_clioptions);
+            System.exit(0);
+            return;
+        }
+
+        // --- read yaml file ------------------------------------------------------------------------------------------
+
+        final CYAML l_configuration = new CYAML( l_cli.getOptionValue( "yaml", "bachelor/project/graph/network.yml" ) );
+        // build graph
+        final IGraph<Integer> l_graph = new CGraph<>( l_configuration.nodes(), l_configuration.edges() );
+
+/*
 //  - id  : 10
 //    to  : [ 11 ]
         double lat10 = 51.562350;
@@ -105,7 +143,7 @@ public class CalculateCellCenterCoordinates {
         double x13 = 585149;
         double y13 = 5713108;
 //	    utmz: 30u
-
+*/
 
         // LON = x-axis
         // LAT = y-axis

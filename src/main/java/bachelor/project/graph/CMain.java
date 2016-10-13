@@ -72,6 +72,11 @@ public final class CMain {
         System.out.println( l_graph );
         System.out.println();
 
+
+        //
+
+
+
         // show neighbours
         System.out.println("Nachbarn");
         System.out.println( l_graph.neighbours( Integer.parseInt( l_cli.getOptionValue( "start", "11" ) ) ) );

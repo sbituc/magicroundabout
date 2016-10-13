@@ -32,21 +32,10 @@ public class Main {
         // --- read yaml file ------------------------------------------------------------------------------------------
 
         final CYAML l_configuration = new CYAML( l_cli.getOptionValue( "yaml", "bachelor/project/graph/network.yml" ) );
-
-        // output of the node, edge and graph objects
-        System.out.println( l_configuration.nodes() );
-        System.out.println( l_configuration.edges() );
-        System.out.println();
-
         // build graph
         final IGraph<Integer> l_graph = new CGraph<>( l_configuration.nodes(), l_configuration.edges() );
-        System.out.println( l_graph );
-        System.out.println();
-
         // show neighbours
-        System.out.println("TEST");
         System.out.println( l_graph.neighbours( Integer.parseInt( l_cli.getOptionValue( "start", "13" ) ) ) );
-        System.out.println();
 
         // calculate a route
         System.out.println(
