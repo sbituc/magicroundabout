@@ -45,6 +45,14 @@ public interface IGraph<T>
     Collection<INode<T>> neighbours( final T p_id );
 
     /**
+     * returns the successors of a node
+     *
+     * @param p_id node identifier
+     * @return collection of successor nodes
+     */
+    Collection<INode<T>> successors( final T p_id );
+
+    /**
      * returns the end nodes of the graph
      * end nodes = nodes without neighbours
      *
@@ -52,4 +60,5 @@ public interface IGraph<T>
      * @return collection of end nodes
      */
     Collection<INode<T>> getEndNodes();
+
 }

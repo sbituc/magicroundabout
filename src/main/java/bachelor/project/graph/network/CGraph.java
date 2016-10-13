@@ -4,7 +4,10 @@ import com.google.common.base.Function;
 import edu.uci.ics.jung.algorithms.shortestpath.DijkstraShortestPath;
 import edu.uci.ics.jung.graph.DirectedSparseGraph;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -115,11 +118,19 @@ public class CGraph<T> implements IGraph<T>
     }
 
     @Override
-    public Collection<INode<T>> getEndNodes() {
+    public final Collection<INode<T>> successors( final T p_id ) {
+        // create a temporary node, because nodes are equal on their hashcode method
+        final INode<T> l_node = new CNode<T>( p_id );
+        return m_graph.containsVertex( l_node )
+                ? m_graph.getSuccessors( l_node )
+                : Collections.<INode<T>>emptySet();
+    }
 
+    @Override
+    public Collection<INode<T>> getEndNodes() {
         return m_nodemap.entrySet().stream().parallel()
-                .filter(i -> this.neighbours( i.getKey() ).isEmpty() )
-                .map( i -> i.getValue() )
+                .filter(i -> this.successors( i.getKey() ).isEmpty() )
+                .map(Map.Entry::getValue)
                 .collect(Collectors.toSet());
     }
 

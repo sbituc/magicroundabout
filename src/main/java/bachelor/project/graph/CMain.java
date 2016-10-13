@@ -2,10 +2,13 @@ package bachelor.project.graph;
 
 import bachelor.project.graph.network.CGraph;
 import bachelor.project.graph.network.IGraph;
+import bachelor.project.graph.network.INode;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
+
+import java.util.Collection;
 
 /**
  * main class for starting Jetty server on a Jar
@@ -71,12 +74,19 @@ public final class CMain {
 
         // show neighbours
         System.out.println("Nachbarn");
-        System.out.println( l_graph.neighbours( Integer.parseInt( l_cli.getOptionValue( "start", "13" ) ) ) );
+        System.out.println( l_graph.neighbours( Integer.parseInt( l_cli.getOptionValue( "start", "11" ) ) ) );
+        System.out.println();
+
+        // show successors
+        System.out.println("Nachfolger");
+        System.out.println( l_graph.successors( Integer.parseInt( l_cli.getOptionValue( "start", "11" ) ) ) );
         System.out.println();
 
         // show end nodes
         System.out.println("Endknoten");
-        System.out.println( l_graph.getEndNodes() );
+//        System.out.println( l_graph.getEndNodes() );
+        final Collection<INode<Integer>> endNodes = l_graph.getEndNodes();
+        System.out.println(endNodes);
         System.out.println();
 
         // calculate a route
