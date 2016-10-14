@@ -47,17 +47,16 @@ public class Main {
 
             edge.setCells( CalculateCellCenterCoordinates.CellCenterCoordinates( p1, p2 ) );
         } );
-
+        /*
         l_configuration.edges().forEach( edge -> {
             System.out.println( edge.from() + " --> " + edge.to() );
             System.out.println( edge.getCells() );
             System.out.println();
         } );
-        /**
-         * VehicleSource source_X = new VehicleSource(X0, int maxAttempts, int probability, IGraph graphObject);
-         *
-         */
-        int m_maxattempts = 100000;
+        */
+        // VehicleSource source_X = new VehicleSource(X0, int maxAttempts, int probability, IGraph graphObject);
+//        int m_maxattempts = 100000;
+        int m_maxattempts = 10;
 /*
  * nodes' numbers vs. streets' names
  * roundabout is defined in YAML file as follows
@@ -67,11 +66,16 @@ public class Main {
  * 4x --> Shrivenham Road (= 1 o'clock entry/exit)      residential area, low traffic (30%)
  * 5x --> Queens Drive (= 4 o'clock entry/exit)         from motorway, high traffic (65%)
  */
+        System.out.println( l_graph.getEndNodes() );
         VehicleSource source_1 = new VehicleSource(l_graph.node(10), m_maxattempts, 45, l_graph);
+        source_1.generateVehicles();
+
+        /*
         VehicleSource source_2 = new VehicleSource(l_graph.node(20), m_maxattempts, 55, l_graph);
         VehicleSource source_3 = new VehicleSource(l_graph.node(30), m_maxattempts, 55, l_graph);
         VehicleSource source_4 = new VehicleSource(l_graph.node(40), m_maxattempts, 30, l_graph);
         VehicleSource source_5 = new VehicleSource(l_graph.node(50), m_maxattempts, 65, l_graph);
+        */
 
     }
 }

@@ -51,28 +51,32 @@ public class VehicleSource extends CVehicleFactory {
         m_graph = p_graph;
     }
 
-    /*
-     * could be modified to create different types of vehicles (if Classes are present)
-     * vehicles.add(new Lorry());
-     * vehicles.add(new Motorbike());
-     */
-    protected void generateVehicles() {
+    public void generateVehicles() {
+        /*
+         * could be modified to create different types of vehicles (if Classes are present)
+         * vehicles.add(new Car());
+         * vehicles.add(new Lorry());
+         * vehicles.add(new Bus());
+         * vehicles.add(new Motorbike());
+         */
         int randomInt;
         Random randomGeneration = new Random(System.currentTimeMillis());
 
-        Collection endNodes = m_graph.getEndNodes();
+//        Collection endNodes = m_graph.getEndNodes();
+//        System.out.println(endNodes);
+        System.out.println( m_graph );
+
+//        Collection endNodes = m_graph.getEndNodes();
 
         for (int i = 0; i < m_maxAttemptsOfGeneration; i++) {
             randomInt = randomGeneration.nextInt(100);
             if (randomInt < m_probabilityOfGeneration) {
 
-                // TODO  declare parameters of Car (Car class)
-                /*
-                 * going with route, color for the moment
-                 */
-                List randomRoute = generateRandomRoute(m_startNode , endNodes, randomGeneration);
+                // TODO  declare parameters of Car (Car class) --- going with route, color for the moment
+//                List randomRoute = generateRandomRoute(m_startNode , endNodes, randomGeneration);
 //                vehicles.add(new Car());
 //                vehicles.add(new CVehicle());
+                System.out.println(randomInt);
             }
         }
 
@@ -80,7 +84,7 @@ public class VehicleSource extends CVehicleFactory {
     }
 
     protected List<IEdge> generateRandomRoute(INode p_startNode, Collection p_endNodes, Random p_random) {
-        m_startNode = p_startNode;
+//        m_startNode = p_startNode;
         Collection m_endnodes = p_endNodes;
 //        int roadStart = m_startNode;
 //        int roadEnd = p_random.nextInt(5) + 1; // chooses int between 0 and 4 (including), labels are 1 to 5
@@ -96,6 +100,5 @@ public class VehicleSource extends CVehicleFactory {
         return null;
     }
 
-    
 
 }
