@@ -1,10 +1,7 @@
 package bachelor.project.graph.network;
 
 import java.text.MessageFormat;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -22,6 +19,10 @@ public final class CEdge<T> implements IEdge<T>
      * weight of the edge
      */
     private double m_weight;
+    /**
+     * cells assigned to edge
+     */
+    private List m_cellsList;
 
     /**
      * ctor
@@ -53,6 +54,12 @@ public final class CEdge<T> implements IEdge<T>
         m_weight = p_weight;
         return this;
     }
+
+    @Override
+    public void setCells(List p_cellsList) { m_cellsList = p_cellsList; }
+
+    @Override
+    public List getCells() { return m_cellsList; }
 
     @Override
     public final T to() {

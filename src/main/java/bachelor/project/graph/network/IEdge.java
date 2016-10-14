@@ -1,6 +1,7 @@
 package bachelor.project.graph.network;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * interface of edges
@@ -38,5 +39,17 @@ public interface IEdge<T>
      * @return self reference
      */
      IEdge<T> weight( final double p_weight );
+
+    /**
+     * sets cells
+     *
+     * @param p_cellsList new list of cells assigned to the edge
+     */
+    public void setCells( final List p_cellsList);
+
+    /**
+     * gets cells assigned to edge
+     */
+    public List getCells();
 
 }

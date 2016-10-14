@@ -1,6 +1,7 @@
 package bachelor.project;
 
 import bachelor.project.graph.CYAML;
+import bachelor.project.graph.CalculateCellCenterCoordinates;
 import bachelor.project.graph.network.CGraph;
 import bachelor.project.graph.network.CNode;
 import bachelor.project.graph.network.IGraph;
@@ -8,6 +9,8 @@ import bachelor.project.vehicle.VehicleSource;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
+
+import java.awt.geom.Point2D;
 
 public class Main {
 
@@ -34,23 +37,41 @@ public class Main {
         final CYAML l_configuration = new CYAML( l_cli.getOptionValue( "yaml", "bachelor/project/graph/network.yml" ) );
         // build graph
         final IGraph<Integer> l_graph = new CGraph<>( l_configuration.nodes(), l_configuration.edges() );
-        // show neighbours
-        System.out.println( l_graph.neighbours( Integer.parseInt( l_cli.getOptionValue( "start", "13" ) ) ) );
+        //assign cells to all edges
+        l_configuration.edges().forEach( edge -> {
+            // LON = x-axis
+            // LAT = y-axis
 
-        // calculate a route
-        System.out.println(
-                l_graph
-                        .route(
-                                Integer.parseInt( l_cli.getOptionValue( "start", "10" ) ),
-                                Integer.parseInt( l_cli.getOptionValue( "end", "49" ) )
-                        )
-        );
+            Point2D p1 = new Point2D.Double( l_graph.node( edge.from() ).xposition(), l_graph.node( edge.from() ).yposition() );
+            Point2D p2 = new Point2D.Double( l_graph.node( edge.to() ).xposition(), l_graph.node( edge.to() ).yposition() );
 
+            edge.setCells( CalculateCellCenterCoordinates.CellCenterCoordinates( p1, p2 ) );
+        } );
+
+        l_configuration.edges().forEach( edge -> {
+            System.out.println( edge.from() + " --> " + edge.to() );
+            System.out.println( edge.getCells() );
+            System.out.println();
+        } );
+        /**
+         * VehicleSource source_X = new VehicleSource(X0, int maxAttempts, int probability, IGraph graphObject);
+         *
+         */
+        int m_maxattempts = 100000;
 /*
- *  VehicleSource source_X = new VehicleSource(X0, int maxAttempts, int probability);
- *
+ * nodes' numbers vs. streets' names
+ * roundabout is defined in YAML file as follows
+ * 1X --> Drove Road (= 6 o'clock entry/exit)           ??, medium traffic (45%)
+ * 2X --> Fleming Way (= 8 o'clock entry/exit)          from town centre, medium to higher traffic (55%)
+ * 3x --> County Road (= 10 o'clock entry/exit)         from bus + train stations, medium to higher traffic (55%)
+ * 4x --> Shrivenham Road (= 1 o'clock entry/exit)      residential area, low traffic (30%)
+ * 5x --> Queens Drive (= 4 o'clock entry/exit)         from motorway, high traffic (65%)
  */
-//        VehicleSource source_1 = new VehicleSource(10, 100000, 45);
-//        VehicleSource source_1 = new VehicleSource(Integer.parseInt( l_cli.getOptionValue( "start", "10" ) ), 100000, 45);
+        VehicleSource source_1 = new VehicleSource(l_graph.node(10), m_maxattempts, 45, l_graph);
+        VehicleSource source_2 = new VehicleSource(l_graph.node(20), m_maxattempts, 55, l_graph);
+        VehicleSource source_3 = new VehicleSource(l_graph.node(30), m_maxattempts, 55, l_graph);
+        VehicleSource source_4 = new VehicleSource(l_graph.node(40), m_maxattempts, 30, l_graph);
+        VehicleSource source_5 = new VehicleSource(l_graph.node(50), m_maxattempts, 65, l_graph);
+
     }
 }

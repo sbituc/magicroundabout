@@ -40,10 +40,6 @@ public class CGraph<T> implements IGraph<T>
      */
     public CGraph(final Collection<INode<T>> p_nodes, final Collection<IEdge<T>> p_edges )
     {
-    	
-    	// TODO Erweiterung, dass Knoten ohne Endpunkt in Set gespeichert werden + Methode zum Zugriff von außen
-    	
-    	
         // in Java 8 a function can be written with a lambda expression
         // @see http://www.java2s.com/Tutorials/Java/java.util.function/Function/index.htm
         // (i) -> i.weight()
