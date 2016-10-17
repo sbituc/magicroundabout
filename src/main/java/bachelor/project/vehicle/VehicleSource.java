@@ -3,12 +3,10 @@ package bachelor.project.vehicle;
 import bachelor.project.graph.network.IEdge;
 import bachelor.project.graph.network.IGraph;
 import bachelor.project.graph.network.INode;
-import bachelor.project.ui.Map;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 
 // TODO  for main program, 5 instances of VehicleSource needed with one starting node each
@@ -39,12 +37,12 @@ public class VehicleSource extends CVehicleFactory {
      * Wann soll sie Auto erzeugen? Zufall
      * Wieviele Autos
      */
-    private final INode m_startNode;
+    private final INode<Integer> m_startNode;
     private final int m_maxAttemptsOfGeneration;
     private final int m_probabilityOfGeneration;
     private final IGraph m_graph;
 
-    public VehicleSource(final INode p_startNode, int p_maxAttemptsOfGeneration, int p_probabilityOfGeneration, final IGraph p_graph) {
+    public VehicleSource(final INode<Integer> p_startNode, int p_maxAttemptsOfGeneration, int p_probabilityOfGeneration, final IGraph p_graph) {
         m_startNode = p_startNode;
         m_maxAttemptsOfGeneration = p_maxAttemptsOfGeneration;
         m_probabilityOfGeneration = p_probabilityOfGeneration;
@@ -60,44 +58,45 @@ public class VehicleSource extends CVehicleFactory {
          * vehicles.add(new Motorbike());
          */
         int randomInt;
-        Random randomGeneration = new Random(System.currentTimeMillis());
-
-//        Collection endNodes = m_graph.getEndNodes();
-//        System.out.println(endNodes);
-        System.out.println( m_graph );
-
-//        Collection endNodes = m_graph.getEndNodes();
+        Random myRandomizer = new Random(System.currentTimeMillis());
+        List<INode> endNodesList = m_graph.getEndNodesList();
 
         for (int i = 0; i < m_maxAttemptsOfGeneration; i++) {
-            randomInt = randomGeneration.nextInt(100);
+            randomInt = myRandomizer.nextInt(100);
             if (randomInt < m_probabilityOfGeneration) {
+//                List<bachelor.project.graph.network.IEdge> randomRoute = generateRandomRoute(endNodesList, myRandomizer);
+//                List randomRoutesCells = convertRouteToCells(randomRoute);
+                List randomRoutesCells = convertRouteToCells( generateRandomRoute(endNodesList, myRandomizer) );
+
+                System.out.println("Versuch " + i + "/" + m_maxAttemptsOfGeneration + ":\t" + randomRoutesCells);
+
+                // TODO  instanciate either CVehicle class or preferably Car class
+                // randomRoutesCells is of type List
 
                 // TODO  declare parameters of Car (Car class) --- going with route, color for the moment
-//                List randomRoute = generateRandomRoute(m_startNode , endNodes, randomGeneration);
-//                vehicles.add(new Car());
-//                vehicles.add(new CVehicle());
-                System.out.println(randomInt);
+//                vehicles.add(new Car(10,randomRoutesCells));
+//                vehicles.add(new CVehicle(10,randomRoutesCells));
             }
         }
-
-
     }
 
-    protected List<IEdge> generateRandomRoute(INode p_startNode, Collection p_endNodes, Random p_random) {
-//        m_startNode = p_startNode;
-        Collection m_endnodes = p_endNodes;
-//        int roadStart = m_startNode;
-//        int roadEnd = p_random.nextInt(5) + 1; // chooses int between 0 and 4 (including), labels are 1 to 5
+    private List convertRouteToCells(List<IEdge> p_randomRoute) {
+        List routeCellList = new ArrayList();
+        for ( IEdge entry : p_randomRoute ) {
+            routeCellList.addAll( entry.getCells() );
+        }
+        return routeCellList;
+    }
 
-        /*
-         * chance of start point being the same as the end point was roughly at 20%
-         * reassigning a new end point in case of equality drops the rate to around 4%
-         */
-//        if (roadStart == roadEnd) {
-//            roadEnd = p_random.nextInt(5) + 1;
-//        }
-
-        return null;
+    /**
+     * Returns a list of edges between start node and a random end node
+     *
+     * @param p_endNodes
+     * @param p_random
+     * @return
+     */
+    private List<bachelor.project.graph.network.IEdge> generateRandomRoute(List<INode> p_endNodes, Random p_random) {
+        return m_graph.route( m_startNode, p_endNodes.get( p_random.nextInt( p_endNodes.size() ) ) );
     }
 
 

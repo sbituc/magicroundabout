@@ -131,6 +131,14 @@ public class CGraph<T> implements IGraph<T>
     }
 
     @Override
+    public List<INode<T>> getEndNodesList() {
+        return m_nodemap.entrySet().stream().parallel()
+                .filter(i -> this.successors( i.getKey() ).isEmpty() )
+                .map(Map.Entry::getValue)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public final int hashCode()
     {
         return m_graph.hashCode();

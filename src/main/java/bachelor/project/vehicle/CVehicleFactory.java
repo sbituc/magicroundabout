@@ -7,7 +7,7 @@ public abstract class CVehicleFactory implements IVehicleFactory {
     protected List<IVehicle> vehicles = new ArrayList<IVehicle>();
 
     public CVehicleFactory() {
-        this.generateVehicles();
+//        this.generateVehicles();
     }
 
     public List<IVehicle> getVehicles() {

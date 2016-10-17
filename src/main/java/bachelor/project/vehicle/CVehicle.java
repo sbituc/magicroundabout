@@ -1,6 +1,6 @@
 package bachelor.project.vehicle;
 
-import java.lang.reflect.Array;
+import java.util.List;
 
 /*
  * role model for all vehicles incl. cars, lorries, motorbikes etc.
@@ -11,22 +11,22 @@ public abstract class CVehicle implements IVehicle {
     /**
      * current speed of the vehicle
      */
-    private int v_currentspeed;
+    private int v_currentSpeed;
 
     /**
      * has the vehicle completed its route?
      */
-    private boolean v_finishpassed = false;
+    private boolean v_finishPassed = false;
 
     /**
      * Current vehicles position
      */
-    private int v_currentposition = 0;
+    private int v_currentPosition = 0;
 
     /**
      * Route for the vehicle
      */
-    private final Array v_route;
+    private final List v_route;
 
     /**
      * Color of the vehicle
@@ -38,22 +38,23 @@ public abstract class CVehicle implements IVehicle {
     /**
      * Vehicle-Constructor
      */
-    public CVehicle(final int c_currentspeed, final Array c_route) {
-        v_currentspeed = c_currentspeed;
+    public CVehicle(final int c_currentSpeed, final List c_route) {
+        v_currentSpeed = c_currentSpeed;
         v_route = c_route;
     }
+
     /**
     * returns current speed
     */
-    public int getcurrentspeed() {
-        return v_currentspeed;
+    public int getCurrentSpeed() {
+        return v_currentSpeed;
     }
 
     /**
      * set current speed
      */
-    public void setcurrentspeed(final int c_currentspeed) {
-        v_currentspeed = c_currentspeed;
+    public void setCurrentSpeed(final int c_currentSpeed) {
+        v_currentSpeed = c_currentSpeed;
     }
 
     //TODO Auto fahren lassen?!

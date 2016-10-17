@@ -61,4 +61,6 @@ public interface IGraph<T>
      */
     Collection<INode<T>> getEndNodes();
 
+    List<INode<T>> getEndNodesList();
+
 }
