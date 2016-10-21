@@ -13,6 +13,11 @@ import org.jxmapviewer.WMSTileFactoryInfo;
 
 
 public class MapSimulation {
+	/*
+	DISCONTINUED
+
+	see bachelor.project.Main
+
 	public static void main(String[] args)
 	{
 		JXMapViewer mapViewer = new JXMapViewer();
@@ -41,5 +46,5 @@ public class MapSimulation {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}
-
+	*/
 }
