@@ -99,7 +99,7 @@ public final class CMain {
             l_graph
                 .route(
                     Integer.parseInt( l_cli.getOptionValue( "start", "10" ) ),
-                    Integer.parseInt( l_cli.getOptionValue( "end", "49" ) )
+                    Integer.parseInt( l_cli.getOptionValue( "end", "29" ) )
                 )
         );
 
