@@ -1,11 +1,13 @@
 package bachelor.project.vehicle;
 
 import java.util.List;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import java.util.LinkedList;
 
 /*
  * Vehicle class
  */
-public class CVehicle {
+public abstract class CVehicle implements IObject {
 
     /**
      * Vehicle-ID
@@ -54,7 +56,7 @@ public class CVehicle {
         m_currentSpeed = p_currentSpeed;
     }
 
-//    @Override
+    @Override
     /**
      * setzt das Vehicle weiter
      */
@@ -63,27 +65,24 @@ public class CVehicle {
 
         // Überprüfung, ob das Auto seine Route in diesm Schritt abgefahren hat
         if ((m_position + m_currentSpeed) >= m_route.size()) {
-            // FIXME: 21.10.2016  what is getLeft() and getRight()
-//            m_route.get(m_position).getLeft().setCell(m_route.get(m_position).getRight(), null);
+
+            m_route.get(m_position).getLeft().setCell(m_route.get(m_position).getRight(), null);
 
             m_finished = true;
             return;
         }
         // Umesetzen des Autos
 
-        // FIXME: 21.10.2016  what is getLeft() and getRight()
-//        m_route.get(m_position).getLeft().setCell(m_route.get(m_position).getRight(), null);
+
+        m_route.get(m_position).getLeft().setCell(m_route.get(m_position).getRight(), null);
 
         m_position = m_position + m_currentSpeed;
 
-        // FIXME: 21.10.2016 what is getLeft() and getRight()
-//        m_route.get(m_position).getLeft().setCell(m_route.get(m_position).getRight(), this);
+
+        m_route.get(m_position).getLeft().setCell(m_route.get(m_position).getRight(), this);
 
     }
 
-//    @Override
-    //FIXME: 21.10.2016  what is getOrder() for?
-//    public Integer getOrder() { return m_order; }
 
     /**
      * Liefert die Distanz in Zelle nzum vorherigen Fahrzeug wieder,
@@ -93,8 +92,8 @@ public class CVehicle {
      */
     public int getDistanceToPredecessor() {
         for (int l_routeCounter = m_position + 1; l_routeCounter < m_route.size(); l_routeCounter++) {
-            // FIXME: 21.10.2016   what is getLeft() and getRight()
-            // if (m_route.get(l_routeCounter).getLeft().getCell(m_route.get(l_routeCounter).getRight()) != null) return l_routeCounter - m_position - 1;
+
+             if (m_route.get(l_routeCounter).getLeft().getCell(m_route.get(l_routeCounter).getRight()) != null) return l_routeCounter - m_position - 1;
         }
         return Integer.MAX_VALUE;
     }
