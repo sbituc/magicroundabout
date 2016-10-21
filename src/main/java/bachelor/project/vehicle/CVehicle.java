@@ -1,8 +1,8 @@
 package bachelor.project.vehicle;
 
-import java.util.List;
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import java.util.LinkedList;
+
+import java.util.List;
 
 /*
  * Vehicle class
@@ -17,7 +17,7 @@ public abstract class CVehicle implements IObject {
     /**
      * zu fahrende Route
      */
-    private final List m_route; //Fehler, ich weiss...
+    private final List <ImmutablePair> m_route; //Fehler, ich weiss...
 
     /**
      * zu fahrende Route bereits abgefahren?
@@ -66,7 +66,7 @@ public abstract class CVehicle implements IObject {
         // Überprüfung, ob das Auto seine Route in diesm Schritt abgefahren hat
         if ((m_position + m_currentSpeed) >= m_route.size()) {
 
-            m_route.get(m_position).getLeft().setCell(m_route.get(m_position).getRight(), null);
+            //m_route.get(m_position).getLeft().setCell(m_route.get(m_position).getRight(), null);
 
             m_finished = true;
             return;
@@ -74,12 +74,12 @@ public abstract class CVehicle implements IObject {
         // Umesetzen des Autos
 
 
-        m_route.get(m_position).getLeft().setCell(m_route.get(m_position).getRight(), null);
+        //m_route.get(m_position).getLeft().setCell(m_route.get(m_position).getRight(), null);
 
         m_position = m_position + m_currentSpeed;
 
 
-        m_route.get(m_position).getLeft().setCell(m_route.get(m_position).getRight(), this);
+        //m_route.get(m_position).getLeft().setCell(m_route.get(m_position).getRight(), this);
 
     }
 
@@ -93,7 +93,7 @@ public abstract class CVehicle implements IObject {
     public int getDistanceToPredecessor() {
         for (int l_routeCounter = m_position + 1; l_routeCounter < m_route.size(); l_routeCounter++) {
 
-             if (m_route.get(l_routeCounter).getLeft().getCell(m_route.get(l_routeCounter).getRight()) != null) return l_routeCounter - m_position - 1;
+             //if (m_route.get(l_routeCounter).getLeft().getCell(m_route.get(l_routeCounter).getRight()) != null) return l_routeCounter - m_position - 1;
         }
         return Integer.MAX_VALUE;
     }
