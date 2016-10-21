@@ -4,11 +4,11 @@ import java.util.concurrent.Callable;
 
 public interface IVehicleFactory extends Callable<IVehicleFactory> {
 /*
-    protected List<IVehicle> vehicles = new ArrayList<IVehicle>();
+    protected List<CVehicle> vehicles = new ArrayList<CVehicle>();
 
     public IVehicleFactory();
 
-    public List<IVehicle> getVehicles();
+    public List<CVehicle> getVehicles();
 
     protected abstract void generateVehicles();
 */

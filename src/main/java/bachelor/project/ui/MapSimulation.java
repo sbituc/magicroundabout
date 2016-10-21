@@ -19,7 +19,7 @@ public class MapSimulation {
 
 		// Create a TileFactoryInfo for OpenStreetMap
 		TileFactoryInfo osmInfo = new OSMTileFactoryInfo();
-		TileFactoryInfo veInfo = new VirtualEarthTileFactoryInfo(VirtualEarthTileFactoryInfo.MAP);
+		TileFactoryInfo veInfo = new VirtualEarthTileFactoryInfo(VirtualEarthTileFactoryInfo.SATELLITE);
 		DefaultTileFactory tileFactory = new DefaultTileFactory(veInfo);
 
 		mapViewer.setTileFactory(tileFactory);

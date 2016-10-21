@@ -1,65 +1,106 @@
 package bachelor.project.vehicle;
 
+import com.sun.xml.internal.bind.v2.TODO;
+
 import java.util.List;
 
 /*
- * role model for all vehicles incl. cars, lorries, motorbikes etc.
- * for the moment we're just using cars (see Car class)
+ * Vehicle class
  */
-public abstract class CVehicle implements IVehicle {
+public class CVehicle {
 
     /**
-     * current speed of the vehicle
+     * Vehicle-ID
      */
-    private int v_currentSpeed;
+    private int id;
 
     /**
-     * has the vehicle completed its route?
+     * zu fahrende Route
      */
-    private boolean v_finishPassed = false;
+    private final List m_route; //Fehler, ich weiss...
 
     /**
-     * Current vehicles position
+     * zu fahrende Route bereits abgefahren?
      */
-    private int v_currentPosition = 0;
+    private boolean m_finished = false;
 
     /**
-     * Route for the vehicle
+     * Position in der Route
      */
-    private final List v_route;
+    private int m_position = 0;
 
     /**
-     * Color of the vehicle
+     * aktuelle Geschwindigkeit pro Zellen pro Schritt
      */
-    private char v_color;
-
-    // TODO  getColor in Abhängigkeit von der CarFactory-Position bzw. Nummer, Konstruktor und "Array" für Route anpassen
+    private int m_currentspeed;
 
     /**
-     * Vehicle-Constructor
+     * Konstruktor des Vehicles
      */
-    public CVehicle(final int c_currentSpeed, final List c_route) {
-        v_currentSpeed = c_currentSpeed;
-        v_route = c_route;
+    public CVehicle(final int p_currentSpeed, final List p_route) {
+        m_currentspeed = p_currentSpeed;
+        m_route = p_route;
     }
 
     /**
-    * returns current speed
-    */
-    public int getCurrentSpeed() {
-        return v_currentSpeed;
+     * Wiedergabe aktuelle Geschwindigkeit
+     */
+    public int getcurrentSpeed() {
+        return m_currentspeed;
     }
 
     /**
-     * set current speed
+     * setzt die aktuelle Geschwindigkeit fest
      */
-    public void setCurrentSpeed(final int c_currentSpeed) {
-        v_currentSpeed = c_currentSpeed;
+    public void setcurrentSpeed(final int p_currentSpeed) {
+        m_currentspeed = p_currentSpeed;
     }
 
-    //TODO Auto fahren lassen?!
+    @Override
+    /**
+     * setzt das Vehicle weiter
+     */
+    public void step(final int p_timeStep) {
+        //TODO...
 
-    public IVehicle call() throws Exception {
-        return null;
+        // Überprüfung, ob das Auto seine Route in diesm Schritt abgefahren hat
+        if ((m_position + m_currentSpeed) >= m_route.size()) {
+            m_route.get(m_position).getLeft().setCell(m_route.get(m_position).getRight(), null);
+            m_finished = true;
+            return;
+        }
+        // Umesetzen des Autos
+        m_route.get(m_position).getLeft().setCell(m_route.get(m_position).getRight(), null);
+        m_position = m_position + m_currentSpeed;
+        m_route.get(m_position).getLeft().setCell(m_route.get(m_position).getRight(), this);
     }
+
+    @Override
+    public Integer getOrder() {
+        return m_order;
+    }
+
+    /**
+     * Liefert die Distanz in Zelle nzum vorherigen Fahrzeug wieder,
+     * ist keines vorhanden wird der maximale Integer wert zurückgegeben
+     *
+     * @return Distanz zum Vorgänger oder Integer.MAXVALUE
+     */
+    public int getDistanceToPredecessor() {
+        for (int l_routeCounter = m_position + 1; l_routeCounter < m_route.size(); l_routeCounter++) {
+            if (m_route.get(l_routeCounter).getLeft().getCell(m_route.get(l_routeCounter).getRight()) != null)
+                return l_routeCounter - m_position - 1;
+        }
+        return Integer.MAX_VALUE;
+    }
+
+    /**
+     * Gibt zurück, ob ein Vehicle seine Route abgefahren hat
+     *
+     * @return true oder false
+     */
+    public boolean canRemove() {
+        return m_finished;
+    }
+
 }

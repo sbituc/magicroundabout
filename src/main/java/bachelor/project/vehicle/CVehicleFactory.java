@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class CVehicleFactory implements IVehicleFactory {
-    protected List<IVehicle> vehicles = new ArrayList<IVehicle>();
+    protected List<CVehicle> vehicles = new ArrayList<CVehicle>();
 
     public CVehicleFactory() {
 //        this.generateVehicles();
     }
 
-    public List<IVehicle> getVehicles() {
+    public List<CVehicle> getVehicles() {
         return vehicles;
     }
 
