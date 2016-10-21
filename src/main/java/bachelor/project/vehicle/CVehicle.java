@@ -1,7 +1,5 @@
 package bachelor.project.vehicle;
 
-import com.sun.xml.internal.bind.v2.TODO;
-
 import java.util.List;
 
 /*
@@ -32,13 +30,13 @@ public class CVehicle {
     /**
      * aktuelle Geschwindigkeit pro Zellen pro Schritt
      */
-    private int m_currentspeed;
+    private int m_currentSpeed;
 
     /**
      * Konstruktor des Vehicles
      */
     public CVehicle(final int p_currentSpeed, final List p_route) {
-        m_currentspeed = p_currentSpeed;
+        m_currentSpeed = p_currentSpeed;
         m_route = p_route;
     }
 
@@ -46,17 +44,17 @@ public class CVehicle {
      * Wiedergabe aktuelle Geschwindigkeit
      */
     public int getcurrentSpeed() {
-        return m_currentspeed;
+        return m_currentSpeed;
     }
 
     /**
      * setzt die aktuelle Geschwindigkeit fest
      */
     public void setcurrentSpeed(final int p_currentSpeed) {
-        m_currentspeed = p_currentSpeed;
+        m_currentSpeed = p_currentSpeed;
     }
 
-    @Override
+//    @Override
     /**
      * setzt das Vehicle weiter
      */
@@ -65,20 +63,27 @@ public class CVehicle {
 
         // Überprüfung, ob das Auto seine Route in diesm Schritt abgefahren hat
         if ((m_position + m_currentSpeed) >= m_route.size()) {
-            m_route.get(m_position).getLeft().setCell(m_route.get(m_position).getRight(), null);
+            // FIXME: 21.10.2016  what is getLeft() and getRight()
+//            m_route.get(m_position).getLeft().setCell(m_route.get(m_position).getRight(), null);
+
             m_finished = true;
             return;
         }
         // Umesetzen des Autos
-        m_route.get(m_position).getLeft().setCell(m_route.get(m_position).getRight(), null);
+
+        // FIXME: 21.10.2016  what is getLeft() and getRight()
+//        m_route.get(m_position).getLeft().setCell(m_route.get(m_position).getRight(), null);
+
         m_position = m_position + m_currentSpeed;
-        m_route.get(m_position).getLeft().setCell(m_route.get(m_position).getRight(), this);
+
+        // FIXME: 21.10.2016 what is getLeft() and getRight()
+//        m_route.get(m_position).getLeft().setCell(m_route.get(m_position).getRight(), this);
+
     }
 
-    @Override
-    public Integer getOrder() {
-        return m_order;
-    }
+//    @Override
+    //FIXME: 21.10.2016  what is getOrder() for?
+//    public Integer getOrder() { return m_order; }
 
     /**
      * Liefert die Distanz in Zelle nzum vorherigen Fahrzeug wieder,
@@ -88,8 +93,8 @@ public class CVehicle {
      */
     public int getDistanceToPredecessor() {
         for (int l_routeCounter = m_position + 1; l_routeCounter < m_route.size(); l_routeCounter++) {
-            if (m_route.get(l_routeCounter).getLeft().getCell(m_route.get(l_routeCounter).getRight()) != null)
-                return l_routeCounter - m_position - 1;
+            // FIXME: 21.10.2016   what is getLeft() and getRight()
+            // if (m_route.get(l_routeCounter).getLeft().getCell(m_route.get(l_routeCounter).getRight()) != null) return l_routeCounter - m_position - 1;
         }
         return Integer.MAX_VALUE;
     }
