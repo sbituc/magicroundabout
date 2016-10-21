@@ -3,18 +3,138 @@ package bachelor.project;
 import bachelor.project.graph.CYAML;
 import bachelor.project.graph.CalculateCellCenterCoordinates;
 import bachelor.project.graph.network.CGraph;
-import bachelor.project.graph.network.CNode;
 import bachelor.project.graph.network.IGraph;
+import bachelor.project.ui.RoutePainter;
+import bachelor.project.ui.VirtualEarthTileFactoryInfo;
 import bachelor.project.vehicle.VehicleSource;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
+import org.jxmapviewer.JXMapViewer;
+import org.jxmapviewer.painter.CompoundPainter;
+import org.jxmapviewer.painter.Painter;
+import org.jxmapviewer.viewer.*;
 
+import javax.swing.*;
 import java.awt.geom.Point2D;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class Main {
 
     public static void main(final String[] p_args) throws Exception {
+
+        // Visualisation
+        JXMapViewer mapViewer = new JXMapViewer();
+
+        // Create a TileFactoryInfo
+        TileFactoryInfo veInfo = new VirtualEarthTileFactoryInfo(VirtualEarthTileFactoryInfo.SATELLITE);
+        DefaultTileFactory tileFactory = new DefaultTileFactory(veInfo);
+        mapViewer.setTileFactory(tileFactory);
+
+        // Use 8 threads in parallel to load the tiles
+        tileFactory.setThreadPoolSize(8);
+
+
+        // Set the focus and zoom
+        GeoPosition magicRoundabout = new GeoPosition(51.562842, -1.771473);
+        mapViewer.setZoom(0);
+        mapViewer.setAddressLocation(magicRoundabout);
+
+
+        String routeString = "[51.56235, -1.771391], [51.562391000000005, -1.77140275], [51.562432, -1.7714145000000001], [51.562473, -1.77142625], [51.562514, -1.771438], [51.562516125, -1.771501], [51.56251825, -1.7715640000000001], [51.562520375, -1.771627], [51.5625225, -1.77169], [51.562524625, -1.771753], [51.56252675, -1.7718159999999998], [51.562528875, -1.771879], [51.562531, -1.771942], [51.5625168, -1.7720064], [51.5625026, -1.7720708], [51.5624884, -1.7721352], [51.562474200000004, -1.7721996]";
+//        Pattern pattern = Pattern.compile("\\[([0-9\\., -]*)\\]");
+        Pattern pattern = Pattern.compile("\\[(([0-9\\.-]*), ([0-9\\.-]*))\\]");
+
+        Matcher matcher = pattern.matcher(routeString);
+
+
+        ArrayList al = new ArrayList();
+
+
+        while (matcher.find()) {
+//            System.out.println(matcher.group(1));
+            //al.add(matcher.group(1));
+
+            ArrayList<Double> singleCoordinate = new ArrayList<Double>();
+            double singleCoordinateLon = ( Double.parseDouble( matcher.group(3) ) );
+            double singleCoordinateLat = ( Double.parseDouble( matcher.group(2) ) );
+
+            singleCoordinate.add(singleCoordinateLat);
+            singleCoordinate.add(singleCoordinateLon);
+            al.add(singleCoordinate);
+
+        }
+
+//        System.out.println(al.size());
+//        System.out.println(al);
+
+
+        // Display the viewer in a JFrame
+        JFrame frame = new JFrame("Magic Roundabout");
+        frame.getContentPane().add(mapViewer);
+        frame.setSize(650, 650);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+
+        // Create a track from the geo-positions
+        final List<GeoPosition> track = new ArrayList<GeoPosition>();
+        System.out.println("OUTPUT");
+
+        int i = 0;
+        while (i < al.size()) {
+
+
+            System.out.println(
+                    al.get(i).toString().getClass()
+            );
+
+//            Pattern pattern2 = Pattern.compile("\\[([0-9.-]*), ([0-9.-]*)\\]");
+//            Pattern pattern2 = Pattern.compile("[0-9]*");
+//            Matcher matcher2 = pattern2.matcher(al.get(i).toString());
+
+//            System.out.println(matcher2.group());
+/*
+            System.out.println(
+                    Double.parseDouble( matcher2.group(3) )
+            );
+            System.out.println(
+                    Double.parseDouble( matcher2.group(2) )
+            );
+*/
+
+            i++;
+        }
+
+//                    track.add(new GeoPosition( a[0],a[1] ));
+
+/*
+
+        RoutePainter routePainter = new RoutePainter(track);
+
+        // Set the focus
+//        mapViewer.zoomToBestFit(new HashSet<GeoPosition>(track), 0.7);
+
+        // Create waypoints from the geo-positions
+        Set<Waypoint> waypoints = new HashSet<Waypoint>();
+
+        // Create a waypoint painter that takes all the waypoints
+        WaypointPainter<Waypoint> waypointPainter = new WaypointPainter<Waypoint>();
+        waypointPainter.setWaypoints(waypoints);
+
+        // Create a compound painter that uses both the route-painter and the waypoint-painter
+        List<Painter<JXMapViewer>> painters = new ArrayList<Painter<JXMapViewer>>();
+        painters.add(routePainter);
+        painters.add(waypointPainter);
+
+        CompoundPainter<JXMapViewer> painter = new CompoundPainter<JXMapViewer>(painters);
+        mapViewer.setOverlayPainter(painter);
+
+*/
+
+
         // --- define CLI options --------------------------------------------------------------------------------------
 
         final Options l_clioptions = new Options();
