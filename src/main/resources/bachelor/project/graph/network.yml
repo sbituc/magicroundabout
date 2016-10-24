@@ -7,190 +7,193 @@ nodes :
 
   - id  : 10
     to  : [ 11 ]
-    lat : 51.562350
-    lon : -1.771391
+    lat : 51.562349
+    lon : -1.771392
     utme: 585163
     utmn: 5713079
     utmz: 30u
 
   - id  : 11
     to  : [ 12, 112, 28 ]
-    lat : 51.562514
-    lon : -1.771438
+    lat : 51.562525
+    lon : -1.771455
     utme: 585160
     utmn: 5713097
     utmz: 30u
 
   - id  : 12
     to  : [ 13, 27, 112 ]
-    lat : 51.562572
-    lon : -1.771490
+    lat : 51.562567
+    lon : -1.771462
     utme: 585146
     utmn: 5713102
     utmz: 30u
 
+    # crossover node between 11,12 and 27,28
   - id  : 112
     to  : [ 27, 28 ]
-    lat : 51.562557
-    lon : -1.771453
+    lat : 51.562543
+    lon : -1.771644
     utme: 585159
     utmn: 5713102
     utmz: 30u
 
   - id  : 13
     to  : [ 14 ]
-    lat : 51.562620
-    lon : -1.771488
+    lat : 51.562608
+    lon : -1.771490
     utme: 585149
     utmn: 5713108
     utmz: 30u
 
   - id  : 14
     to  : [ 16, 54, 145 ]
-    lat : 51.562660
-    lon : -1.771393
+    lat : 51.562655
+    lon : -1.771412
     utme: 585163
     utmn: 5713113
     utmz: 30u
 
   - id  : 15
     to  : [ 145, 55 ]
-    lat : 51.562723
-    lon : -1.771396
+    lat : 51.562709
+    lon : -1.771419
     utme: 585162
     utmn: 5713120
     utmz: 30u
 
+    # crossover node between 14,15 and 54,55
   - id  : 145
     to  : [ 54, 55 ]
-    lat : 51.562732
-    lon : -1.771298
+    lat : 51.562733
+    lon : -1.771294
     utme: 585169
     utmn: 5713121
     utmz: 30u
 
   - id  : 16
     to  : [ 17 ]
-    lat : 51.562632
-    lon : -1.771342
+    lat : 51.562623
+    lon : -1.771354
     utme: 585166
     utmn: 5713110
     utmz: 30u
 
   - id  : 17
     to  : [ 12, 18 ]
-    lat : 51.562581
-    lon : -1.771334
+    lat : 51.562576
+    lon : -1.771340
     utme: 585167
     utmn: 5713104
     utmz: 30u
 
   - id  : 18
     to  : [ 19 ]
-    lat : 51.562524
-    lon : -1.771316
+    lat : 51.562537
+    lon : -1.771323
     utme: 585168
     utmn: 5713098
     utmz: 30u
 
   - id  : 19
-    to  : []
-    lat : 51.562360
-    lon : -1.771306
+    lat : 51.562361
+    lon : -1.771307
     utme: 585169
     utmn: 5713080
     utmz: 30u
 
   - id  : 20
     to  : [ 21 ]
-    lat : 51.562552
-    lon : -1.771270
+    lat : 51.562551
+    lon : -1.772266
     utme: 585171
     utmn: 5713101
     utmz: 30u
 
   - id  : 21
     to  : [ 22, 212, 38 ]
-    lat : 51.562642
-    lon : -1.772013
+    lat : 51.562661
+    lon : -1.772005
     utme: 585120
     utmn: 5713110
     utmz: 30u
 
   - id  : 22
     to  : [ 23, 37, 212 ]
-    lat : 51.562664
-    lon : -1.771918
+    lat : 51.562676
+    lon : -1.771927
     utme: 585123
     utmn: 5713113
     utmz: 30u
 
+    # crossover node between 21,22 and 37,38
   - id  : 212
     to  : [ 37, 38 ]
-    lat : 51.562746
-    lon : -1.771979
+    lat : 51.562815
+    lon : -1.771994
     utme: 585122
     utmn: 5713122
     utmz: 30u
 
   - id  : 23
     to  : [ 24 ]
-    lat : 51.562680
-    lon : -1.771831
+    lat : 51.562696
+    lon : -1.771846
     utme: 585132
     utmn: 5713115
     utmz: 30u
 
   - id  : 24
     to  : [ 26, 14, 245 ]
-    lat : 51.562672
-    lon : -1.771756
+    lat : 51.562674
+    lon : -1.771779
     utme: 585137
     utmn: 5713114
     utmz: 30u
 
   - id  : 25
     to  : [ 245, 15 ]
-    lat : 51.562734
-    lon : -1.771603
+    lat : 51.562735
+    lon : -1.771663
     utme: 585148
     utmn: 5713121
     utmz: 30u
 
+    # crossover node between 24,25 and 14,15
   - id  : 245
     to  : [ 14, 15 ]
-    lat : 51.562692
-    lon : -1.771530
+    lat : 51.562684
+    lon : -1.771593
     utme: 585153
     utmn: 5713116
     utmz: 30u
 
   - id  : 26
     to  : [ 27 ]
-    lat : 51.562623
-    lon : -1.771760
+    lat : 51.562619
+    lon : -1.771777
     utme: 585137
     utmn: 5713109
     utmz: 30u
 
   - id  : 27
     to  : [ 22, 28 ]
-    lat : 51.562579
-    lon : -1.771846
+    lat : 51.562578
+    lon : -1.771838
     utme: 585131
     utmn: 5713104
     utmz: 30u
 
   - id  : 28
     to  : [ 29 ]
-    lat : 51.562531
-    lon : -1.771942
+    lat : 51.562553
+    lon : -1.771899
     utme: 585124
     utmn: 5713098
     utmz: 30u
 
   - id  : 29
-    lat : 51.562460
+    lat : 51.562461
     lon : -1.772264
     utme: 585103
     utmn: 5713090
@@ -198,285 +201,309 @@ nodes :
 
   - id  : 30
     to  : [ 31 ]
-    lat : 51.563051
-    lon : -1.772335
+    lat : 51.563050
+    lon : -1.772332
     utme: 585096
     utmn: 5713155
     utmz: 30u
 
   - id  : 31
-    to  : [ 32, 312, 48 ]
-    lat : 51.563026
-    lon : -1.771985
+    to  : [ 32, 312, 318 ]
+    lat : 51.563036
+    lon : -1.771959
     utme: 585121
     utmn: 5713153
     utmz: 30u
 
+    # smoothening node between 31 and 48
+  - id  : 318
+    to  : [ 48 ]
+    lat : 51.563181
+    lon : -1.771365
+    utme: 
+    utmn: 
+    utmz: 30u
+
   - id  : 32
-    to  : [ 33, 47, 312 ]
-    lat : 51.563010
-    lon : -1.771889
+    to  : [ 33, 327, 312 ]
+    lat : 51.563018
+    lon : -1.771901
     utme: 585127
     utmn: 5713151
     utmz: 30u
 
+    # smoothening node between 32 and 47
+  - id  : 327
+    to  : [ 47 ]
+    lat : 51.563103
+    lon : -1.771578
+    utme: 
+    utmn: 
+    utmz: 30u
+
+    # crossover node between 31,32 and 47,48
   - id  : 312
-    to  : [ 47, 48 ]
-    lat : 51.563108
-    lon : -1.771636
+    to  : [ 47, 318 ]
+    lat : 51.563125
+    lon : -1.771582
     utme: 585145
     utmn: 5713163
     utmz: 30u
 
   - id  : 33
     to  : [ 34 ]
-    lat : 51.562963
-    lon : -1.771808
+    lat : 51.562983
+    lon : -1.771828
     utme: 858133
     utmn: 5713146
     utmz: 30u
 
   - id  : 34
     to  : [ 36, 24, 345 ]
-    lat : 51.562909
-    lon : -1.771796
+    lat : 51.562929
+    lon : -1.771810
     utme: 585134
     utmn: 5713140
     utmz: 30u
 
   - id  : 35
     to  : [ 345, 25 ]
-    lat : 51.562879
-    lon : -1.771693
+    lat : 51.562905
+    lon : -1.771698
     utme: 585141
     utmn: 5713137
     utmz: 30u
 
+    # crossover node between 34,35 and 24,25
   - id  : 345
     to  : [ 24, 25 ]
-    lat : 51.562836
-    lon : -1.771711
+    lat : 51.562811
+    lon : -1.771712
     utme: 585140
     utmn: 5713132
     utmz: 30u
 
   - id  : 36
     to  : [ 37 ]
-    lat : 51.562900
-    lon : -1.771882
+    lat : 51.562904
+    lon : -1.771895
     utme: 585122
     utmn: 5713139
     utmz: 30u
 
   - id  : 37
     to  : [ 32, 38 ]
-    lat : 51.562931
-    lon : -1.771968
+    lat : 51.562924
+    lon : -1.771973
     utme: 585122
     utmn: 5713143
     utmz: 30u
 
   - id  : 38
     to  : [ 39 ]
-    lat : 51.562947
-    lon : -1.772068
+    lat : 51.562946
+    lon : -1.772069
     utme: 585115
     utmn: 5713144
     utmz: 30u
 
   - id  : 39
     lat : 51.563007
-    lon : -1.772351
+    lon : -1.772345
     utme: 585095
     utmn: 5713151
     utmz: 30u
 
   - id  : 40
     to  : [ 41 ]
-    lat : 51.563220
-    lon : -1.770908
+    lat : 51.563260
+    lon : -1.770845
     utme: 585195
     utmn: 5713176
     utmz: 30u
 
   - id  : 41
     to  : [ 42, 412, 58 ]
-    lat : 51.563101
-    lon : -1.771047
+    lat : 51.563113
+    lon : -1.771053
     utme: 585186
     utmn: 5713163
     utmz: 30u
 
   - id  : 42
     to  : [ 43, 57, 412 ]
-    lat : 51.563059
-    lon : -1.771106
+    lat : 51.563063
+    lon : -1.771102
     utme: 585182
     utmn: 5713158
     utmz: 30u
 
+    # crossover node between 41,42 and 57,58
   - id  : 412
     to  : [ 57, 58 ]
-    lat : 51.562989
-    lon : -1.770994
+    lat : 51.562995
+    lon : -1.771011
     utme: 585190
     utmn: 5713150
     utmz: 30u
 
   - id  : 43
     to  : [ 44 ]
-    lat : 51.563033
-    lon : -1.771181
+    lat : 51.563026
+    lon : -1.771173
     utme: 585176
     utmn: 5713155
     utmz: 30u
 
   - id  : 44
     to  : [ 46, 34, 445 ]
-    lat : 51.563038
-    lon : -1.771279
+    lat : 51.563046
+    lon : -1.771258
     utme: 585170
     utmn: 5713155
     utmz: 30u
 
   - id  : 45
     to  : [ 445, 35 ]
-    lat : 51.562970
-    lon : -1.771389
+    lat : 51.562965
+    lon : -1.771323
     utme: 585162
     utmn: 5713148
     utmz: 30u
 
+    # crossover node between 44,45 and 34,35
   - id  : 445
     to  : [ 34, 35 ]
-    lat : 51.562961
-    lon : -1.771513
+    lat : 51.562964
+    lon : -1.771526
     utme: 585154
     utmn: 5713146
     utmz: 30u
 
   - id  : 46
     to  : [ 47 ]
-    lat : 51.563074
-    lon : -1.771279
+    lat : 51.563089
+    lon : -1.771274
     utme: 585170
     utmn: 5713159
     utmz: 30u
 
   - id  : 47
     to  : [ 42, 48 ]
-    lat : 51.563118
-    lon : -1.771236
+    lat : 51.563130
+    lon : -1.771220
     utme: 585173
     utmn: 5713164
     utmz: 30u
 
   - id  : 48
     to  : [ 49 ]
-    lat : 51.563151
-    lon : -1.771093
+    lat : 51.563144
+    lon : -1.771098
     utme: 585182
     utmn: 5713168
     utmz: 30u
 
   - id  : 49
-    lat : 51.563238
-    lon : -1.770939
+    lat : 51.563278
+    lon : -1.770885
     utme: 585193
     utmn: 5713178
     utmz: 30u
 
   - id  : 50
     to  : [ 51 ]
-    lat : 51.562689
-    lon : -1.770525
+    lat : 51.562678
+    lon : -1.770526
     utme: 585223
     utmn: 5713117
     utmz: 30u
 
   - id  : 51
     to  : [ 52, 512, 18 ]
-    lat : 51.562720
-    lon : -1.770927
+    lat : 51.562713
+    lon : -1.770952
     utme: 585195
     utmn: 5713120
     utmz: 30u
 
   - id  : 52
     to  : [ 53, 17, 512 ]
-    lat : 51.562745
-    lon : -1.771010
+    lat : 51.562733
+    lon : -1.771024
     utme: 585189
     utmn: 5713123
     utmz: 30u
 
+    # crossover node between 51,52 and 17,18
   - id  : 512
     to  : [ 17, 18 ]
-    lat : 51.562652
-    lon : -1.771133
+    lat : 51.562653
+    lon : -1.771154
     utme: 585181
     utmn: 5713113
     utmz: 30u
 
   - id  : 53
     to  : [ 54 ]
-    lat : 51.562766
-    lon : -1.771092
+    lat : 51.562763
+    lon : -1.771089
     utme: 585183
     utmn: 5713125
     utmz: 30u
 
   - id  : 54
     to  : [ 56, 44, 545 ]
-    lat : 51.562820
-    lon : -1.771128
+    lat : 51.562810
+    lon : -1.771120
     utme: 585181
     utmn: 5713131
     utmz: 30u
 
   - id  : 55
     to  : [ 545, 45 ]
-    lat : 51.562901
-    lon : -1.771263
+    lat : 51.562809
+    lon : -1.771232
     utme: 585171
     utmn: 5713140
     utmz: 30u
 
+    # crossover node between 54,55 and 44,45
   - id  : 545
     to  : [ 44, 45 ]
-    lat : 51.562961
-    lon : -1.771513
+    lat : 51.562892
+    lon : -1.771236
     utme: 585154
     utmn: 5713146
     utmz: 30u
 
   - id  : 56
     to  : [ 57 ]
-    lat : 51.562850
-    lon : -1.771040
+    lat : 51.562844
+    lon : -1.771042
     utme: 585187
     utmn: 5713135
     utmz: 30u
 
   - id  : 57
     to  : [ 52, 58 ]
-    lat : 51.562848
-    lon : -1.770958
+    lat : 51.562834
+    lon : -1.770955
     utme: 585192
     utmn: 5713135
     utmz: 30u
 
   - id  : 58
     to  : [ 59 ]
-    lat : 51.562833
-    lon : -1.770816
+    lat : 51.562824
+    lon : -1.770798
     utme: 585202
     utmn: 5713133
     utmz: 30u
 
   - id  : 59
-    lat : 51.562800
-    lon : -1.770519
+    lat : 51.562789
+    lon : -1.770420
     utme: 585223
     utmn: 5713130
     utmz: 30u

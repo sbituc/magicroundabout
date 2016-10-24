@@ -70,17 +70,17 @@ public class VehicleSource extends CVehicleFactory {
 
                 System.out.println("Versuch " + i + "/" + m_maxAttemptsOfGeneration + ":\t" + randomRoutesCells);
 
-                // TODO  instanciate either CVehicle class or preferably Car class
-                // randomRoutesCells is of type List
-
                 // TODO  declare parameters of Car (Car class) --- going with route, color for the moment
-//                vehicles.add(new Car(10,randomRoutesCells));
-//                vehicles.add(new CVehicle(10,randomRoutesCells));
+//                vehicles.add(new Car(10,randomRoutesCells,"yellow"));
+
             }
         }
     }
 
     private List convertRouteToCells(List<IEdge> p_randomRoute) {
+
+        // TODO ID for edges
+
         List routeCellList = new ArrayList();
         for ( IEdge entry : p_randomRoute ) {
             routeCellList.addAll( entry.getCells() );

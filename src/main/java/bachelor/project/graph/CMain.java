@@ -60,17 +60,21 @@ public final class CMain {
         final CYAML l_configuration = new CYAML( l_cli.getOptionValue( "yaml", "bachelor/project/graph/network.yml" ) );
 
         // output of the node, edge and graph objects
+        /*
         System.out.println("Knoten");
         System.out.println( l_configuration.nodes() );
         System.out.println("Kanten");
         System.out.println( l_configuration.edges() );
         System.out.println();
+        */
 
         // build graph
         final IGraph<Integer> l_graph = new CGraph<>( l_configuration.nodes(), l_configuration.edges() );
+        /*
         System.out.println("Graph");
         System.out.println( l_graph );
         System.out.println();
+        */
 
 
         //
@@ -78,28 +82,33 @@ public final class CMain {
 
 
         // show neighbours
+        /*
         System.out.println("Nachbarn");
         System.out.println( l_graph.neighbours( Integer.parseInt( l_cli.getOptionValue( "start", "11" ) ) ) );
         System.out.println();
+        */
 
         // show successors
+        /*
         System.out.println("Nachfolger");
         System.out.println( l_graph.successors( Integer.parseInt( l_cli.getOptionValue( "start", "11" ) ) ) );
         System.out.println();
+        */
 
         // show end nodes
+        /*
         System.out.println("Endknoten");
-//        System.out.println( l_graph.getEndNodes() );
         final Collection<INode<Integer>> endNodes = l_graph.getEndNodes();
         System.out.println(endNodes);
         System.out.println();
+        */
 
         // calculate a route
         System.out.println(
             l_graph
                 .route(
                     Integer.parseInt( l_cli.getOptionValue( "start", "10" ) ),
-                    Integer.parseInt( l_cli.getOptionValue( "end", "29" ) )
+                    Integer.parseInt( l_cli.getOptionValue( "end", "19" ) )
                 )
         );
 

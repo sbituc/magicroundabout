@@ -17,7 +17,7 @@ public abstract class CVehicle implements IObject {
     /**
      * zu fahrende Route
      */
-    private final List <ImmutablePair> m_route; //Fehler, ich weiss...
+    private final List m_route; //Fehler, ich weiss...
 
     /**
      * zu fahrende Route bereits abgefahren?
@@ -35,11 +35,17 @@ public abstract class CVehicle implements IObject {
     private int m_currentSpeed;
 
     /**
+     * color of the vehicle
+     */
+    private String m_color;
+
+    /**
      * Konstruktor des Vehicles
      */
-    public CVehicle(final int p_currentSpeed, final List p_route) {
+    public CVehicle(final int p_currentSpeed, final List p_route, String p_color) {
         m_currentSpeed = p_currentSpeed;
         m_route = p_route;
+        m_color = p_color;
     }
 
     /**
