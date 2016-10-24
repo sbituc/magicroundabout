@@ -49,7 +49,9 @@ public class VehicleSource extends CVehicleFactory {
         m_graph = p_graph;
     }
 
-    public void generateVehicles() {
+//    public void generateVehicles() {
+    //TODO redo constructor to "produce" vehicles again, missusing it to generate a list for painting route
+    public List generateVehicles() {
         /*
          * could be modified to create different types of vehicles (if Classes are present)
          * vehicles.add(new Car());
@@ -61,20 +63,21 @@ public class VehicleSource extends CVehicleFactory {
         Random myRandomizer = new Random(System.currentTimeMillis());
         List<INode> endNodesList = m_graph.getEndNodesList();
 
-        for (int i = 0; i < m_maxAttemptsOfGeneration; i++) {
-            randomInt = myRandomizer.nextInt(100);
-            if (randomInt < m_probabilityOfGeneration) {
-//                List<bachelor.project.graph.network.IEdge> randomRoute = generateRandomRoute(endNodesList, myRandomizer);
-//                List randomRoutesCells = convertRouteToCells(randomRoute);
-                List randomRoutesCells = convertRouteToCells( generateRandomRoute(endNodesList, myRandomizer) );
+        List randomRoutesCells = null;
+//        for (int i = 0; i < m_maxAttemptsOfGeneration; i++) {
+//            randomInt = myRandomizer.nextInt(100);
+//            if (randomInt < m_probabilityOfGeneration) {
+                randomRoutesCells = convertRouteToCells(generateRandomRoute(endNodesList, myRandomizer));
 
-                System.out.println("Versuch " + i + "/" + m_maxAttemptsOfGeneration + ":\t" + randomRoutesCells);
+//                System.out.println("Versuch " + i + "/" + m_maxAttemptsOfGeneration + ":\t" + randomRoutesCells);
 
                 // TODO  declare parameters of Car (Car class) --- going with route, color for the moment
 //                vehicles.add(new Car(10,randomRoutesCells,"yellow"));
 
-            }
-        }
+//            }
+//        }
+
+        return randomRoutesCells;
     }
 
     private List convertRouteToCells(List<IEdge> p_randomRoute) {

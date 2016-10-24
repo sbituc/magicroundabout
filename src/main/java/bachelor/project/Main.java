@@ -43,6 +43,14 @@ public class Main {
         mapViewer.setZoom(0);
         mapViewer.setAddressLocation(magicRoundabout);
 
+        // Display the viewer in a JFrame
+        JFrame frame = new JFrame("Magic Roundabout");
+        frame.getContentPane().add(mapViewer);
+        frame.setSize(650, 650);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+
+/*
         //  1 -> 1 (fucked)
 //        String routeString = "[51.562349, -1.771392], [51.5623842, -1.7714046], [51.562419399999996, -1.7714172000000001], [51.5624546, -1.7714298], [51.5624898, -1.7714424], [51.562525, -1.771455], [51.562567, -1.771462], [51.562608, -1.77149], [51.562655, -1.771412], [51.56268083333333, -1.7713633333333334], [51.562706666666664, -1.7713146666666666], [51.562732499999996, -1.771266], [51.562758333333335, -1.7712173333333334], [51.56278416666667, -1.7711686666666666], [51.56281, -1.77112], [51.56284933333333, -1.771143], [51.562888666666666, -1.771166], [51.562928, -1.7711890000000001], [51.56296733333333, -1.771212], [51.563006666666666, -1.771235], [51.563046, -1.771258], [51.563089, -1.771274], [51.56313, -1.77122], [51.5630965, -1.771161], [51.563063, -1.771102], [51.56302483333333, -1.7710775], [51.56298666666667, -1.771053], [51.562948500000005, -1.7710285], [51.562910333333335, -1.771004], [51.562872166666665, -1.7709795000000002], [51.562834, -1.770955], [51.562800333333335, -1.770978], [51.56276666666667, -1.771001], [51.562733, -1.771024], [51.56270683333334, -1.7710766666666666], [51.562680666666665, -1.7711293333333333], [51.5626545, -1.771182], [51.562628333333336, -1.7712346666666665], [51.562602166666665, -1.7712873333333332], [51.562576, -1.77134], [51.562537, -1.771323], [51.562493, -1.771319], [51.562449, -1.771315], [51.562405, -1.7713109999999999]";
         //  1 -> 2
@@ -70,7 +78,7 @@ Versuch 7/10:	[[51.562349, -1.771392], [51.5623842, -1.7714046], [51.56241939999
 Versuch 8/10:	[[51.562349, -1.771392], [51.5623842, -1.7714046], [51.562419399999996, -1.7714172000000001], [51.5624546, -1.7714298], [51.5624898, -1.7714424], [51.562525, -1.771455], [51.562567, -1.771462], [51.562608, -1.77149], [51.562655, -1.771412], [51.56268083333333, -1.7713633333333334], [51.562706666666664, -1.7713146666666666], [51.562732499999996, -1.771266], [51.562758333333335, -1.7712173333333334], [51.56278416666667, -1.7711686666666666], [51.56281, -1.77112], [51.56284933333333, -1.771143], [51.562888666666666, -1.771166], [51.562928, -1.7711890000000001], [51.56296733333333, -1.771212], [51.563006666666666, -1.771235], [51.563046, -1.771258], [51.563089, -1.771274], [51.56313, -1.77122], [51.5630965, -1.771161], [51.563063, -1.771102], [51.563029, -1.7710564999999998], [51.562995, -1.771011], [51.5629608, -1.7709683999999999], [51.5629266, -1.7709257999999999], [51.5628924, -1.7708832], [51.5628582, -1.7708406], [51.562824, -1.770798], [51.562818166666666, -1.7707350000000002], [51.56281233333333, -1.770672], [51.5628065, -1.770609], [51.56280066666667, -1.7705460000000002], [51.562794833333335, -1.770483]]
 Versuch 9/10:	[[51.562349, -1.771392], [51.5623842, -1.7714046], [51.562419399999996, -1.7714172000000001], [51.5624546, -1.7714298], [51.5624898, -1.7714424], [51.562525, -1.771455], [51.562567, -1.771462], [51.562608, -1.77149], [51.562655, -1.771412], [51.56268083333333, -1.7713633333333334], [51.562706666666664, -1.7713146666666666], [51.562732499999996, -1.771266], [51.562758333333335, -1.7712173333333334], [51.56278416666667, -1.7711686666666666], [51.56281, -1.77112], [51.56284933333333, -1.771143], [51.562888666666666, -1.771166], [51.562928, -1.7711890000000001], [51.56296733333333, -1.771212], [51.563006666666666, -1.771235], [51.563046, -1.771258], [51.563089, -1.771274], [51.56313, -1.77122], [51.5630965, -1.771161], [51.563063, -1.771102], [51.563029, -1.7710564999999998], [51.562995, -1.771011], [51.5629608, -1.7709683999999999], [51.5629266, -1.7709257999999999], [51.5628924, -1.7708832], [51.5628582, -1.7708406], [51.562824, -1.770798], [51.562818166666666, -1.7707350000000002], [51.56281233333333, -1.770672], [51.5628065, -1.770609], [51.56280066666667, -1.7705460000000002], [51.562794833333335, -1.770483]]
 
- */
+
 
         Pattern pattern = Pattern.compile("\\[(([0-9\\.-]*), ([0-9\\.-]*))\\]");
         Matcher matcher = pattern.matcher(routeString);
@@ -86,48 +94,7 @@ Versuch 9/10:	[[51.562349, -1.771392], [51.5623842, -1.7714046], [51.56241939999
             singleCoordinate.add(singleCoordinateLon);
             al.add(singleCoordinate);
         }
-
-        // Display the viewer in a JFrame
-        JFrame frame = new JFrame("Magic Roundabout");
-        frame.getContentPane().add(mapViewer);
-        frame.setSize(650, 650);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-
-        // Create a track from the geo-positions
-        final List<GeoPosition> track = new ArrayList<GeoPosition>();
-        System.out.println("OUTPUT");
-
-        for (int i = 0; i < al.size(); i++) {
-            ArrayList coords = (ArrayList) al.get(i);
-
-            double lat = (double) coords.get(0);
-            double lon = (double) coords.get(1);
-
-            track.add(new GeoPosition( lat,lon ));
-        }
-
-//        System.out.println(track);
-
-        RoutePainter routePainter = new RoutePainter(track);
-
-        // Set the focus
-//        mapViewer.zoomToBestFit(new HashSet<GeoPosition>(track), 0.7);
-
-        // Create waypoints from the geo-positions
-        Set<Waypoint> waypoints = new HashSet<Waypoint>();
-
-        // Create a waypoint painter that takes all the waypoints
-        WaypointPainter<Waypoint> waypointPainter = new WaypointPainter<Waypoint>();
-        waypointPainter.setWaypoints(waypoints);
-
-        // Create a compound painter that uses both the route-painter and the waypoint-painter
-        List<Painter<JXMapViewer>> painters = new ArrayList<Painter<JXMapViewer>>();
-        painters.add(routePainter);
-        painters.add(waypointPainter);
-
-        CompoundPainter<JXMapViewer> painter = new CompoundPainter<JXMapViewer>(painters);
-        mapViewer.setOverlayPainter(painter);
+ */
 
 
 
@@ -192,13 +159,50 @@ Versuch 9/10:	[[51.562349, -1.771392], [51.5623842, -1.7714046], [51.56241939999
 */
 
         VehicleSource source_2 = new VehicleSource(l_graph.node(20), m_maxattempts, 55, l_graph);
-        source_2.generateVehicles();
+        List route = source_2.generateVehicles();
 
         /*
         VehicleSource source_3 = new VehicleSource(l_graph.node(30), m_maxattempts, 55, l_graph);
         VehicleSource source_4 = new VehicleSource(l_graph.node(40), m_maxattempts, 30, l_graph);
         VehicleSource source_5 = new VehicleSource(l_graph.node(50), m_maxattempts, 65, l_graph);
         */
+
+
+
+
+        // Create a track from the geo-positions
+        final List<GeoPosition> track = new ArrayList<GeoPosition>();
+
+        for (int i = 0; i < route.size(); i++) {
+            ArrayList coords = (ArrayList) route.get(i);
+
+            double lat = (double) coords.get(0);
+            double lon = (double) coords.get(1);
+
+            track.add(new GeoPosition( lat,lon ));
+        }
+
+//        System.out.println(track);
+
+        RoutePainter routePainter = new RoutePainter(track);
+
+        // Set the focus
+//        mapViewer.zoomToBestFit(new HashSet<GeoPosition>(track), 0.7);
+
+        // Create waypoints from the geo-positions
+        Set<Waypoint> waypoints = new HashSet<Waypoint>();
+
+        // Create a waypoint painter that takes all the waypoints
+        WaypointPainter<Waypoint> waypointPainter = new WaypointPainter<Waypoint>();
+        waypointPainter.setWaypoints(waypoints);
+
+        // Create a compound painter that uses both the route-painter and the waypoint-painter
+        List<Painter<JXMapViewer>> painters = new ArrayList<Painter<JXMapViewer>>();
+        painters.add(routePainter);
+        painters.add(waypointPainter);
+
+        CompoundPainter<JXMapViewer> painter = new CompoundPainter<JXMapViewer>(painters);
+        mapViewer.setOverlayPainter(painter);
 
     }
 }
