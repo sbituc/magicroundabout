@@ -1,4 +1,4 @@
-# x & y = GPS coordinates in degrees
+# lat & lon = WGS84 coordinates in degrees
 # utme, utmn, utmz = UTM coordinates of lat/lon coordinates
 # http://www.latlong.net/lat-long-utm.html
 #
@@ -23,8 +23,8 @@ nodes :
 
   - id  : 12
     to  : [ 13, 27, 112 ]
-    lat : 51.562559
-    lon : -1.771635
+    lat : 51.562572
+    lon : -1.771490
     utme: 585146
     utmn: 5713102
     utmz: 30u
@@ -39,8 +39,8 @@ nodes :
 
   - id  : 13
     to  : [ 14 ]
-    lat : 51.562615
-    lon : -1.771587
+    lat : 51.562620
+    lon : -1.771488
     utme: 585149
     utmn: 5713108
     utmz: 30u
