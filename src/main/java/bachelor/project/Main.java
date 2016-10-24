@@ -130,7 +130,23 @@ Versuch 9/10:	[[51.562349, -1.771392], [51.5623842, -1.7714046], [51.56241939999
             Point2D p2 = new Point2D.Double( l_graph.node( edge.to() ).xposition(), l_graph.node( edge.to() ).yposition() );
 
             edge.setCells( CalculateCellCenterCoordinates.CellCenterCoordinates( p1, p2 ) );
+
+            edge.weight( CalculateCellCenterCoordinates.distanceBetweenCoordinates( p1, p2 ) );
         } );
+
+        System.out.println("Graph");
+        System.out.println( l_graph );
+        System.out.println();
+
+        // calculate a route
+        System.out.println(
+                l_graph
+                        .route(
+                                Integer.parseInt( l_cli.getOptionValue( "start", "10" ) ),
+                                Integer.parseInt( l_cli.getOptionValue( "end", "19" ) )
+                        )
+        );
+
         /*
         l_configuration.edges().forEach( edge -> {
             System.out.println( edge.from() + " --> " + edge.to() );
@@ -159,7 +175,7 @@ Versuch 9/10:	[[51.562349, -1.771392], [51.5623842, -1.7714046], [51.56241939999
         VehicleSource source_4 = new VehicleSource(l_graph.node(40), m_maxattempts, 30, l_graph);
         VehicleSource source_5 = new VehicleSource(l_graph.node(50), m_maxattempts, 65, l_graph);
 
-        List route = source_5.generateVehicles();
+        List route = source_1.generateVehicles();
 
 
 

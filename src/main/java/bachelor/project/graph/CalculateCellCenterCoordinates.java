@@ -34,6 +34,10 @@ public class CalculateCellCenterCoordinates {
         return (int) (p_distance /cellSize);
     }
 
+    public static double distanceBetweenCoordinates(Point2D p_p1, Point2D p_p2) {
+        return distBetweenWGS84Coordinates(p_p1.getX(), p_p1.getY(), p_p2.getX(), p_p2.getY());
+    }
+
     public static List CellCenterCoordinates(Point2D p_p1, Point2D p_p2) {
 
         int quantityCells = calculateQuantityCells( distBetweenWGS84Coordinates(p_p1.getX(), p_p1.getY(), p_p2.getX(), p_p2.getY()) );
