@@ -55,10 +55,7 @@ public final class CNode<T> implements INode<T> {
     }
 
     @Override
-    public final double xposition()
-    {
-        return m_xposition;
-    }
+    public final double xposition() { return m_xposition; }
 
     @Override
     public final double yposition()

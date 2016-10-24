@@ -153,19 +153,13 @@ Versuch 9/10:	[[51.562349, -1.771392], [51.5623842, -1.7714046], [51.56241939999
  * X0 --> source node
  * X9 --> sink node
  */
-/*
         VehicleSource source_1 = new VehicleSource(l_graph.node(10), m_maxattempts, 45, l_graph);
-        source_1.generateVehicles();
-*/
-
         VehicleSource source_2 = new VehicleSource(l_graph.node(20), m_maxattempts, 55, l_graph);
-        List route = source_2.generateVehicles();
-
-        /*
         VehicleSource source_3 = new VehicleSource(l_graph.node(30), m_maxattempts, 55, l_graph);
         VehicleSource source_4 = new VehicleSource(l_graph.node(40), m_maxattempts, 30, l_graph);
         VehicleSource source_5 = new VehicleSource(l_graph.node(50), m_maxattempts, 65, l_graph);
-        */
+
+        List route = source_5.generateVehicles();
 
 
 

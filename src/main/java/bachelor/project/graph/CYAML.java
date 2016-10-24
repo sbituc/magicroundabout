@@ -55,8 +55,11 @@ public final class CYAML
                 // cast each element in the list to a ui (YAML file contains maps within the node list)
                 .map( i -> (Map<String,Object>) i )
                 // build node object from the ui item
-//                .map( i -> new CNode<>( (Integer) i.get( "id" ), (Double) (i.get( "lon" ))*10000000, (Double) (i.get( "lat" ))*10000000 ) )
+//                .map( i -> new CNode<>( (Integer) i.get( "id" ), (Double) (i.get( "lon" ))*-10000000, (Double) (i.get( "lat" ))*10000000 ) )
+//                  import WGS84 coordinates
                 .map( i -> new CNode<>( (Integer) i.get( "id" ), (Double) (i.get( "lon" )), (Double) (i.get( "lat" )) ) )
+//                  Import UTM coordinates
+//               .map( i -> new CNode<>( (Integer) i.get( "id" ), (Integer) (i.get( "utme" )), (Integer) (i.get( "utmn" )) ) )
                 // and convert all data into a set
                 .collect(Collectors.toSet() )
         );

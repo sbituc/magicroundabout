@@ -70,11 +70,11 @@ public final class CMain {
 
         // build graph
         final IGraph<Integer> l_graph = new CGraph<>( l_configuration.nodes(), l_configuration.edges() );
-        /*
+
         System.out.println("Graph");
         System.out.println( l_graph );
         System.out.println();
-        */
+
 
 
         //
@@ -107,8 +107,8 @@ public final class CMain {
         System.out.println(
             l_graph
                 .route(
-                    Integer.parseInt( l_cli.getOptionValue( "start", "10" ) ),
-                    Integer.parseInt( l_cli.getOptionValue( "end", "19" ) )
+                    Integer.parseInt( l_cli.getOptionValue( "start", "52" ) ),
+                    Integer.parseInt( l_cli.getOptionValue( "end", "29" ) )
                 )
         );
 

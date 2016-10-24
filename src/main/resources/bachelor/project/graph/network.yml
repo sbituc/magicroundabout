@@ -25,8 +25,8 @@ nodes :
     to  : [ 13, 27, 112 ]
     lat : 51.562567
     lon : -1.771462
-    utme: 585146
-    utmn: 5713102
+    utme: 585158
+    utmn: 5713103
     utmz: 30u
 
     # crossover node between 11,12 and 27,28
@@ -42,8 +42,8 @@ nodes :
     to  : [ 14 ]
     lat : 51.562608
     lon : -1.771490
-    utme: 585149
-    utmn: 5713108
+    utme: 585156
+    utmn: 5713107
     utmz: 30u
 
   - id  : 14
@@ -106,8 +106,8 @@ nodes :
     to  : [ 21 ]
     lat : 51.562551
     lon : -1.772266
-    utme: 585171
-    utmn: 5713101
+    utme: 585102
+    utmn: 5713100
     utmz: 30u
 
   - id  : 21
@@ -220,8 +220,8 @@ nodes :
     to  : [ 48 ]
     lat : 51.563181
     lon : -1.771365
-    utme: 
-    utmn: 
+    utme: 585163
+    utmn: 5713171
     utmz: 30u
 
   - id  : 32
@@ -237,8 +237,8 @@ nodes :
     to  : [ 47 ]
     lat : 51.563103
     lon : -1.771578
-    utme: 
-    utmn: 
+    utme: 585149
+    utmn: 5713162
     utmz: 30u
 
     # crossover node between 31,32 and 47,48
