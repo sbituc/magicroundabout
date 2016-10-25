@@ -3,8 +3,10 @@ package bachelor.project.vehicle;
 import bachelor.project.graph.network.IEdge;
 import bachelor.project.graph.network.IGraph;
 import bachelor.project.graph.network.INode;
+import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -27,15 +29,10 @@ import java.util.Random;
 
 //public class VehicleSource implements IVehicleFactory {
 public class VehicleSource extends CVehicleFactory {
-    /*
+    /**
      * QUELLE!
      *
      * Startpunkt bekommt sie vorgegeben --> @param p_startNode
-     * // TODO Zielpunkt zufällig ziehen
-     * Route berechnen
-     *
-     * Wann soll sie Auto erzeugen? Zufall
-     * Wieviele Autos
      */
     private final INode<Integer> m_startNode;
     private final int m_maxAttemptsOfGeneration;
@@ -60,7 +57,7 @@ public class VehicleSource extends CVehicleFactory {
          * vehicles.add(new Motorbike());
          */
         int randomInt;
-        Random myRandomizer = new Random(System.currentTimeMillis());
+        Random myRandomizer = new Random(System.currentTimeMillis()*911);
         List<INode> endNodesList = m_graph.getEndNodesList();
 
         List randomRoutesCells = null;
@@ -86,10 +83,22 @@ public class VehicleSource extends CVehicleFactory {
 
         List routeCellList = new ArrayList();
         for ( IEdge entry : p_randomRoute ) {
+
+            System.out.println(
+                    entry.hashCode()
+            );
+
             routeCellList.addAll( entry.getCells() );
         }
         return routeCellList;
     }
+
+    /*
+    private LinkedList<> getCells(List<IEdge> p_randomRoute) {
+        LinkedList<> l_routeCells = new LinkedList<>();
+
+    }
+    */
 
     /**
      * Returns a list of edges between start node and a random end node
@@ -101,6 +110,5 @@ public class VehicleSource extends CVehicleFactory {
     private List<bachelor.project.graph.network.IEdge> generateRandomRoute(List<INode> p_endNodes, Random p_random) {
         return m_graph.route( m_startNode, p_endNodes.get( p_random.nextInt( p_endNodes.size() ) ) );
     }
-
 
 }

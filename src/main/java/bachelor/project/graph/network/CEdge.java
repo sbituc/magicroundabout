@@ -2,8 +2,6 @@ package bachelor.project.graph.network;
 
 import java.text.MessageFormat;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public final class CEdge<T> implements IEdge<T>
 {
@@ -23,6 +21,10 @@ public final class CEdge<T> implements IEdge<T>
      * cells assigned to edge
      */
     private List m_cellsList;
+    /**
+     * cells assigned to edge with hashcode of edge and position on edge
+     */
+    private LinkedList m_laneInfo;
 
     /**
      * ctor
@@ -56,10 +58,21 @@ public final class CEdge<T> implements IEdge<T>
     }
 
     @Override
-    public void setCells(List p_cellsList) { m_cellsList = p_cellsList; }
+    public void setCells(List p_cellsList) {
+        m_cellsList = p_cellsList;
+
+        LinkedList laneInfo = new LinkedList();
+
+    }
 
     @Override
     public List getCells() { return m_cellsList; }
+
+    @Override
+    private void setLaneInfo(LinkedList p_laneInfo) { m_laneInfo = p_laneInfo; }
+
+    @Override
+    public LinkedList getLaneInfo() { return m_laneInfo; }
 
     @Override
     public final T to() {
