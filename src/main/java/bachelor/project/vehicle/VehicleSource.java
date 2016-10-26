@@ -68,8 +68,14 @@ public class VehicleSource extends CVehicleFactory {
                 List<IEdge> randomRoute = generateRandomRoute(endNodesList, myRandomizer);
                 randomRouteCells = convertedRouteToCells( randomRoute );
                     System.out.println( randomRouteCells );     // to be removed
+                    System.out.println( randomRouteCells.size() );     // to be removed
                 randomRouteLanes = convertedRouteToLanes( randomRoute );
                     System.out.println( randomRouteLanes );     // to be removed
+                    System.out.println( randomRouteLanes.size() );     // to be removed
+
+                    System.out.println();
+                    System.out.println( "half is " + Math.floorDiv( randomRouteCells.size(), 2 ) );
+                    System.out.println( randomRouteCells.get( Math.floorDiv( randomRouteCells.size(), 2 ) ) + " - " + randomRouteLanes.get( Math.floorDiv( randomRouteCells.size(), 2 ) )  );
 
 //                System.out.println("Versuch " + i + "/" + m_maxAttemptsOfGeneration + ":\t" + randomRoutesCells);
 
@@ -78,8 +84,6 @@ public class VehicleSource extends CVehicleFactory {
 
 //            }
 //        }
-        System.out.println(" - 5 - ");
-
         return randomRouteCells;
     }
 

@@ -120,17 +120,17 @@ public class Main {
         VehicleSource source_4 = new VehicleSource(l_graph.node(40), m_maxattempts, 30, l_graph);
         VehicleSource source_5 = new VehicleSource(l_graph.node(50), m_maxattempts, 65, l_graph);
 
-        List route1 = source_1.generateVehicles();
-//        List route2 = source_2.generateVehicles();
-//        List route3 = source_3.generateVehicles();
-//        List route4 = source_4.generateVehicles();
-//        List route5 = source_5.generateVehicles();
+//        List route = source_1.generateVehicles();
+//        List route = source_2.generateVehicles();
+//        List route = source_3.generateVehicles();
+//        List route = source_4.generateVehicles();
+        List route = source_5.generateVehicles();
 
         // Create a track from the geo-positions
         final List<GeoPosition> track = new ArrayList<GeoPosition>();
 
-        for (int i = 0; i < route1.size(); i++) {
-            ArrayList coords = (ArrayList) route1.get(i);
+        for (int i = 0; i < route.size(); i++) {
+            ArrayList coords = (ArrayList) route.get(i);
 
             double lat = (double) coords.get(0);
             double lon = (double) coords.get(1);
