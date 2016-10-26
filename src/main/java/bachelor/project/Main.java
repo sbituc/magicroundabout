@@ -76,30 +76,28 @@ public class Main {
         // build graph
         final IGraph<Integer> l_graph = new CGraph<>( l_configuration.nodes(), l_configuration.edges() );
         //assign cells to all edges for navigation
+
         l_configuration.edges().forEach( edge -> {
-            // LON = x-axis
-            // LAT = y-axis
-
-            Point2D p1 = new Point2D.Double( l_graph.node( edge.from() ).xposition(), l_graph.node( edge.from() ).yposition() );
-            Point2D p2 = new Point2D.Double( l_graph.node( edge.to() ).xposition(), l_graph.node( edge.to() ).yposition() );
-
-            edge.setCells( CalculateCellCenterCoordinates.CellCenterCoordinates( p1, p2 ) );
-
-            edge.weight( CalculateCellCenterCoordinates.distanceBetweenCoordinates( p1, p2 ) );
-
+            edge.makeLane(edge, l_graph);
         } );
-
+/*
         System.out.println("Graph");
         System.out.println( l_graph );
         System.out.println();
 
-        /*
         l_configuration.edges().forEach( edge -> {
-            System.out.println( edge.from() + " --> " + edge.to() );
-            System.out.println( edge.getCells() );
+            System.out.println("LaneInfo: " + edge.getLaneInfo());
+            System.out.println("Cells: " + edge.getCells());
+
+            int abc = edge.getCells().size()-1;
+
+            System.out.println(
+                    edge.getCells().get( abc ) + " und " + edge.getLaneInfo().get( abc )
+            );
+
             System.out.println();
         } );
-        */
+*/
         // VehicleSource source_X = new VehicleSource(X0, int maxAttempts, int probability, IGraph graphObject);
 //        int m_maxattempts = 100000;
         int m_maxattempts = 10;
@@ -115,6 +113,7 @@ public class Main {
  * X0 --> source node
  * X9 --> sink node
  */
+
         VehicleSource source_1 = new VehicleSource(l_graph.node(10), m_maxattempts, 45, l_graph);
         VehicleSource source_2 = new VehicleSource(l_graph.node(20), m_maxattempts, 55, l_graph);
         VehicleSource source_3 = new VehicleSource(l_graph.node(30), m_maxattempts, 55, l_graph);
@@ -122,10 +121,10 @@ public class Main {
         VehicleSource source_5 = new VehicleSource(l_graph.node(50), m_maxattempts, 65, l_graph);
 
         List route1 = source_1.generateVehicles();
-        List route2 = source_2.generateVehicles();
-        List route3 = source_3.generateVehicles();
-        List route4 = source_4.generateVehicles();
-        List route5 = source_5.generateVehicles();
+//        List route2 = source_2.generateVehicles();
+//        List route3 = source_3.generateVehicles();
+//        List route4 = source_4.generateVehicles();
+//        List route5 = source_5.generateVehicles();
 
         // Create a track from the geo-positions
         final List<GeoPosition> track = new ArrayList<GeoPosition>();

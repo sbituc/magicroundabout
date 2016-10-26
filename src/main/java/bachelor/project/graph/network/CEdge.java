@@ -1,5 +1,9 @@
 package bachelor.project.graph.network;
 
+import bachelor.project.graph.CalculateCellCenterCoordinates;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
+import java.awt.geom.Point2D;
 import java.text.MessageFormat;
 import java.util.*;
 
@@ -24,7 +28,7 @@ public final class CEdge<T> implements IEdge<T>
     /**
      * cells assigned to edge with hashcode of edge and position on edge
      */
-    private LinkedList m_laneInfo;
+    private LinkedList<ImmutablePair<IEdge,Integer>> m_laneInfo;
 
     /**
      * ctor
@@ -58,18 +62,34 @@ public final class CEdge<T> implements IEdge<T>
     }
 
     @Override
-    public void setCells(List p_cellsList) {
-        m_cellsList = p_cellsList;
-
-        LinkedList laneInfo = new LinkedList();
-
-    }
+    public void setCells(List p_cellsList) { m_cellsList = p_cellsList; }
 
     @Override
     public List getCells() { return m_cellsList; }
 
     @Override
-    private void setLaneInfo(LinkedList p_laneInfo) { m_laneInfo = p_laneInfo; }
+    public void makeLane(IEdge p_edge, IGraph p_graph) {
+        INode m_fromNode = p_graph.node( p_edge.from() );
+        INode m_toNode = p_graph.node( p_edge.to() );
+
+        // LON = x-axis
+        // LAT = y-axis
+        Point2D p1 = new Point2D.Double( m_fromNode.xposition(), m_fromNode.yposition() );
+        Point2D p2 = new Point2D.Double( m_toNode.xposition(), m_toNode.yposition() );
+
+        List cellsList = CalculateCellCenterCoordinates.CellCenterCoordinates( p1, p2 );
+        LinkedList<ImmutablePair<Integer,Integer>> ll_laneInfo = new LinkedList<>();
+        for (int i = 0; i < cellsList.size(); i++) {
+            ll_laneInfo.add(ImmutablePair.of(p_edge.hashCode(),i));
+        }
+
+        this.setLaneInfo( ll_laneInfo );
+        this.setCells( cellsList );
+        this.weight( CalculateCellCenterCoordinates.distanceBetweenCoordinates( p1, p2 ) );
+    }
+
+    @Override
+    public void setLaneInfo(LinkedList p_laneInfo) { m_laneInfo = p_laneInfo; }
 
     @Override
     public LinkedList getLaneInfo() { return m_laneInfo; }

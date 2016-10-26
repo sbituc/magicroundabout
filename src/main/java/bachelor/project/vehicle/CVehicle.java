@@ -2,6 +2,7 @@ package bachelor.project.vehicle;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /*
@@ -15,10 +16,11 @@ public abstract class CVehicle implements IObject {
     private int id;
 
     /**
-     * zu fahrende Route
+     * zu fahrende Route (lanebasiert)
      */
-    private final List m_route; //Fehler, ich weiss...
+    private final LinkedList<ImmutablePair<Integer,Integer>> m_route; //Fehler, ich weiss...
 
+    private final List m_cellRoute;
     /**
      * zu fahrende Route bereits abgefahren?
      */
@@ -42,9 +44,10 @@ public abstract class CVehicle implements IObject {
     /**
      * Konstruktor des Vehicles
      */
-    public CVehicle(final int p_currentSpeed, final List p_route, String p_color) {
+    public CVehicle(final int p_currentSpeed, final List p_cellRoute, final LinkedList<ImmutablePair<Integer,Integer>> p_laneRoute, String p_color) {
         m_currentSpeed = p_currentSpeed;
-        m_route = p_route;
+        m_route = p_laneRoute;
+        m_cellRoute = p_cellRoute;
         m_color = p_color;
     }
 

@@ -3,7 +3,7 @@ package bachelor.project.vehicle;
 import bachelor.project.graph.network.IEdge;
 import bachelor.project.graph.network.IGraph;
 import bachelor.project.graph.network.INode;
-import com.google.common.collect.ImmutableList;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -57,51 +57,62 @@ public class VehicleSource extends CVehicleFactory {
          * vehicles.add(new Motorbike());
          */
         int randomInt;
-        Random myRandomizer = new Random(System.currentTimeMillis()*911);
+        Random myRandomizer = new Random(System.currentTimeMillis());
         List<INode> endNodesList = m_graph.getEndNodesList();
 
-        List randomRoutesCells = null;
+        List randomRouteCells = null;
+        LinkedList randomRouteLanes = null;
 //        for (int i = 0; i < m_maxAttemptsOfGeneration; i++) {
 //            randomInt = myRandomizer.nextInt(100);
 //            if (randomInt < m_probabilityOfGeneration) {
-                randomRoutesCells = convertRouteToCells(generateRandomRoute(endNodesList, myRandomizer));
+                List<IEdge> randomRoute = generateRandomRoute(endNodesList, myRandomizer);
+                randomRouteCells = convertedRouteToCells( randomRoute );
+                    System.out.println( randomRouteCells );     // to be removed
+                randomRouteLanes = convertedRouteToLanes( randomRoute );
+                    System.out.println( randomRouteLanes );     // to be removed
 
 //                System.out.println("Versuch " + i + "/" + m_maxAttemptsOfGeneration + ":\t" + randomRoutesCells);
 
                 // TODO  declare parameters of Car (Car class) --- going with route, color for the moment
-//                vehicles.add(new Car(10,randomRoutesCells,"yellow"));
+//                vehicles.add(new Car(10,randomRouteCells,randomRouteLanes,"yellow"));
 
 //            }
 //        }
+        System.out.println(" - 5 - ");
 
-        return randomRoutesCells;
+        return randomRouteCells;
     }
 
-    private List convertRouteToCells(List<IEdge> p_randomRoute) {
+    /**
+     * converts a given path of graph's edges to a route with lane information
+     *
+     * @param p_randomRoute
+     * @return
+     */
+    private LinkedList<ImmutablePair<Integer,Integer>> convertedRouteToLanes (List<IEdge> p_randomRoute) {
+        LinkedList<ImmutablePair<Integer,Integer>> ll_routeLaneList = new LinkedList<>();
+        for ( IEdge edge : p_randomRoute ) {
+            ll_routeLaneList.addAll( edge.getLaneInfo() );
+        }
+        return ll_routeLaneList;
+    }
 
-        // TODO ID for edges
-
+    /**
+     * converts a given path of graph's edges to a route of coordiate tupels
+     *
+     * @param p_randomRoute
+     * @return
+     */
+    private List convertedRouteToCells(List<IEdge> p_randomRoute) {
         List routeCellList = new ArrayList();
-        for ( IEdge entry : p_randomRoute ) {
-
-            System.out.println(
-                    entry.hashCode()
-            );
-
-            routeCellList.addAll( entry.getCells() );
+        for ( IEdge edge : p_randomRoute ) {
+            routeCellList.addAll( edge.getCells() );
         }
         return routeCellList;
     }
 
-    /*
-    private LinkedList<> getCells(List<IEdge> p_randomRoute) {
-        LinkedList<> l_routeCells = new LinkedList<>();
-
-    }
-    */
-
     /**
-     * Returns a list of edges between start node and a random end node
+     * Returns a path (list of edges) between start node and a random end node
      *
      * @param p_endNodes
      * @param p_random

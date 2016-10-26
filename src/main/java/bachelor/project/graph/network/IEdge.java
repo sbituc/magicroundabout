@@ -1,6 +1,5 @@
 package bachelor.project.graph.network;
 
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -46,23 +45,30 @@ public interface IEdge<T>
      *
      * @param p_cellsList new list of cells assigned to the edge
      */
-    public void setCells( final List p_cellsList);
+    void setCells(final List p_cellsList);
 
     /**
      * gets cells assigned to edge
      */
-    public List getCells();
+    List getCells();
+
+    /**
+     * make edge to lane
+     * @param p_edge
+     * @param p_graph
+     */
+    void makeLane(final IEdge p_edge, final IGraph p_graph);
 
     /**
      * sets information about lane behaviour to edge
      * @param p_laneInfo
      */
-    private void setLaneInfo(final LinkedList p_laneInfo);
+    void setLaneInfo(final LinkedList p_laneInfo);
 
     /**
      * return lane information of edge
      * @return
      */
-    public LinkedList getLaneInfo();
+    LinkedList getLaneInfo();
 
 }
