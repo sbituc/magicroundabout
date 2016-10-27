@@ -90,4 +90,7 @@ public class RoutePainter implements Painter<JXMapViewer>
             lastY = (int) pt.getY();
         }
     }
+
 }
+
+

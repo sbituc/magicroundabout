@@ -7,6 +7,7 @@ import bachelor.project.graph.network.IGraph;
 import bachelor.project.ui.RoutePainter;
 import bachelor.project.ui.VirtualEarthTileFactoryInfo;
 import bachelor.project.vehicle.VehicleSource;
+import com.intellij.ui.components.JBCheckBox;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
@@ -38,6 +39,21 @@ public class Main {
 
         // Use 8 threads in parallel to load the tiles
         tileFactory.setThreadPoolSize(8);
+       //create card1
+        JPanel card1 = new JPanel();
+        card1.add(new JLabel("Startpunkt:"));
+        card1.add(new JComboBox());
+        card1.add(new JLabel("Zielpunkt:"));
+        card1.add(new JComboBox());
+        card1.add(new JButton("Route zeichnen"));
+        card1.add(new JButton("fahren"));
+
+
+        //create card2
+        JPanel card2 = new JPanel();
+        card2.add(new JButton("Route zeichnen Random"));
+
+
 
 
         // Set the focus and zoom
@@ -48,6 +64,9 @@ public class Main {
         // Display the viewer in a JFrame
         JFrame frame = new JFrame("Magic Roundabout");
         frame.getContentPane().add(mapViewer);
+        //add cards
+        frame.add(card1, BorderLayout.NORTH);
+        frame.add(card2, BorderLayout.SOUTH);
 //        frame.setSize(1000, 1000);
         frame.setSize(650, 650);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

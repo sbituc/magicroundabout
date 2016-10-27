@@ -13,18 +13,13 @@ import org.jxmapviewer.WMSTileFactoryInfo;
 
 
 public class MapSimulation {
-	/*
-	DISCONTINUED
-
-	see bachelor.project.Main
-
 	public static void main(String[] args)
 	{
 		JXMapViewer mapViewer = new JXMapViewer();
 
 		// Create a TileFactoryInfo for OpenStreetMap
 		TileFactoryInfo osmInfo = new OSMTileFactoryInfo();
-		TileFactoryInfo veInfo = new VirtualEarthTileFactoryInfo(VirtualEarthTileFactoryInfo.SATELLITE);
+		TileFactoryInfo veInfo = new VirtualEarthTileFactoryInfo(VirtualEarthTileFactoryInfo.MAP);
 		DefaultTileFactory tileFactory = new DefaultTileFactory(veInfo);
 
 		mapViewer.setTileFactory(tileFactory);
@@ -46,5 +41,5 @@ public class MapSimulation {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}
-	*/
+
 }
