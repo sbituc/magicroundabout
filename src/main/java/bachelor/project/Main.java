@@ -45,8 +45,9 @@ public class Main {
         card1.add(new JLabel("Zielpunkt:"));
         card1.add(new JComboBox());
         card1.add(new JButton("Route zeichnen"));
+        card1.add(new JButton("Random-Route zeichnen"));
         card1.add(new JButton("fahren"));
-        card1.add(new JButton("Route zeichnen Random"));
+
 
 
         //create card2
