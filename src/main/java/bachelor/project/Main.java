@@ -75,40 +75,23 @@ public class Main {
         final CYAML l_configuration = new CYAML( l_cli.getOptionValue( "yaml", "bachelor/project/graph/network.yml" ) );
         // build graph
         final IGraph<Integer> l_graph = new CGraph<>( l_configuration.nodes(), l_configuration.edges() );
-        //assign cells to all edges for navigation
-
+        //assign cells to all edges for navigation, painting etc.
         l_configuration.edges().forEach( edge -> {
             edge.makeLane(edge, l_graph);
         } );
-/*
-        System.out.println("Graph");
-        System.out.println( l_graph );
-        System.out.println();
 
-        l_configuration.edges().forEach( edge -> {
-            System.out.println("LaneInfo: " + edge.getLaneInfo());
-            System.out.println("Cells: " + edge.getCells());
 
-            int abc = edge.getCells().size()-1;
-
-            System.out.println(
-                    edge.getCells().get( abc ) + " und " + edge.getLaneInfo().get( abc )
-            );
-
-            System.out.println();
-        } );
-*/
         // VehicleSource source_X = new VehicleSource(X0, int maxAttempts, int probability, IGraph graphObject);
 //        int m_maxattempts = 100000;
         int m_maxattempts = 10;
 /*
  * nodes' numbers vs. streets' names
  * roundabout is defined in YAML file as follows
- * 1X --> Drove Road (= 6 o'clock entry/exit)           ??, medium traffic (45%)
- * 2X --> Fleming Way (= 8 o'clock entry/exit)          from town centre, medium to higher traffic (55%)
- * 3X --> County Road (= 10 o'clock entry/exit)         from bus + train stations, medium to higher traffic (55%)
- * 4X --> Shrivenham Road (= 1 o'clock entry/exit)      residential area, low traffic (30%)
- * 5X --> Queens Drive (= 4 o'clock entry/exit)         from motorway, high traffic (65%)
+ * 1X --> Drove Road (= 6 o'clock entry/exit)           ??, medium traffic (generation probability 45%)
+ * 2X --> Fleming Way (= 8 o'clock entry/exit)          from town centre, medium to higher traffic (generation probability 55%)
+ * 3X --> County Road (= 10 o'clock entry/exit)         from bus + train stations, medium to higher traffic (generation probability 55%)
+ * 4X --> Shrivenham Road (= 1 o'clock entry/exit)      residential area, low traffic (generation probability 30%)
+ * 5X --> Queens Drive (= 4 o'clock entry/exit)         from motorway, high traffic (generation probability 65%)
  *
  * X0 --> source node
  * X9 --> sink node
@@ -120,11 +103,15 @@ public class Main {
         VehicleSource source_4 = new VehicleSource(l_graph.node(40), m_maxattempts, 30, l_graph);
         VehicleSource source_5 = new VehicleSource(l_graph.node(50), m_maxattempts, 65, l_graph);
 
-//        List route = source_1.generateVehicles();
-//        List route = source_2.generateVehicles();
-//        List route = source_3.generateVehicles();
-//        List route = source_4.generateVehicles();
-        List route = source_5.generateVehicles();
+        // TODO remove random generation
+        Random rand = new Random(System.currentTimeMillis());
+        int randomNumber = rand.nextInt(100);
+        List route = null;
+        if (randomNumber < 20) route = source_1.generateVehicles();
+        else if (randomNumber >= 20 && randomNumber < 42) route = source_2.generateVehicles();
+        else if (randomNumber >= 42 && randomNumber < 65) route = source_3.generateVehicles();
+        else if (randomNumber >= 65 && randomNumber < 75) route = source_4.generateVehicles();
+        else if (randomNumber >= 75 && randomNumber < 100) route = source_5.generateVehicles();
 
         // Create a track from the geo-positions
         final List<GeoPosition> track = new ArrayList<GeoPosition>();
@@ -142,11 +129,12 @@ public class Main {
 
         RoutePainter routePainter = new RoutePainter(track);
 
-        // Set the focus
-//        mapViewer.zoomToBestFit(new HashSet<GeoPosition>(track), 0.7);
-
         // Create waypoints from the geo-positions
         Set<Waypoint> waypoints = new HashSet<Waypoint>();
+        // create waypoint for each graph node
+        l_configuration.nodes().forEach( node -> {
+            waypoints.add( new DefaultWaypoint( node.yposition(), node.xposition()  ) );
+        } );
 
         // Create a waypoint painter that takes all the waypoints
         WaypointPainter<Waypoint> waypointPainter = new WaypointPainter<Waypoint>();
@@ -155,7 +143,6 @@ public class Main {
         // Create a compound painter that uses both the route-painter and the waypoint-painter
         List<Painter<JXMapViewer>> painters = new ArrayList<Painter<JXMapViewer>>();
         painters.add(routePainter);
-
         painters.add(waypointPainter);
 
         CompoundPainter<JXMapViewer> painter = new CompoundPainter<JXMapViewer>(painters);

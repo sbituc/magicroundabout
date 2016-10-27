@@ -1,6 +1,8 @@
 package bachelor.project.graph.network;
 
 import bachelor.project.graph.CalculateCellCenterCoordinates;
+import bachelor.project.vehicle.CVehicle;
+import bachelor.project.vehicle.Car;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.awt.geom.Point2D;
@@ -23,12 +25,19 @@ public final class CEdge<T> implements IEdge<T>
     private double m_weight;
     /**
      * cells assigned to edge
+     * tuple of WGS84 coordinates
      */
     private List m_cellsList;
     /**
-     * cells assigned to edge with hashcode of edge and position on edge
+     * cells assigned to edge
+     * tuple of hashcode of edge and position/index on edge
      */
     private LinkedList<ImmutablePair<IEdge,Integer>> m_laneInfo;
+    /**
+     * occupied cells of edge
+     * key is index, value is CVehicle object
+     */
+    protected LinkedHashMap<Integer, CVehicle> m_occupiedCells;
 
     /**
      * ctor
@@ -139,4 +148,25 @@ public final class CEdge<T> implements IEdge<T>
     {
         return ( p_object != null ) && ( p_object instanceof IEdge<?> ) && ( p_object.hashCode() == this.hashCode() );
     }
+
+    /**
+     * occupies (CVehicle as value) or frees (null as value) cell on lane
+     * @param p_cellIndex   int
+     * @param p_vehicle     CVehicle or null
+     */
+    public void occupyCell(int p_cellIndex, final CVehicle p_vehicle){
+        if (p_vehicle != null && m_occupiedCells.get(p_cellIndex) != null) throw new IllegalStateException("Cell is already taken!");
+        m_occupiedCells.put(p_cellIndex, p_vehicle);
+    }
+
+    /**
+     * check if cell is occupied
+     * @param p_cellIndex
+     * @return boolen flag if cell is occupied or not
+     */
+    public boolean isOccupied(int p_cellIndex) {
+        if (m_occupiedCells.get(p_cellIndex) == null) return false;
+        else return true;
+    }
+
 }

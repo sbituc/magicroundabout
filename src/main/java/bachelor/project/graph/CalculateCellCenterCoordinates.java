@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class CalculateCellCenterCoordinates {
 
     private static double distBetweenWGS84Coordinates(double p_lon1, double p_lat1, double p_lon2, double p_lat2) {
-        // formula according to https://www.kompf.de/gps/distcalc.html --> Verbesserte Methode
+        // formula according to https://www.kompf.de/gps/distcalc.html --> Einfachste Entfernungsberechnung
         // sufficient precise enough for distances < 1 km
 
         double distLat = 110950; // in m, aprox. distance in km between 1° of latitude in Swindon area
