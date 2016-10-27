@@ -48,6 +48,7 @@ public class Main {
         // Display the viewer in a JFrame
         JFrame frame = new JFrame("Magic Roundabout");
         frame.getContentPane().add(mapViewer);
+//        frame.setSize(1000, 1000);
         frame.setSize(650, 650);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -104,6 +105,7 @@ public class Main {
         VehicleSource source_5 = new VehicleSource(l_graph.node(50), m_maxattempts, 65, l_graph);
 
         // TODO remove random generation
+
         Random rand = new Random(System.currentTimeMillis());
         int randomNumber = rand.nextInt(100);
         List route = null;
@@ -123,11 +125,26 @@ public class Main {
             double lon = (double) coords.get(1);
 
             track.add(new GeoPosition( lat,lon ));
+
         }
 
 //        System.out.println(track);
 
         RoutePainter routePainter = new RoutePainter(track);
+
+
+        // visualize graph (I)
+        final LinkedHashMap<Integer,List<GeoPosition>> graphMap = new LinkedHashMap<>();
+        l_configuration.edges().forEach( edge -> {
+            final List<GeoPosition> MapTrack = new ArrayList<GeoPosition>();
+            MapTrack.add(new GeoPosition( l_graph.node(edge.from()).yposition(),l_graph.node(edge.from()).xposition() ));
+            MapTrack.add(new GeoPosition( l_graph.node(edge.to()).yposition(),l_graph.node(edge.to()).xposition() ));
+            graphMap.put( edge.hashCode(), MapTrack );
+        } );
+        System.out.println(graphMap);
+
+
+
 
         // Create waypoints from the geo-positions
         Set<Waypoint> waypoints = new HashSet<Waypoint>();
@@ -142,8 +159,21 @@ public class Main {
 
         // Create a compound painter that uses both the route-painter and the waypoint-painter
         List<Painter<JXMapViewer>> painters = new ArrayList<Painter<JXMapViewer>>();
+
+        // visualize graph (II)
+        List<RoutePainter> painterList = new ArrayList<>();
+        for ( Map.Entry<Integer, List<GeoPosition>> entry : graphMap.entrySet() ) {
+            int key = entry.getKey();
+            List<GeoPosition> value = entry.getValue();
+
+            painterList.add(new RoutePainter(value));
+        }
+        painterList.forEach( singlePainter -> {
+//            painters.add(singlePainter);
+        } );
+
         painters.add(routePainter);
-        painters.add(waypointPainter);
+//        painters.add(waypointPainter);
 
         CompoundPainter<JXMapViewer> painter = new CompoundPainter<JXMapViewer>(painters);
         mapViewer.setOverlayPainter(painter);

@@ -162,9 +162,9 @@ nodes :
     # crossover node between 24,25 and 14,15
   - id  : 245
     to  : [ 14, 15 ]
-    lat : 51.562684
-    lon : -1.771593
-    utme: 585153
+    lat : 51.562691
+    lon : -1.771544
+    utme: 585152
     utmn: 5713116
     utmz: 30u
 
@@ -209,19 +209,19 @@ nodes :
 
   - id  : 31
     to  : [ 32, 312, 318 ]
-    lat : 51.563036
-    lon : -1.771959
-    utme: 585121
-    utmn: 5713153
+    lat : 51.563047
+    lon : -1.771942
+    utme: 585124
+    utmn: 5713155
     utmz: 30u
 
     # smoothening node between 31 and 48
   - id  : 318
     to  : [ 48 ]
-    lat : 51.563181
-    lon : -1.771365
-    utme: 585163
-    utmn: 5713171
+    lat : 51.563161
+    lon : -1.771494
+    utme: 585155
+    utmn: 5713169
     utmz: 30u
 
   - id  : 32
@@ -365,10 +365,10 @@ nodes :
 
   - id  : 45
     to  : [ 445, 35 ]
-    lat : 51.562965
-    lon : -1.771323
-    utme: 585162
-    utmn: 5713148
+    lat : 51.562981
+    lon : -1.771363
+    utme: 585164
+    utmn: 5713149
     utmz: 30u
 
     # crossover node between 44,45 and 34,35
