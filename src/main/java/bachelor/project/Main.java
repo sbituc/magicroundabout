@@ -7,7 +7,6 @@ import bachelor.project.graph.network.IGraph;
 import bachelor.project.ui.RoutePainter;
 import bachelor.project.ui.VirtualEarthTileFactoryInfo;
 import bachelor.project.vehicle.VehicleSource;
-import com.intellij.ui.components.JBCheckBox;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
@@ -47,11 +46,14 @@ public class Main {
         card1.add(new JComboBox());
         card1.add(new JButton("Route zeichnen"));
         card1.add(new JButton("fahren"));
+        card1.add(new JButton("Route zeichnen Random"));
 
 
         //create card2
         JPanel card2 = new JPanel();
-        card2.add(new JButton("Route zeichnen Random"));
+        card2.add(new JButton("Knoten zeichnen"));
+        card2.add(new JButton("Graphen zeichnen"));
+
 
 
 
