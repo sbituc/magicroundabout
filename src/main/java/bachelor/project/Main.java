@@ -3,6 +3,7 @@ package bachelor.project;
 import bachelor.project.graph.CYAML;
 import bachelor.project.graph.network.CGraph;
 import bachelor.project.graph.network.IGraph;
+import bachelor.project.ui.FancyWaypointRenderer;
 import bachelor.project.ui.MyWaypoint;
 import bachelor.project.ui.VirtualEarthTileFactoryInfo;
 import bachelor.project.vehicle.CVehicle;
@@ -17,6 +18,7 @@ import org.jxmapviewer.viewer.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -31,10 +33,16 @@ public class Main {
         // Visualisation
         JXMapViewer mapViewer = new JXMapViewer();
 
+
         // Create a TileFactoryInfo
         TileFactoryInfo veInfo = new VirtualEarthTileFactoryInfo(VirtualEarthTileFactoryInfo.SATELLITE);
         DefaultTileFactory tileFactory = new DefaultTileFactory(veInfo);
         mapViewer.setTileFactory(tileFactory);
+
+        // Setup local file cache
+        File cacheDir = new File(System.getProperty("user.home") + File.separator + ".magicroundabout");
+        LocalResponseCache.installResponseCache(veInfo.getBaseURL(), cacheDir, false);
+
 
         // Use 8 threads in parallel to load the tiles
         tileFactory.setThreadPoolSize(8);
@@ -188,7 +196,7 @@ public class Main {
         );
 
         // Create markers for vehicles from the geo-positions
-        Set<Waypoint> vehicleMarkers = new HashSet<Waypoint>();
+        Set<MyWaypoint> vehicleMarkers = new HashSet<MyWaypoint>();
 
 
         while (!allVehicles.isEmpty()) {
@@ -216,8 +224,9 @@ public class Main {
                 }
             } );
             // Create a waypoint painter that takes all the vehicle markers
-            WaypointPainter<Waypoint> vehicleMarkerPainter = new WaypointPainter<Waypoint>();
+            WaypointPainter<MyWaypoint> vehicleMarkerPainter = new WaypointPainter<MyWaypoint>();
             vehicleMarkerPainter.setWaypoints(vehicleMarkers);
+            vehicleMarkerPainter.setRenderer(new FancyWaypointRenderer());
 
             // Create a compound painter that uses painter
             List<Painter<JXMapViewer>> painters = new ArrayList<Painter<JXMapViewer>>();

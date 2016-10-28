@@ -1,5 +1,5 @@
 
-package sample4_fancy;
+package bachelor.project.ui;
 
 import java.awt.Composite;
 import java.awt.CompositeContext;

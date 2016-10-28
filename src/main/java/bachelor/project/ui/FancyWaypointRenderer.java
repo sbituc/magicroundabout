@@ -7,23 +7,20 @@
  * and open the template in the editor.
  */
 
-package sample4_fancy;
-
-import java.awt.Color;
-import java.awt.FontMetrics;
-import java.awt.Graphics2D;
-import java.awt.geom.Point2D;
-import java.awt.image.BufferedImage;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.imageio.ImageIO;
+package bachelor.project.ui;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.viewer.WaypointRenderer;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
