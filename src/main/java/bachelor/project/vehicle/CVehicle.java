@@ -1,7 +1,9 @@
 package bachelor.project.vehicle;
 
+import bachelor.project.graph.network.IEdge;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,16 +11,12 @@ import java.util.List;
  * Vehicle class
  */
 public abstract class CVehicle implements IObject {
-
-    /**
-     * Vehicle-ID
-     */
-    private int id;
+//public abstract class CVehicle implements IObject {
 
     /**
      * zu fahrende Route (lanebasiert)
      */
-    private final LinkedList<ImmutablePair<Integer,Integer>> m_route; //Fehler, ich weiss...
+    private final LinkedList<ImmutablePair<IEdge,Integer>> m_route;
 
     private final List m_cellRoute;
     /**
@@ -32,6 +30,11 @@ public abstract class CVehicle implements IObject {
     private int m_position = 0;
 
     /**
+     * Maximalgeschwindigkeit des Fahrzeugs
+     */
+    protected final int m_maxSpeed = 2;
+
+    /**
      * aktuelle Geschwindigkeit pro Zellen pro Schritt
      */
     private int m_currentSpeed;
@@ -39,72 +42,81 @@ public abstract class CVehicle implements IObject {
     /**
      * color of the vehicle
      */
-    private String m_color;
+    private int m_color;
 
     /**
      * Konstruktor des Vehicles
      */
-    public CVehicle(final int p_currentSpeed, final List p_cellRoute, final LinkedList<ImmutablePair<Integer,Integer>> p_laneRoute, String p_color) {
+    public CVehicle(final int p_currentSpeed, final List p_cellRoute, final LinkedList<ImmutablePair<IEdge, Integer>> p_laneRoute, int p_color) {
         m_currentSpeed = p_currentSpeed;
-        m_route = p_laneRoute;
-        m_cellRoute = p_cellRoute;
+        m_route = p_laneRoute; //Hash und ZellId
+        m_cellRoute = p_cellRoute; //Koordinatentupel
         m_color = p_color;
+    }
+
+    /**
+     * Liefert die Positionskoordinaten des Fahrzeugs
+     * @return (Koordinatenpaar Format WGS84)
+     */
+    public ArrayList<Double> getPositionCoordinates() {
+        return (ArrayList<Double>) this.m_cellRoute.get(m_position);
     }
 
     /**
      * Wiedergabe aktuelle Geschwindigkeit
      */
-    public int getcurrentSpeed() {
+    public int getCurrentSpeed() {
         return m_currentSpeed;
     }
 
     /**
      * setzt die aktuelle Geschwindigkeit fest
      */
-    public void setcurrentSpeed(final int p_currentSpeed) {
+    public void setCurrentSpeed(final int p_currentSpeed) {
         m_currentSpeed = p_currentSpeed;
     }
+
 
     @Override
     /**
      * setzt das Vehicle weiter
      */
-    public void step(final int p_timeStep) {
-        //TODO...
+    public void move(final int p_timeStep) {
 
         // Überprüfung, ob das Auto seine Route in diesm Schritt abgefahren hat
         if ((m_position + m_currentSpeed) >= m_route.size()) {
-
-            //m_route.get(m_position).getLeft().setCell(m_route.get(m_position).getRight(), null);
-
+            m_route.get(m_position).getLeft().occupyCell(m_route.get(m_position).getRight(), null); //left=Iedge Objekt und right=Zell-ID
             m_finished = true;
             return;
         }
-        // Umesetzen des Autos
-
-
-        //m_route.get(m_position).getLeft().setCell(m_route.get(m_position).getRight(), null);
-
+        // Umsetzen des Autos
+        m_route.get(m_position).getLeft().occupyCell(m_route.get(m_position).getRight(), null);
         m_position = m_position + m_currentSpeed;
-
-
-        //m_route.get(m_position).getLeft().setCell(m_route.get(m_position).getRight(), this);
+        m_route.get(m_position).getLeft().occupyCell(m_route.get(m_position).getRight(), this);
 
     }
 
-
     /**
-     * Liefert die Distanz in Zelle nzum vorherigen Fahrzeug wieder,
-     * ist keines vorhanden wird der maximale Integer wert zurückgegeben
+     * gibt die Anzahl der freien Zellen bis zum vorherigen Fahrzeug wieder,
+     * ist keines vorhanden wird der maximale Integerwert zurück gegeben
      *
      * @return Distanz zum Vorgänger oder Integer.MAXVALUE
      */
-    public int getDistanceToPredecessor() {
-        for (int l_routeCounter = m_position + 1; l_routeCounter < m_route.size(); l_routeCounter++) {
-
-             //if (m_route.get(l_routeCounter).getLeft().getCell(m_route.get(l_routeCounter).getRight()) != null) return l_routeCounter - m_position - 1;
+    public int getEmptyCellsToVehicleInfront() {
+        for (int i = m_position + 1; i < m_route.size(); i++) {
+            if ( m_route.get(i).getLeft().isOccupied(m_route.get(i).getRight()) ) // True für besetzte Zelle
+                return i - m_position -1;
         }
         return Integer.MAX_VALUE;
+    }
+
+    /**
+     * Berechnet die aktuell mögliche Geschwindigkeit (in Zellen pro Schritt) des Fahrzeugs in Abhängigkeit der Maximalgeschwindigkeit und des Abstands zum Vorgänger
+     * (aktuell Werte zwischen 0 und 2 möglich)
+     */
+    public void calculateSpeed() {
+
+        this.setCurrentSpeed(Math.min(m_maxSpeed, Math.min(this.getCurrentSpeed(), this.getEmptyCellsToVehicleInfront())));
     }
 
     /**
@@ -114,6 +126,10 @@ public abstract class CVehicle implements IObject {
      */
     public boolean canRemove() {
         return m_finished;
+    }
+
+    public int getColor() {
+        return m_color;
     }
 
 }

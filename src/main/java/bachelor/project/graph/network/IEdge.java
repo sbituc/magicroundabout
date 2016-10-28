@@ -1,13 +1,14 @@
 package bachelor.project.graph.network;
 
+import bachelor.project.vehicle.CVehicle;
+
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * interface of edges
  */
-public interface IEdge<T>
-{
+public interface IEdge<T> {
 
     /**
      * returns the identifier of the source / start node
@@ -38,7 +39,7 @@ public interface IEdge<T>
      * @param p_weight new weight of the edge
      * @return self reference
      */
-     IEdge<T> weight( final double p_weight );
+    IEdge<T> weight(final double p_weight);
 
     /**
      * sets cells
@@ -54,6 +55,7 @@ public interface IEdge<T>
 
     /**
      * make edge to lane
+     *
      * @param p_edge
      * @param p_graph
      */
@@ -61,14 +63,20 @@ public interface IEdge<T>
 
     /**
      * sets information about lane behaviour to edge
+     *
      * @param p_laneInfo
      */
     void setLaneInfo(final LinkedList p_laneInfo);
 
     /**
      * return lane information of edge
+     *
      * @return
      */
     LinkedList getLaneInfo();
+
+    void occupyCell(int p_cellIndex, final CVehicle p_vehicle);
+
+    boolean isOccupied(int p_cellIndex);
 
 }

@@ -1,27 +1,22 @@
 package bachelor.project;
 
 import bachelor.project.graph.CYAML;
-import bachelor.project.graph.CalculateCellCenterCoordinates;
 import bachelor.project.graph.network.CGraph;
 import bachelor.project.graph.network.IGraph;
-import bachelor.project.ui.RoutePainter;
 import bachelor.project.ui.VirtualEarthTileFactoryInfo;
 import bachelor.project.vehicle.VehicleSource;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
 import org.jxmapviewer.JXMapViewer;
-import org.jxmapviewer.painter.CompoundPainter;
-import org.jxmapviewer.painter.Painter;
-import org.jxmapviewer.viewer.*;
+import org.jxmapviewer.viewer.DefaultTileFactory;
+import org.jxmapviewer.viewer.GeoPosition;
+import org.jxmapviewer.viewer.TileFactoryInfo;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.Point2D;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public class Main {
@@ -126,8 +121,15 @@ public class Main {
         VehicleSource source_4 = new VehicleSource(l_graph.node(40), m_maxattempts, 30, l_graph);
         VehicleSource source_5 = new VehicleSource(l_graph.node(50), m_maxattempts, 65, l_graph);
 
-        // TODO remove random generation
+        source_1.generateVehicles();
+        source_2.generateVehicles();
+        source_3.generateVehicles();
+        source_4.generateVehicles();
+        source_5.generateVehicles();
 
+
+        // TODO remove random generation
+/*
         Random rand = new Random(System.currentTimeMillis());
         int randomNumber = rand.nextInt(100);
         List route = null;
@@ -199,6 +201,31 @@ public class Main {
 
         CompoundPainter<JXMapViewer> painter = new CompoundPainter<JXMapViewer>(painters);
         mapViewer.setOverlayPainter(painter);
+*/
+
+         //Liste aller Vehicles aus den VehicleFactorys
+        List allVehicles = new ArrayList();
+
+        allVehicles.addAll(source_1.getVehicles());
+        allVehicles.addAll(source_2.getVehicles());
+        allVehicles.addAll(source_3.getVehicles());
+        allVehicles.addAll(source_4.getVehicles());
+        allVehicles.addAll(source_5.getVehicles());
+
+        System.out.println(
+
+                allVehicles.size()
+
+        );
+
+
+//        while (!allVehicles.isEmpty()) {
+            allVehicles.forEach( vehicle -> {
+                System.out.println(
+                vehicle
+                );
+            } );
+//        }
 
     }
 }

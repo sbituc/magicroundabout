@@ -13,7 +13,8 @@ public interface IObject extends Callable<IObject>, ISteppable {
      *
      * @param p_timeStep Zeitschritt in der Simulation
      */
-    public void step(int p_timeStep);
+    public void move(int p_timeStep);
+
 
     /**
      * Gibt an, ob das Object aus der IStappale Liste entfernt werden soll

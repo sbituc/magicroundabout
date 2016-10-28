@@ -2,12 +2,13 @@ package bachelor.project.graph.network;
 
 import bachelor.project.graph.CalculateCellCenterCoordinates;
 import bachelor.project.vehicle.CVehicle;
-import bachelor.project.vehicle.Car;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.awt.geom.Point2D;
 import java.text.MessageFormat;
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 public final class CEdge<T> implements IEdge<T>
 {
@@ -87,9 +88,9 @@ public final class CEdge<T> implements IEdge<T>
         Point2D p2 = new Point2D.Double( m_toNode.xposition(), m_toNode.yposition() );
 
         List cellsList = CalculateCellCenterCoordinates.CellCenterCoordinates( p1, p2 );
-        LinkedList<ImmutablePair<Integer,Integer>> ll_laneInfo = new LinkedList<>();
+        LinkedList<ImmutablePair<IEdge,Integer>> ll_laneInfo = new LinkedList<>();
         for (int i = 0; i < cellsList.size(); i++) {
-            ll_laneInfo.add(ImmutablePair.of(p_edge.hashCode(),i));
+            ll_laneInfo.add(ImmutablePair.of(p_edge,i));
         }
 
         this.setLaneInfo( ll_laneInfo );

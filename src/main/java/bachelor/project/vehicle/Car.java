@@ -12,7 +12,7 @@ public class Car extends CVehicle {
      * @param p_laneRoute
      * @param p_color
      */
-    public Car(int p_currentSpeed, List p_cellRoute, LinkedList p_laneRoute, String p_color) {
+    public Car(int p_currentSpeed, List p_cellRoute, LinkedList p_laneRoute, int p_color) {
         super(p_currentSpeed, p_cellRoute, p_laneRoute, p_color);
     }
 

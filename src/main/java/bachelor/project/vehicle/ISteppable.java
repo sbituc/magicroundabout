@@ -10,6 +10,6 @@ public interface ISteppable {
      *
      * @param p_timeStep Zeitschritt in der Simulation
      */
-    public void step(final int p_timeStep);
+    public void move(final int p_timeStep);
 
 }
