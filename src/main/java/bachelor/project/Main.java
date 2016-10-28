@@ -4,6 +4,7 @@ import bachelor.project.graph.CYAML;
 import bachelor.project.graph.network.CGraph;
 import bachelor.project.graph.network.IGraph;
 import bachelor.project.ui.VirtualEarthTileFactoryInfo;
+import bachelor.project.vehicle.CVehicle;
 import bachelor.project.vehicle.VehicleSource;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.DefaultParser;
@@ -204,7 +205,7 @@ public class Main {
 */
 
          //Liste aller Vehicles aus den VehicleFactorys
-        List allVehicles = new ArrayList();
+        List<CVehicle> allVehicles = new ArrayList();
 
         allVehicles.addAll(source_1.getVehicles());
         allVehicles.addAll(source_2.getVehicles());
@@ -221,8 +222,9 @@ public class Main {
 
 //        while (!allVehicles.isEmpty()) {
             allVehicles.forEach( vehicle -> {
+                vehicle.move();
                 System.out.println(
-                vehicle
+                vehicle.getPositionCoordinates()
                 );
             } );
 //        }

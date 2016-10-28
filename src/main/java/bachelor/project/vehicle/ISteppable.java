@@ -7,9 +7,7 @@ public interface ISteppable {
 
     /**
      * Methode, die die Objekte jeden Zeitschritt ausführen
-     *
-     * @param p_timeStep Zeitschritt in der Simulation
      */
-    public void move(final int p_timeStep);
+    public void move();
 
 }

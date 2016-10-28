@@ -81,7 +81,7 @@ public abstract class CVehicle implements IObject {
     /**
      * setzt das Vehicle weiter
      */
-    public void move(final int p_timeStep) {
+    public void move() {
 
         // Überprüfung, ob das Auto seine Route in diesm Schritt abgefahren hat
         if ((m_position + m_currentSpeed) >= m_route.size()) {
@@ -90,6 +90,13 @@ public abstract class CVehicle implements IObject {
             return;
         }
         // Umsetzen des Autos
+        System.out.println(
+
+                m_route.get(m_position).getLeft()
+                + "   " +
+                m_route.get(m_position).getRight()
+
+        );
         m_route.get(m_position).getLeft().occupyCell(m_route.get(m_position).getRight(), null);
         m_position = m_position + m_currentSpeed;
         m_route.get(m_position).getLeft().occupyCell(m_route.get(m_position).getRight(), this);

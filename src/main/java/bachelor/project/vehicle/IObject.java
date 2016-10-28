@@ -10,10 +10,8 @@ public interface IObject extends Callable<IObject>, ISteppable {
 
     /**
      * Methode, die die Objekte jeden Zeitschritt ausführen
-     *
-     * @param p_timeStep Zeitschritt in der Simulation
      */
-    public void move(int p_timeStep);
+    public void move();
 
 
     /**
