@@ -82,25 +82,30 @@ public abstract class CVehicle implements IObject {
      * setzt das Vehicle weiter
      */
     public void move() {
+        this.calculateSpeed();
 
-        // Überprüfung, ob das Auto seine Route in diesm Schritt abgefahren hat
+        // Überprüfung, ob das Fahrzeug seine Route in diesem Schritt abgefahren hat
         if ((m_position + m_currentSpeed) >= m_route.size()) {
             m_route.get(m_position).getLeft().occupyCell(m_route.get(m_position).getRight(), null); //left=Iedge Objekt und right=Zell-ID
             m_finished = true;
             return;
         }
+
+        // Initiale Positionierung des Fahrzeuges
+        if ( m_position == 0) {
+            if ( !m_route.get(m_position).getLeft().isOccupied(m_route.get(m_position).getRight()) ) {
+                m_route.get(m_position).getLeft().occupyCell(m_route.get(m_position).getRight(), this);
+            }
+            else {
+                // do nothing
+                return;
+            }
+        }
+
         // Umsetzen des Autos
-        System.out.println(
-
-                m_route.get(m_position).getLeft()
-                + "   " +
-                m_route.get(m_position).getRight()
-
-        );
         m_route.get(m_position).getLeft().occupyCell(m_route.get(m_position).getRight(), null);
         m_position = m_position + m_currentSpeed;
         m_route.get(m_position).getLeft().occupyCell(m_route.get(m_position).getRight(), this);
-
     }
 
     /**
@@ -139,4 +144,11 @@ public abstract class CVehicle implements IObject {
         return m_color;
     }
 
+/*
+    @Override
+    public String toString() {
+        return MessageFormat.format( "Fzg: Farbe: {0} / Geschw: {1} / Route: {2}", m_color, m_currentSpeed, m_route );
+
+    }
+*/
 }

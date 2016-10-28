@@ -50,6 +50,7 @@ public final class CEdge<T> implements IEdge<T>
     {
         m_sourceidentifier = p_sourceidentifier;
         m_targetidentifier = p_targetidentifier;
+        m_occupiedCells = new LinkedHashMap<Integer,CVehicle>();
     }
 
     @Override
@@ -96,6 +97,8 @@ public final class CEdge<T> implements IEdge<T>
         this.setLaneInfo( ll_laneInfo );
         this.setCells( cellsList );
         this.weight( CalculateCellCenterCoordinates.distanceBetweenCoordinates( p1, p2 ) );
+
+
     }
 
     @Override
@@ -155,24 +158,29 @@ public final class CEdge<T> implements IEdge<T>
      * @param p_cellIndex   int
      * @param p_vehicle     CVehicle or null
      */
-    public void occupyCell(int p_cellIndex, final CVehicle p_vehicle){
-        System.out.println(
-
-                p_cellIndex
-                + "  ---  " +
-                        p_vehicle
-
-        );
+    public void occupyCell(int p_cellIndex, CVehicle p_vehicle){
 
         if (p_vehicle != null && m_occupiedCells.get(p_cellIndex) != null) throw new IllegalStateException("Cell is already taken!");
 
         m_occupiedCells.put(p_cellIndex, p_vehicle);
+        System.out.println(
+
+               "TEST " + this + ":" + m_occupiedCells + " ENDE"
+
+
+//                "Zellindex CEdge: "
+//                + p_cellIndex
+//                + "  ---  "
+//                + "FzgObjekt:  "
+//                + p_vehicle
+
+        );
     }
 
     /**
      * check if cell is occupied
      * @param p_cellIndex
-     * @return boolen flag if cell is occupied or not
+     * @return boolean flag if cell is occupied or not
      */
     public boolean isOccupied(int p_cellIndex) {
         if (m_occupiedCells.get(p_cellIndex) == null) return false;
