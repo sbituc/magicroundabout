@@ -112,7 +112,7 @@ public class Main {
 
         // VehicleSource source_X = new VehicleSource(X0, int maxAttempts, int probability, IGraph graphObject);
 //        int m_maxattempts = 100000;
-        int m_maxattempts = 5;
+        int m_maxattempts = 20;
 /*
  * nodes' numbers vs. streets' names
  * roundabout is defined in YAML file as follows
@@ -242,8 +242,9 @@ public class Main {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            painter.removePainter(painter);
-            mapViewer.setOverlayPainter(painter);
+            vehicleMarkers.clear();
+            //painter.removePainter(painter);
+            //mapViewer.setOverlayPainter(painter);
         }
 
 
