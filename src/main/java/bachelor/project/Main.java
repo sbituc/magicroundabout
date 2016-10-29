@@ -3,8 +3,6 @@ package bachelor.project;
 import bachelor.project.graph.CYAML;
 import bachelor.project.graph.network.CGraph;
 import bachelor.project.graph.network.IGraph;
-import bachelor.project.ui.FancyWaypointRenderer;
-import bachelor.project.ui.MyWaypoint;
 import bachelor.project.ui.VirtualEarthTileFactoryInfo;
 import bachelor.project.vehicle.CVehicle;
 import bachelor.project.vehicle.VehicleSource;
@@ -23,7 +21,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public class Main {
@@ -114,7 +112,7 @@ public class Main {
 
         // VehicleSource source_X = new VehicleSource(X0, int maxAttempts, int probability, IGraph graphObject);
 //        int m_maxattempts = 100000;
-        int m_maxattempts = 1;
+        int m_maxattempts = 5;
 /*
  * nodes' numbers vs. streets' names
  * roundabout is defined in YAML file as follows
@@ -130,10 +128,14 @@ public class Main {
 
         VehicleSource source_1 = new VehicleSource(l_graph.node(10), m_maxattempts, 100, l_graph);
 //        VehicleSource source_1 = new VehicleSource(l_graph.node(10), m_maxattempts, 45, l_graph);
-        VehicleSource source_2 = new VehicleSource(l_graph.node(20), m_maxattempts, 55, l_graph);
-        VehicleSource source_3 = new VehicleSource(l_graph.node(30), m_maxattempts, 55, l_graph);
-        VehicleSource source_4 = new VehicleSource(l_graph.node(40), m_maxattempts, 30, l_graph);
-        VehicleSource source_5 = new VehicleSource(l_graph.node(50), m_maxattempts, 65, l_graph);
+//        VehicleSource source_2 = new VehicleSource(l_graph.node(20), m_maxattempts, 55, l_graph);
+        VehicleSource source_2 = new VehicleSource(l_graph.node(20), m_maxattempts, 100, l_graph);
+//        VehicleSource source_3 = new VehicleSource(l_graph.node(30), m_maxattempts, 55, l_graph);
+        VehicleSource source_3 = new VehicleSource(l_graph.node(30), m_maxattempts, 100, l_graph);
+//        VehicleSource source_4 = new VehicleSource(l_graph.node(40), m_maxattempts, 30, l_graph);
+        VehicleSource source_4 = new VehicleSource(l_graph.node(40), m_maxattempts, 100, l_graph);
+//        VehicleSource source_5 = new VehicleSource(l_graph.node(50), m_maxattempts, 65, l_graph);
+        VehicleSource source_5 = new VehicleSource(l_graph.node(50), m_maxattempts, 100, l_graph);
 
         source_1.generateVehicles();
         source_2.generateVehicles();
@@ -181,13 +183,13 @@ public class Main {
 */
 
          //Liste aller Vehicles aus den VehicleFactorys
-        List<CVehicle> allVehicles = new ArrayList();
+        List<CVehicle> allVehicles = new CopyOnWriteArrayList<>();
 
         allVehicles.addAll(source_1.getVehicles());
-//        allVehicles.addAll(source_2.getVehicles());
-//        allVehicles.addAll(source_3.getVehicles());
-//        allVehicles.addAll(source_4.getVehicles());
-//        allVehicles.addAll(source_5.getVehicles());
+        allVehicles.addAll(source_2.getVehicles());
+        allVehicles.addAll(source_3.getVehicles());
+        allVehicles.addAll(source_4.getVehicles());
+        allVehicles.addAll(source_5.getVehicles());
 
         System.out.println(
 
@@ -196,7 +198,7 @@ public class Main {
         );
 
         // Create markers for vehicles from the geo-positions
-        Set<MyWaypoint> vehicleMarkers = new HashSet<MyWaypoint>();
+        Set<Waypoint> vehicleMarkers = new HashSet<Waypoint>();
 
 
         while (!allVehicles.isEmpty()) {
@@ -218,15 +220,15 @@ public class Main {
                     else if (vehicle.getColor() == 5) vehicleColor = Color.MAGENTA;
                     else  vehicleColor = Color.BLACK;
 
-//                    vehicleMarkers.add( new DefaultWaypoint( vehicle.getPositionCoordinates().get(0), vehicle.getPositionCoordinates().get(1) ));
+                    vehicleMarkers.add( new DefaultWaypoint( vehicle.getPositionCoordinates().get(0), vehicle.getPositionCoordinates().get(1) ));
                     GeoPosition vehiclePositon = new GeoPosition( vehicle.getPositionCoordinates().get(0), vehicle.getPositionCoordinates().get(1) );
-                    vehicleMarkers.add( new MyWaypoint("C", vehicleColor, vehiclePositon ) );
+                    //vehicleMarkers.add( new Waypoint("C", vehicleColor, vehiclePositon ) );
                 }
             } );
             // Create a waypoint painter that takes all the vehicle markers
-            WaypointPainter<MyWaypoint> vehicleMarkerPainter = new WaypointPainter<MyWaypoint>();
+            WaypointPainter<Waypoint> vehicleMarkerPainter = new WaypointPainter<Waypoint>();
             vehicleMarkerPainter.setWaypoints(vehicleMarkers);
-            vehicleMarkerPainter.setRenderer(new FancyWaypointRenderer());
+            //vehicleMarkerPainter.setRenderer(new FancyWaypointRenderer());
 
             // Create a compound painter that uses painter
             List<Painter<JXMapViewer>> painters = new ArrayList<Painter<JXMapViewer>>();
@@ -236,7 +238,7 @@ public class Main {
             CompoundPainter<JXMapViewer> painter = new CompoundPainter<JXMapViewer>(painters);
             mapViewer.setOverlayPainter(painter);
             try {
-                Thread.sleep(1000);
+                Thread.sleep(300);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

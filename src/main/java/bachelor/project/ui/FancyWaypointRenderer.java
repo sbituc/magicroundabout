@@ -30,11 +30,11 @@ import java.util.Map;
 public class FancyWaypointRenderer implements WaypointRenderer<MyWaypoint>
 {
 	private static final Log log = LogFactory.getLog(FancyWaypointRenderer.class);
-	
+
 	private final Map<Color, BufferedImage> map = new HashMap<Color, BufferedImage>();
-	
+
 //	private final Font font = new Font("Lucida Sans", Font.BOLD, 10);
-	
+
 	private BufferedImage origImage;
 
 	/**
@@ -61,7 +61,7 @@ public class FancyWaypointRenderer implements WaypointRenderer<MyWaypoint>
 		int h = loadImg.getHeight();
 		BufferedImage imgOut = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 		BufferedImage imgColor = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-		
+
 		Graphics2D g = imgColor.createGraphics();
 		g.setColor(newColor);
 		g.fillRect(0, 0, w+1, h+1);
@@ -72,7 +72,7 @@ public class FancyWaypointRenderer implements WaypointRenderer<MyWaypoint>
 		graphics.setComposite(MultiplyComposite.Default);
 		graphics.drawImage(imgColor, 0, 0, null);
 		graphics.dispose();
-		
+
 		return imgOut;
 	}
 
@@ -80,12 +80,12 @@ public class FancyWaypointRenderer implements WaypointRenderer<MyWaypoint>
 	public void paintWaypoint(Graphics2D g, JXMapViewer viewer, MyWaypoint w)
 	{
 		g = (Graphics2D)g.create();
-		
+
 		if (origImage == null)
 			return;
-		
+
 		BufferedImage myImg = map.get(w.getColor());
-		
+
 		if (myImg == null)
 		{
 			myImg = convert(origImage, w.getColor());
@@ -93,25 +93,23 @@ public class FancyWaypointRenderer implements WaypointRenderer<MyWaypoint>
 		}
 
 		Point2D point = viewer.getTileFactory().geoToPixel(w.getPosition(), viewer.getZoom());
-		
+
 		int x = (int)point.getX();
 		int y = (int)point.getY();
-		
+
 		g.drawImage(myImg, x -myImg.getWidth() / 2, y -myImg.getHeight(), null);
-		
+
 		String label = w.getLabel();
-	
+
 //		g.setFont(font);
 
 		FontMetrics metrics = g.getFontMetrics();
 		int tw = metrics.stringWidth(label);
 		int th = 1 + metrics.getAscent();
-		
+
 //		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g.drawString(label, x - tw / 2, y + th - myImg.getHeight());
-		
+
 		g.dispose();
 	}
 }
-
-
