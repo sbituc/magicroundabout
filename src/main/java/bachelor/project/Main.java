@@ -112,7 +112,7 @@ public class Main {
 
         // VehicleSource source_X = new VehicleSource(X0, int maxAttempts, int probability, IGraph graphObject);
 //        int m_maxattempts = 100000;
-        int m_maxattempts = 20;
+        int m_maxattempts = 2;
 /*
  * nodes' numbers vs. streets' names
  * roundabout is defined in YAML file as follows
@@ -207,9 +207,11 @@ public class Main {
                 else {
                     vehicle.move();
                     System.out.println(
-                        vehicle.getPositionCoordinates().get(0) + " / " + vehicle.getPositionCoordinates().get(1)
+                        "Koordinaten: " +vehicle.getPositionCoordinates().get(0) + " / " + vehicle.getPositionCoordinates().get(1)
                             + " Farbe: " +
                                 vehicle.getColor()
+                            + " current_Speed: " + vehicle.getCurrentSpeed()
+                            + " max Speed: " + vehicle.getEmptyCellsToVehicleInfront()
                     );
 
                     Color vehicleColor;
@@ -238,7 +240,7 @@ public class Main {
             CompoundPainter<JXMapViewer> painter = new CompoundPainter<JXMapViewer>(painters);
             mapViewer.setOverlayPainter(painter);
             try {
-                Thread.sleep(400);
+                Thread.sleep(250);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

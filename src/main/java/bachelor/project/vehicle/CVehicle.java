@@ -11,7 +11,6 @@ import java.util.List;
  * Vehicle class
  */
 public abstract class CVehicle implements IObject {
-//public abstract class CVehicle implements IObject {
 
     /**
      * zu fahrende Route (lanebasiert)
@@ -40,7 +39,7 @@ public abstract class CVehicle implements IObject {
     private int m_currentSpeed;
 
     /**
-     * color of the vehicle
+     * Fahrzeugfarbe
      */
     private int m_color;
 
@@ -93,7 +92,7 @@ public abstract class CVehicle implements IObject {
 
         // Initiale Positionierung des Fahrzeuges
         if ( m_position == 0) {
-            if ( !m_route.get(m_position).getLeft().isOccupied(m_route.get(m_position).getRight()) ) {
+            if ( !m_route.get(m_position).getLeft().isOccupied(m_route.get(m_position).getRight())) {
                 m_route.get(m_position).getLeft().occupyCell(m_route.get(m_position).getRight(), this);
             }
             else {
