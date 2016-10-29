@@ -238,7 +238,7 @@ public class Main {
             CompoundPainter<JXMapViewer> painter = new CompoundPainter<JXMapViewer>(painters);
             mapViewer.setOverlayPainter(painter);
             try {
-                Thread.sleep(300);
+                Thread.sleep(400);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
