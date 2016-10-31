@@ -3,6 +3,8 @@ package bachelor.project;
 import bachelor.project.graph.CYAML;
 import bachelor.project.graph.network.CGraph;
 import bachelor.project.graph.network.IGraph;
+import bachelor.project.ui.FancyWaypointRenderer;
+import bachelor.project.ui.MyWaypoint;
 import bachelor.project.ui.VirtualEarthTileFactoryInfo;
 import bachelor.project.vehicle.CVehicle;
 import bachelor.project.vehicle.VehicleSource;
@@ -36,7 +38,7 @@ public class Main {
         mapViewer.setTileFactory(tileFactory);
 
         // Setup local file cache
-        File cacheDir = new File(System.getProperty("user.home") + File.separator + ".magicroundabout");
+        File cacheDir = new File(System.getProperty("user.home") + File.separator + ".jxmapviewer2");
         LocalResponseCache.installResponseCache(veInfo.getBaseURL(), cacheDir, false);
 
 
@@ -53,14 +55,10 @@ public class Main {
         card1.add(new JButton("fahren"));
 
 
-
         //create card2
         JPanel card2 = new JPanel();
         card2.add(new JButton("Knoten zeichnen"));
         card2.add(new JButton("Graphen zeichnen"));
-
-
-
 
 
         // Set the focus and zoom
@@ -74,8 +72,8 @@ public class Main {
         //add cards
         frame.add(card1, BorderLayout.NORTH);
         frame.add(card2, BorderLayout.SOUTH);
-        frame.setSize(1000, 1000);
-//        frame.setSize(650, 650);
+//        frame.setSize(1000, 1000);
+        frame.setSize(650, 650);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
@@ -152,11 +150,12 @@ public class Main {
         }
         VehicleSource source_5 = new VehicleSource(l_graph.node(50), m_maxAttempts, 65, l_graph);
 
-        
+
         //Liste aller Vehicles aus den VehicleFactorys
         List<CVehicle> allVehicles = new CopyOnWriteArrayList<CVehicle>();
         // Create markers for vehicles from the geo-positions
         Set<Waypoint> vehicleMarkers = new HashSet<Waypoint>();
+        Set<MyWaypoint> colouredVehicleMarkers = new HashSet<MyWaypoint>();
 
         int i = 0;
         while (i < m_maxSteps) {
@@ -168,20 +167,18 @@ public class Main {
             allVehicles.add( source_4.generateVehicle() );
             allVehicles.add( source_5.generateVehicle() );
 
-//        }
-//        while (!allVehicles.isEmpty()) {
-            allVehicles.removeAll(Collections.singleton(null));
             vehicleMarkers.clear();
+            colouredVehicleMarkers.clear();
+
+            // remove possible null elements from list
+            allVehicles.removeAll(Collections.singleton(null));
             if (allVehicles.isEmpty()) continue;
 
             for (CVehicle vehicle : allVehicles) {
-
-//            }
-
-//            allVehicles.forEach( vehicle -> {
                 if (vehicle.canRemove()) allVehicles.remove(vehicle);
                 else {
                     vehicle.move();
+                    /*
                     System.out.println(
                             " m_pos: " + vehicle.getM_position()
                                     + " empty Cells: " + vehicle.getEmptyCellsToVehicleInfront()
@@ -189,17 +186,20 @@ public class Main {
                                     + " current_Speed: " + vehicle.getCurrentSpeed()
                                     + " Koordinaten: " +vehicle.getPositionCoordinates().get(0) + " / " + vehicle.getPositionCoordinates().get(1)
                     );
-
-                    vehicleMarkers.add( new DefaultWaypoint( vehicle.getPositionCoordinates().get(0), vehicle.getPositionCoordinates().get(1) ));
+                    */
+//                    vehicleMarkers.add( new DefaultWaypoint( vehicle.getPositionCoordinates().get(0), vehicle.getPositionCoordinates().get(1) ));
                     GeoPosition vehiclePositon = new GeoPosition( vehicle.getPositionCoordinates().get(0), vehicle.getPositionCoordinates().get(1) );
-                    //vehicleMarkers.add( new Waypoint("C", vehicleColor, vehiclePositon ) );
+                    colouredVehicleMarkers.add( new MyWaypoint("C", vehicle.getColor(), vehiclePositon ) );
                 }
-            } //);
+            }
             // Create a waypoint painter that takes all the vehicle markers
-            WaypointPainter<Waypoint> vehicleMarkerPainter = new WaypointPainter<Waypoint>();
-            vehicleMarkerPainter.clearCache();
-            vehicleMarkerPainter.setWaypoints(vehicleMarkers);
-            //vehicleMarkerPainter.setRenderer(new FancyWaypointRenderer());
+//            WaypointPainter<Waypoint> vehicleMarkerPainter = new WaypointPainter<Waypoint>();
+//            vehicleMarkerPainter.setWaypoints(vehicleMarkers);
+
+            // create coloured waypoint layer for vehicles
+            WaypointPainter<MyWaypoint> vehicleMarkerPainter = new WaypointPainter<MyWaypoint>();
+            vehicleMarkerPainter.setWaypoints(colouredVehicleMarkers);
+            vehicleMarkerPainter.setRenderer(new FancyWaypointRenderer());
 
             // Create a compound painter that uses painter
             List<Painter<JXMapViewer>> painters = new ArrayList<Painter<JXMapViewer>>();
@@ -220,14 +220,6 @@ public class Main {
 
 
 /*
-        Random rand = new Random(System.currentTimeMillis());
-        int randomNumber = rand.nextInt(100);
-        List route = null;
-        if (randomNumber < 20) route = source_1.generateVehicles();
-        else if (randomNumber >= 20 && randomNumber < 42) route = source_2.generateVehicles();
-        else if (randomNumber >= 42 && randomNumber < 65) route = source_3.generateVehicles();
-        else if (randomNumber >= 65 && randomNumber < 75) route = source_4.generateVehicles();
-        else if (randomNumber >= 75 && randomNumber < 100) route = source_5.generateVehicles();
 
         // Create a track from the geo-positions
         final List<GeoPosition> track = new ArrayList<GeoPosition>();

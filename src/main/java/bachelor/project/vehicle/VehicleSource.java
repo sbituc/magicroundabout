@@ -122,8 +122,8 @@ public class VehicleSource extends CVehicleFactory {
         if ((int) Math.floor( m_startNode.id()/10 ) == 1) vehicleColor = Color.RED;
         else if ((int) Math.floor( m_startNode.id()/10 ) == 2) vehicleColor = Color.GREEN;
         else if ((int) Math.floor( m_startNode.id()/10 ) == 3) vehicleColor = Color.BLUE;
-        else if ((int) Math.floor( m_startNode.id()/10 ) == 4) vehicleColor = Color.YELLOW;
-        else if ((int) Math.floor( m_startNode.id()/10 ) == 5) vehicleColor = Color.MAGENTA;
+        else if ((int) Math.floor( m_startNode.id()/10 ) == 4) vehicleColor = Color.MAGENTA;
+        else if ((int) Math.floor( m_startNode.id()/10 ) == 5) vehicleColor = Color.YELLOW;
         else  vehicleColor = Color.BLACK;
         return vehicleColor;
     }

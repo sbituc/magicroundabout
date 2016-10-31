@@ -162,6 +162,7 @@ public final class CEdge<T> implements IEdge<T>
         if (p_vehicle != null && m_occupiedCells.get(p_cellIndex) != null) throw new IllegalStateException("Cell is already taken!");
 
         m_occupiedCells.put(p_cellIndex, p_vehicle);
+        /*
         System.out.println(
 
                "TEST " + this + ":" + m_occupiedCells + " ENDE"
@@ -174,6 +175,7 @@ public final class CEdge<T> implements IEdge<T>
 //                + p_vehicle
 
         );
+        */
     }
 
     /**

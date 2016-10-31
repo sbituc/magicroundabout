@@ -42,7 +42,8 @@ public class FancyWaypointRenderer implements WaypointRenderer<MyWaypoint>
 	 */
 	public FancyWaypointRenderer()
 	{
-		URL resource = getClass().getResource("waypoint_white.png");
+		URL resource = getClass().getResource("/bachelor/project/graph/waypoint_white.png");
+		System.out.println();
 
 		try
 		{
