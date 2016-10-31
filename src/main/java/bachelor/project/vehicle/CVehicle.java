@@ -3,6 +3,7 @@ package bachelor.project.vehicle;
 import bachelor.project.graph.network.IEdge;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -30,6 +31,9 @@ public abstract class CVehicle implements IObject {
 
     /**
      * Maximalgeschwindigkeit des Fahrzeugs
+     *
+     * 30 mph UK speed limit inside city limits
+     * = 48 km/h -> 8.333 m/s -> 2 cells
      */
     protected final int m_maxSpeed = 2;
 
@@ -41,12 +45,12 @@ public abstract class CVehicle implements IObject {
     /**
      * Fahrzeugfarbe
      */
-    private int m_color;
+    private Color m_color;
 
     /**
      * Konstruktor des Vehicles
      */
-    public CVehicle(final int p_currentSpeed, final List p_cellRoute, final LinkedList<ImmutablePair<IEdge, Integer>> p_laneRoute, int p_color) {
+    public CVehicle(final int p_currentSpeed, final List p_cellRoute, final LinkedList<ImmutablePair<IEdge, Integer>> p_laneRoute, Color p_color) {
         m_currentSpeed = p_currentSpeed;
         m_route = p_laneRoute; //Hash und ZellId
         m_cellRoute = p_cellRoute; //Koordinatentupel
@@ -85,19 +89,20 @@ public abstract class CVehicle implements IObject {
 
         // Überprüfung, ob das Fahrzeug seine Route in diesem Schritt abgefahren hat
         if ((m_position + m_currentSpeed) >= m_route.size()) {
-            m_route.get(m_position).getLeft().occupyCell(m_route.get(m_position).getRight(), null); //left=Iedge Objekt und right=Zell-ID
+            m_route.get(m_position).getLeft().occupyCell(m_route.get(m_position).getRight(), null); //left=IEdge-Objekt und right=Zell-ID
             m_finished = true;
             return;
         }
 
         // Initiale Positionierung des Fahrzeuges
+        // TODO fails when more than 2 vehicles are generated in source
         if ( m_position == 0) {
-            if ( !m_route.get(m_position).getLeft().isOccupied(m_route.get(m_position).getRight())) {
-                m_route.get(m_position).getLeft().occupyCell(m_route.get(m_position).getRight(), this);
-            }
-            else {
+            if ( m_route.get(m_position).getLeft().isOccupied(m_route.get(m_position).getRight())) {
                 // do nothing
                 return;
+            }
+            else {
+                m_route.get(m_position).getLeft().occupyCell(m_route.get(m_position).getRight(), this);
             }
         }
 
@@ -126,8 +131,7 @@ public abstract class CVehicle implements IObject {
      * (aktuell Werte zwischen 0 und 2 möglich)
      */
     public void calculateSpeed() {
-
-        this.setCurrentSpeed(Math.min(m_maxSpeed, Math.min(this.getCurrentSpeed(), this.getEmptyCellsToVehicleInfront())));
+        this.setCurrentSpeed( Math.min( m_maxSpeed, Math.min( this.getCurrentSpeed()+1, this.getEmptyCellsToVehicleInfront() ) ) );
     }
 
     /**
@@ -139,8 +143,16 @@ public abstract class CVehicle implements IObject {
         return m_finished;
     }
 
-    public int getColor() {
+    /**
+     *  returns color given to vehicle by the source
+     * @return vehicle's color
+     */
+    public Color getColor() {
         return m_color;
+    }
+
+    public int getM_position(){
+        return m_position;
     }
 
 /*

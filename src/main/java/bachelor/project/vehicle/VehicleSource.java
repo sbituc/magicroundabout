@@ -5,17 +5,11 @@ import bachelor.project.graph.network.IGraph;
 import bachelor.project.graph.network.INode;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-
-
-// TODO  for main program, 5 instances of VehicleSource needed with one starting node each
-/*
- *  VehicleSource source_X = new VehicleSource(X0, int maxAttempts, int probability, IGraph graphObject);
- *
- */
 
 /*
  * nodes' numbers vs. streets' names
@@ -25,69 +19,58 @@ import java.util.Random;
  * 3x --> County Road (= 10 o'clock entry/exit)         from bus + train stations, medium to higher traffic (55%)
  * 4x --> Shrivenham Road (= 1 o'clock entry/exit)      residential area, low traffic (30%)
  * 5x --> Queens Drive (= 4 o'clock entry/exit)         from motorway, high traffic (65%)
+ *
+ *  VehicleSource source_X = new VehicleSource(X0, int maxAttempts, int probability, IGraph graphObject);
  */
 
-//public class VehicleSource implements IVehicleFactory {
 public class VehicleSource extends CVehicleFactory {
-    /**
-     * QUELLE!
-     *
-     * Startpunkt bekommt sie vorgegeben --> @param p_startNode
-     */
+
     private final INode<Integer> m_startNode;
     private final int m_maxAttemptsOfGeneration;
     private final int m_probabilityOfGeneration;
     private final IGraph m_graph;
+    private Random m_randomizer;
 
     public VehicleSource(final INode<Integer> p_startNode, int p_maxAttemptsOfGeneration, int p_probabilityOfGeneration, final IGraph p_graph) {
         m_startNode = p_startNode;
         m_maxAttemptsOfGeneration = p_maxAttemptsOfGeneration;
         m_probabilityOfGeneration = p_probabilityOfGeneration;
         m_graph = p_graph;
+        m_randomizer = new Random(System.currentTimeMillis());
     }
 
+    @Override
     public void generateVehicles() {
-    //TODO redo constructor to "produce" vehicles again, missusing it to generate a list for painting route
-//    public List generateVehicles() {
-        int m_colorToGive = (int) Math.floor(m_startNode.id()/10);
+        for (int i = 0; i < m_maxAttemptsOfGeneration; i++) {
+            generateVehicle();
+        }
+    }
 
+    @Override
+    public CVehicle generateVehicle() {
         /*
-         * could be modified to create different types of vehicles (if Classes are present)
+         * could be modified to create different types of vehicles (if classes are present)
          * vehicles.add(new Car());
          * vehicles.add(new Lorry());
          * vehicles.add(new Bus());
          * vehicles.add(new Motorbike());
          */
         int randomInt;
-        Random myRandomizer = new Random(System.currentTimeMillis());
+//        Random myRandomizer = new Random(System.currentTimeMillis());
         List<INode> endNodesList = m_graph.getEndNodesList();
 
         List randomRouteCells = null;
         LinkedList randomRouteLanes = null;
-        for (int i = 0; i < m_maxAttemptsOfGeneration; i++) {
-            randomInt = myRandomizer.nextInt(100);
-            if (randomInt < m_probabilityOfGeneration) {
-                List<IEdge> randomRoute = generateRandomRoute(endNodesList, myRandomizer);
-                randomRouteCells = convertedRouteToCells( randomRoute );
-//                    System.out.println( randomRouteCells );     // to be removed
-//                    System.out.println( randomRouteCells.size() );     // to be removed
-                randomRouteLanes = convertedRouteToLanes( randomRoute );
-//                    System.out.println( randomRouteLanes );     // to be removed
-//                    System.out.println( randomRouteLanes.size() );     // to be removed
+        randomInt = this.m_randomizer.nextInt(200);
+        if (randomInt < m_probabilityOfGeneration) {
+            List<IEdge> randomRoute = generateRandomRoute(endNodesList, this.m_randomizer);
+            randomRouteCells = convertedRouteToCells( randomRoute );
+            randomRouteLanes = convertedRouteToLanes( randomRoute );
 
-//                    System.out.println();
-//                    System.out.println( "half is " + Math.floorDiv( randomRouteCells.size(), 2 ) );
-//                    System.out.println( randomRouteCells.get( Math.floorDiv( randomRouteCells.size(), 2 ) ) + " - " + randomRouteLanes.get( Math.floorDiv( randomRouteCells.size(), 2 ) )  );
-
-//                System.out.println("Versuch " + i + "/" + m_maxAttemptsOfGeneration + ":\t" + randomRoutesCells);
-
-
-                // TODO  declare parameters of Car (Car class) --- going with route, color for the moment
-                vehicles.add(new Car(2,randomRouteCells,randomRouteLanes, m_colorToGive));
-
-            }
+//            vehicles.add( new Car( 2, randomRouteCells, randomRouteLanes, pickColor(m_startNode) ) );
+            return (new Car( 2, randomRouteCells, randomRouteLanes, pickColor(m_startNode) ));
         }
-//        return randomRouteCells;
+        else return null;
     }
 
     /**
@@ -119,7 +102,7 @@ public class VehicleSource extends CVehicleFactory {
     }
 
     /**
-     * Returns a path (list of edges) between start node and a random end node
+     * Returns the shortest path (list of edges) between start node and a random end node
      *
      * @param p_endNodes
      * @param p_random
@@ -127,6 +110,22 @@ public class VehicleSource extends CVehicleFactory {
      */
     private List<bachelor.project.graph.network.IEdge> generateRandomRoute(List<INode> p_endNodes, Random p_random) {
         return m_graph.route( m_startNode, p_endNodes.get( p_random.nextInt( p_endNodes.size() ) ) );
+    }
+
+    /**
+     *
+     * @param p_startNode
+     * @return Color
+     */
+    private Color pickColor(INode p_startNode) {
+        Color vehicleColor;
+        if ((int) Math.floor( m_startNode.id()/10 ) == 1) vehicleColor = Color.RED;
+        else if ((int) Math.floor( m_startNode.id()/10 ) == 2) vehicleColor = Color.GREEN;
+        else if ((int) Math.floor( m_startNode.id()/10 ) == 3) vehicleColor = Color.BLUE;
+        else if ((int) Math.floor( m_startNode.id()/10 ) == 4) vehicleColor = Color.YELLOW;
+        else if ((int) Math.floor( m_startNode.id()/10 ) == 5) vehicleColor = Color.MAGENTA;
+        else  vehicleColor = Color.BLACK;
+        return vehicleColor;
     }
 
 }

@@ -17,10 +17,8 @@ import org.jxmapviewer.viewer.*;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.*;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 
@@ -76,8 +74,8 @@ public class Main {
         //add cards
         frame.add(card1, BorderLayout.NORTH);
         frame.add(card2, BorderLayout.SOUTH);
-//        frame.setSize(1000, 1000);
-        frame.setSize(650, 650);
+        frame.setSize(1000, 1000);
+//        frame.setSize(650, 650);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
@@ -110,9 +108,11 @@ public class Main {
         } );
 
 
+        int m_maxSteps = 1000;
+
         // VehicleSource source_X = new VehicleSource(X0, int maxAttempts, int probability, IGraph graphObject);
-//        int m_maxattempts = 100000;
-        int m_maxattempts = 2;
+//        int m_maxAttempts = 100000;
+        int m_maxAttempts = 1;
 /*
  * nodes' numbers vs. streets' names
  * roundabout is defined in YAML file as follows
@@ -126,22 +126,98 @@ public class Main {
  * X9 --> sink node
  */
 
-        VehicleSource source_1 = new VehicleSource(l_graph.node(10), m_maxattempts, 100, l_graph);
-//        VehicleSource source_1 = new VehicleSource(l_graph.node(10), m_maxattempts, 45, l_graph);
-//        VehicleSource source_2 = new VehicleSource(l_graph.node(20), m_maxattempts, 55, l_graph);
-        VehicleSource source_2 = new VehicleSource(l_graph.node(20), m_maxattempts, 100, l_graph);
-//        VehicleSource source_3 = new VehicleSource(l_graph.node(30), m_maxattempts, 55, l_graph);
-        VehicleSource source_3 = new VehicleSource(l_graph.node(30), m_maxattempts, 100, l_graph);
-//        VehicleSource source_4 = new VehicleSource(l_graph.node(40), m_maxattempts, 30, l_graph);
-        VehicleSource source_4 = new VehicleSource(l_graph.node(40), m_maxattempts, 100, l_graph);
-//        VehicleSource source_5 = new VehicleSource(l_graph.node(50), m_maxattempts, 65, l_graph);
-        VehicleSource source_5 = new VehicleSource(l_graph.node(50), m_maxattempts, 100, l_graph);
+        VehicleSource source_1 = new VehicleSource(l_graph.node(10), m_maxAttempts, 45, l_graph);
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        VehicleSource source_2 = new VehicleSource(l_graph.node(20), m_maxAttempts, 55, l_graph);
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        VehicleSource source_3 = new VehicleSource(l_graph.node(30), m_maxAttempts, 55, l_graph);
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        VehicleSource source_4 = new VehicleSource(l_graph.node(40), m_maxAttempts, 30, l_graph);
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        VehicleSource source_5 = new VehicleSource(l_graph.node(50), m_maxAttempts, 65, l_graph);
 
-        source_1.generateVehicles();
-        source_2.generateVehicles();
-        source_3.generateVehicles();
-        source_4.generateVehicles();
-        source_5.generateVehicles();
+        
+        //Liste aller Vehicles aus den VehicleFactorys
+        List<CVehicle> allVehicles = new CopyOnWriteArrayList<CVehicle>();
+        // Create markers for vehicles from the geo-positions
+        Set<Waypoint> vehicleMarkers = new HashSet<Waypoint>();
+
+        int i = 0;
+        while (i < m_maxSteps) {
+            i++;
+
+            allVehicles.add( source_1.generateVehicle() );
+            allVehicles.add( source_2.generateVehicle() );
+            allVehicles.add( source_3.generateVehicle() );
+            allVehicles.add( source_4.generateVehicle() );
+            allVehicles.add( source_5.generateVehicle() );
+
+//        }
+//        while (!allVehicles.isEmpty()) {
+            allVehicles.removeAll(Collections.singleton(null));
+            vehicleMarkers.clear();
+            if (allVehicles.isEmpty()) continue;
+
+            for (CVehicle vehicle : allVehicles) {
+
+//            }
+
+//            allVehicles.forEach( vehicle -> {
+                if (vehicle.canRemove()) allVehicles.remove(vehicle);
+                else {
+                    vehicle.move();
+                    System.out.println(
+                            " m_pos: " + vehicle.getM_position()
+                                    + " empty Cells: " + vehicle.getEmptyCellsToVehicleInfront()
+                                    + " Farbe: " + vehicle.getColor()
+                                    + " current_Speed: " + vehicle.getCurrentSpeed()
+                                    + " Koordinaten: " +vehicle.getPositionCoordinates().get(0) + " / " + vehicle.getPositionCoordinates().get(1)
+                    );
+
+                    vehicleMarkers.add( new DefaultWaypoint( vehicle.getPositionCoordinates().get(0), vehicle.getPositionCoordinates().get(1) ));
+                    GeoPosition vehiclePositon = new GeoPosition( vehicle.getPositionCoordinates().get(0), vehicle.getPositionCoordinates().get(1) );
+                    //vehicleMarkers.add( new Waypoint("C", vehicleColor, vehiclePositon ) );
+                }
+            } //);
+            // Create a waypoint painter that takes all the vehicle markers
+            WaypointPainter<Waypoint> vehicleMarkerPainter = new WaypointPainter<Waypoint>();
+            vehicleMarkerPainter.clearCache();
+            vehicleMarkerPainter.setWaypoints(vehicleMarkers);
+            //vehicleMarkerPainter.setRenderer(new FancyWaypointRenderer());
+
+            // Create a compound painter that uses painter
+            List<Painter<JXMapViewer>> painters = new ArrayList<Painter<JXMapViewer>>();
+
+            painters.add(vehicleMarkerPainter);
+
+            CompoundPainter<JXMapViewer> painter = new CompoundPainter<JXMapViewer>(painters);
+            mapViewer.setOverlayPainter(painter);
+
+            try {
+                Thread.sleep(333);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            //painter.removePainter(painter);
+            //mapViewer.setOverlayPainter(painter);
+        }
+
 
 /*
         Random rand = new Random(System.currentTimeMillis());
@@ -181,77 +257,8 @@ public class Main {
         } );
         System.out.println(graphMap);
 */
+/*
 
-         //Liste aller Vehicles aus den VehicleFactorys
-        List<CVehicle> allVehicles = new CopyOnWriteArrayList<>();
-
-        allVehicles.addAll(source_1.getVehicles());
-        allVehicles.addAll(source_2.getVehicles());
-        allVehicles.addAll(source_3.getVehicles());
-        allVehicles.addAll(source_4.getVehicles());
-        allVehicles.addAll(source_5.getVehicles());
-
-        System.out.println(
-
-                allVehicles.size()
-
-        );
-
-        // Create markers for vehicles from the geo-positions
-        Set<Waypoint> vehicleMarkers = new HashSet<Waypoint>();
-
-
-        while (!allVehicles.isEmpty()) {
-            allVehicles.forEach( vehicle -> {
-                if (vehicle.canRemove()) allVehicles.remove(vehicle);
-                else {
-                    vehicle.move();
-                    System.out.println(
-                        "Koordinaten: " +vehicle.getPositionCoordinates().get(0) + " / " + vehicle.getPositionCoordinates().get(1)
-                            + " Farbe: " +
-                                vehicle.getColor()
-                            + " current_Speed: " + vehicle.getCurrentSpeed()
-                            + " max Speed: " + vehicle.getEmptyCellsToVehicleInfront()
-                    );
-
-                    Color vehicleColor;
-                    if (vehicle.getColor() == 1) vehicleColor = Color.RED;
-                    else if (vehicle.getColor() == 2) vehicleColor = Color.GREEN;
-                    else if (vehicle.getColor() == 3) vehicleColor = Color.BLUE;
-                    else if (vehicle.getColor() == 4) vehicleColor = Color.YELLOW;
-                    else if (vehicle.getColor() == 5) vehicleColor = Color.MAGENTA;
-                    else  vehicleColor = Color.BLACK;
-
-                    vehicleMarkers.add( new DefaultWaypoint( vehicle.getPositionCoordinates().get(0), vehicle.getPositionCoordinates().get(1) ));
-                    GeoPosition vehiclePositon = new GeoPosition( vehicle.getPositionCoordinates().get(0), vehicle.getPositionCoordinates().get(1) );
-                    //vehicleMarkers.add( new Waypoint("C", vehicleColor, vehiclePositon ) );
-                }
-            } );
-            // Create a waypoint painter that takes all the vehicle markers
-            WaypointPainter<Waypoint> vehicleMarkerPainter = new WaypointPainter<Waypoint>();
-            vehicleMarkerPainter.setWaypoints(vehicleMarkers);
-            //vehicleMarkerPainter.setRenderer(new FancyWaypointRenderer());
-
-            // Create a compound painter that uses painter
-            List<Painter<JXMapViewer>> painters = new ArrayList<Painter<JXMapViewer>>();
-
-            painters.add(vehicleMarkerPainter);
-
-            CompoundPainter<JXMapViewer> painter = new CompoundPainter<JXMapViewer>(painters);
-            mapViewer.setOverlayPainter(painter);
-            try {
-                Thread.sleep(250);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            vehicleMarkers.clear();
-            //painter.removePainter(painter);
-            //mapViewer.setOverlayPainter(painter);
-        }
-
-
-
-        /*
         // Create waypoints from the geo-positions
         Set<Waypoint> waypoints = new HashSet<Waypoint>();
         // create waypoint for each graph node
@@ -262,12 +269,10 @@ public class Main {
         // Create a waypoint painter that takes all the waypoints
         WaypointPainter<Waypoint> waypointPainter = new WaypointPainter<Waypoint>();
         waypointPainter.setWaypoints(waypoints);
-        */
 
         // Create a compound painter that uses both the route-painter and the waypoint-painter
         List<Painter<JXMapViewer>> painters = new ArrayList<Painter<JXMapViewer>>();
 
-/*
         // visualize graph (II)
         List<RoutePainter> painterList = new ArrayList<>();
         for ( Map.Entry<Integer, List<GeoPosition>> entry : graphMap.entrySet() ) {
@@ -279,12 +284,12 @@ public class Main {
         painterList.forEach( singlePainter -> {
 //            painters.add(singlePainter);
         } );
-*/
 //        painters.add(routePainter);
 //        painters.add(waypointPainter);
 
         CompoundPainter<JXMapViewer> painter = new CompoundPainter<JXMapViewer>(painters);
         mapViewer.setOverlayPainter(painter);
+*/
 
     }
 }

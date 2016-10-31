@@ -29,7 +29,7 @@ public class CalculateCellCenterCoordinates {
     }
 
     private static int calculateQuantityCells(double p_distance) {
-        double cellSize = 4.0; // Cell size is 4 m
+        double cellSize = 2.0; // Cell size is 4 m
 
         return (int) (p_distance /cellSize);
     }
