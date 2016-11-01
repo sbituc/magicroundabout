@@ -61,7 +61,7 @@ public class VehicleSource extends CVehicleFactory {
 
         List randomRouteCells = null;
         LinkedList randomRouteLanes = null;
-        randomInt = this.m_randomizer.nextInt(200);
+        randomInt = this.m_randomizer.nextInt(100);
         if (randomInt < m_probabilityOfGeneration) {
             List<IEdge> randomRoute = generateRandomRoute(endNodesList, this.m_randomizer);
             randomRouteCells = convertedRouteToCells( randomRoute );
@@ -109,7 +109,15 @@ public class VehicleSource extends CVehicleFactory {
      * @return
      */
     private List<bachelor.project.graph.network.IEdge> generateRandomRoute(List<INode> p_endNodes, Random p_random) {
-        return m_graph.route( m_startNode, p_endNodes.get( p_random.nextInt( p_endNodes.size() ) ) );
+//        return m_graph.route( m_startNode, p_endNodes.get( p_random.nextInt( p_endNodes.size() ) ) );
+
+        // reassigning the end node brings down the 20% chance of exit being the same
+        // as the entry to 4%
+        INode endNode = p_endNodes.get( p_random.nextInt( p_endNodes.size() ) );
+        if ( Math.floor( ((int) endNode.id())/10 ) == Math.floor( ((int) m_startNode.id())/10 ) ) {
+            endNode = p_endNodes.get(p_random.nextInt(p_endNodes.size()));
+        }
+        return m_graph.route( m_startNode, endNode );
     }
 
     /**

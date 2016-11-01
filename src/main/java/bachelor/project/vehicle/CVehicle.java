@@ -33,9 +33,11 @@ public abstract class CVehicle implements IObject {
      * Maximalgeschwindigkeit des Fahrzeugs
      *
      * 30 mph UK speed limit inside city limits
-     * = 48 km/h -> 8.333 m/s -> 2 cells
+     * = 48 km/h -> 13.888 m/s (too fast for roundabout)
+     * 20 mph -> 30 km/h -> 8.333 m/s is absolute maximum (cell's length is 2m -> 4 cells)
+     * for visibility reasons set to "3"
      */
-    protected final int m_maxSpeed = 2;
+    protected final int m_maxSpeed = 3;
 
     /**
      * aktuelle Geschwindigkeit pro Zellen pro Schritt
@@ -43,9 +45,21 @@ public abstract class CVehicle implements IObject {
     private int m_currentSpeed;
 
     /**
-     * Fahrzeugfarbe
+     * vehicle's color
      */
     private Color m_color;
+
+    /**
+     * vehicle's label
+     * "C" for car, "L" for lorry, "B" for bus ...
+     */
+    private String m_label;
+
+    /**
+     * vehicle's length
+     */
+    private int m_length;
+
 
     /**
      * Konstruktor des Vehicles
@@ -93,7 +107,7 @@ public abstract class CVehicle implements IObject {
             m_finished = true;
             return;
         }
-
+/*
         // Initiale Positionierung des Fahrzeuges
         // TODO fails when more than 2 vehicles are generated in source
         if ( m_position == 0) {
@@ -105,7 +119,7 @@ public abstract class CVehicle implements IObject {
                 m_route.get(m_position).getLeft().occupyCell(m_route.get(m_position).getRight(), this);
             }
         }
-
+*/
         // Umsetzen des Autos
         m_route.get(m_position).getLeft().occupyCell(m_route.get(m_position).getRight(), null);
         m_position = m_position + m_currentSpeed;
@@ -121,14 +135,13 @@ public abstract class CVehicle implements IObject {
     public int getEmptyCellsToVehicleInfront() {
         for (int i = m_position + 1; i < m_route.size(); i++) {
             if ( m_route.get(i).getLeft().isOccupied(m_route.get(i).getRight()) ) // True für besetzte Zelle
-                return i - m_position -1;
+                return i - m_position - 2;
         }
         return Integer.MAX_VALUE;
     }
 
     /**
      * Berechnet die aktuell mögliche Geschwindigkeit (in Zellen pro Schritt) des Fahrzeugs in Abhängigkeit der Maximalgeschwindigkeit und des Abstands zum Vorgänger
-     * (aktuell Werte zwischen 0 und 2 möglich)
      */
     public void calculateSpeed() {
         this.setCurrentSpeed( Math.min( m_maxSpeed, Math.min( this.getCurrentSpeed()+1, this.getEmptyCellsToVehicleInfront() ) ) );
@@ -145,15 +158,33 @@ public abstract class CVehicle implements IObject {
 
     /**
      *  returns color given to vehicle by the source
-     * @return vehicle's color
+     * @return Color value
      */
     public Color getColor() {
         return m_color;
     }
 
+    /**
+     * returns vehicle's position on its route
+     * @return
+     */
     public int getM_position(){
         return m_position;
     }
+
+    /**
+     * returns vehicle's label, e.g. for output on marker
+     * @return
+     */
+    public String get_label() { return m_label; }
+    public void set_label(String p_label) { m_label = p_label; }
+
+    /**
+     * returns vehicle's length
+     * @return
+     */
+    public int get_length() { return m_length; }
+    public void set_length(int p_length) { m_length = p_length; }
 
 /*
     @Override

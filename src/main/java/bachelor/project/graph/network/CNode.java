@@ -19,6 +19,11 @@ public final class CNode<T> implements INode<T> {
      * y-position within the spheroid earth (latitude)
      */
     private final double m_yposition;
+    /**
+     * status of node blocked by a routing vehicle
+     */
+    protected boolean m_isBlocked;
+
 
     /**
      * ctor
@@ -89,6 +94,14 @@ public final class CNode<T> implements INode<T> {
     {
         return ( p_object != null ) && ( p_object instanceof INode<?> ) && ( this.hashCode() == p_object.hashCode() );
     }
+
+    /**
+     * block nodes on route to prevent collisions in nodes
+     * when routes cross
+     * @param p_signal
+     */
+    public void blockNode(boolean p_signal) { m_isBlocked = p_signal; }
+    public boolean isBlocked() { return m_isBlocked; }
 
 
     /**

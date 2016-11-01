@@ -72,8 +72,8 @@ public class Main {
         //add cards
         frame.add(card1, BorderLayout.NORTH);
         frame.add(card2, BorderLayout.SOUTH);
-//        frame.setSize(1000, 1000);
-        frame.setSize(650, 650);
+        frame.setSize(1000, 1000);
+//        frame.setSize(650, 650);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
@@ -124,6 +124,7 @@ public class Main {
  * X9 --> sink node
  */
 
+        // delay init of sources by 10 ms for different random output
         VehicleSource source_1 = new VehicleSource(l_graph.node(10), m_maxAttempts, 45, l_graph);
         try {
             Thread.sleep(10);
@@ -154,20 +155,22 @@ public class Main {
         //Liste aller Vehicles aus den VehicleFactorys
         List<CVehicle> allVehicles = new CopyOnWriteArrayList<CVehicle>();
         // Create markers for vehicles from the geo-positions
-        Set<Waypoint> vehicleMarkers = new HashSet<Waypoint>();
+//        Set<Waypoint> vehicleMarkers = new HashSet<Waypoint>();
         Set<MyWaypoint> colouredVehicleMarkers = new HashSet<MyWaypoint>();
 
         int i = 0;
         while (i < m_maxSteps) {
             i++;
 
-            allVehicles.add( source_1.generateVehicle() );
-            allVehicles.add( source_2.generateVehicle() );
-            allVehicles.add( source_3.generateVehicle() );
-            allVehicles.add( source_4.generateVehicle() );
-            allVehicles.add( source_5.generateVehicle() );
-
-            vehicleMarkers.clear();
+            // "generate" vehicles every second step
+            if( (i%2) != 0 ) {
+                allVehicles.add(source_1.generateVehicle());
+                allVehicles.add(source_2.generateVehicle());
+                allVehicles.add(source_3.generateVehicle());
+                allVehicles.add(source_4.generateVehicle());
+                allVehicles.add(source_5.generateVehicle());
+            }
+//            vehicleMarkers.clear();
             colouredVehicleMarkers.clear();
 
             // remove possible null elements from list
@@ -178,18 +181,9 @@ public class Main {
                 if (vehicle.canRemove()) allVehicles.remove(vehicle);
                 else {
                     vehicle.move();
-                    /*
-                    System.out.println(
-                            " m_pos: " + vehicle.getM_position()
-                                    + " empty Cells: " + vehicle.getEmptyCellsToVehicleInfront()
-                                    + " Farbe: " + vehicle.getColor()
-                                    + " current_Speed: " + vehicle.getCurrentSpeed()
-                                    + " Koordinaten: " +vehicle.getPositionCoordinates().get(0) + " / " + vehicle.getPositionCoordinates().get(1)
-                    );
-                    */
 //                    vehicleMarkers.add( new DefaultWaypoint( vehicle.getPositionCoordinates().get(0), vehicle.getPositionCoordinates().get(1) ));
                     GeoPosition vehiclePositon = new GeoPosition( vehicle.getPositionCoordinates().get(0), vehicle.getPositionCoordinates().get(1) );
-                    colouredVehicleMarkers.add( new MyWaypoint("C", vehicle.getColor(), vehiclePositon ) );
+                    colouredVehicleMarkers.add( new MyWaypoint(vehicle.get_label(), vehicle.getColor(), vehiclePositon ) );
                 }
             }
             // Create a waypoint painter that takes all the vehicle markers
