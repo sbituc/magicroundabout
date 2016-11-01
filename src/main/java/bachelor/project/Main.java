@@ -28,6 +28,24 @@ public class Main {
 
     public static void main(final String[] p_args) throws Exception {
 
+        // --- define CLI options --------------------------------------------------------------------------------------
+
+        final Options l_clioptions = new Options();
+        l_clioptions.addOption("help", false, "shows this information");
+        l_clioptions.addOption("yaml", true, "YAML graph file");
+        l_clioptions.addOption("start", true, "start ID");
+        l_clioptions.addOption("end", true, "end ID");
+
+        final CommandLine l_cli;
+        try {
+            l_cli = new DefaultParser().parse(l_clioptions, p_args);
+        } catch (final Exception l_exception) {
+            System.err.println("command-line arguments parsing error");
+            System.exit(-1);
+            return;
+        }
+
+
         // Visualisation
         JXMapViewer mapViewer = new JXMapViewer();
 
@@ -72,28 +90,11 @@ public class Main {
         //add cards
         frame.add(card1, BorderLayout.NORTH);
         frame.add(card2, BorderLayout.SOUTH);
-        frame.setSize(1000, 1000);
-//        frame.setSize(650, 650);
+//        frame.setSize(1000, 1000);
+        frame.setSize(650, 650);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
-
-        // --- define CLI options --------------------------------------------------------------------------------------
-
-        final Options l_clioptions = new Options();
-        l_clioptions.addOption("help", false, "shows this information");
-        l_clioptions.addOption("yaml", true, "YAML graph file");
-        l_clioptions.addOption("start", true, "start ID");
-        l_clioptions.addOption("end", true, "end ID");
-
-        final CommandLine l_cli;
-        try {
-            l_cli = new DefaultParser().parse(l_clioptions, p_args);
-        } catch (final Exception l_exception) {
-            System.err.println("command-line arguments parsing error");
-            System.exit(-1);
-            return;
-        }
 
         // --- read yaml file ------------------------------------------------------------------------------------------
 

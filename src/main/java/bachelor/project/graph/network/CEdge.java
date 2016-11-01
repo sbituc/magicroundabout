@@ -88,7 +88,9 @@ public final class CEdge<T> implements IEdge<T>
         Point2D p1 = new Point2D.Double( m_fromNode.xposition(), m_fromNode.yposition() );
         Point2D p2 = new Point2D.Double( m_toNode.xposition(), m_toNode.yposition() );
 
+        // list of cells' centerpoints (WGS84 coordinate tuples)
         List cellsList = CalculateCellCenterCoordinates.CellCenterCoordinates( p1, p2 );
+        // lane info for edge using cells list (each entry becomes entry in lane info list)
         LinkedList<ImmutablePair<IEdge,Integer>> ll_laneInfo = new LinkedList<>();
         for (int i = 0; i < cellsList.size(); i++) {
             ll_laneInfo.add(ImmutablePair.of(p_edge,i));

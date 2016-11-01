@@ -66,7 +66,7 @@ public abstract class CVehicle implements IObject {
      */
     public CVehicle(final int p_currentSpeed, final List p_cellRoute, final LinkedList<ImmutablePair<IEdge, Integer>> p_laneRoute, Color p_color) {
         m_currentSpeed = p_currentSpeed;
-        m_route = p_laneRoute; //Hash und ZellId
+        m_route = p_laneRoute; // CEdgeobjekt  und ZellId
         m_cellRoute = p_cellRoute; //Koordinatentupel
         m_color = p_color;
     }
@@ -107,9 +107,8 @@ public abstract class CVehicle implements IObject {
             m_finished = true;
             return;
         }
-/*
+
         // Initiale Positionierung des Fahrzeuges
-        // TODO fails when more than 2 vehicles are generated in source
         if ( m_position == 0) {
             if ( m_route.get(m_position).getLeft().isOccupied(m_route.get(m_position).getRight())) {
                 // do nothing
@@ -119,7 +118,7 @@ public abstract class CVehicle implements IObject {
                 m_route.get(m_position).getLeft().occupyCell(m_route.get(m_position).getRight(), this);
             }
         }
-*/
+
         // Umsetzen des Autos
         m_route.get(m_position).getLeft().occupyCell(m_route.get(m_position).getRight(), null);
         m_position = m_position + m_currentSpeed;
